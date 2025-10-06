@@ -18,6 +18,9 @@
     <string name="intent_label_pdf_ppt">PPT Düzenleyici</string>
     <string name="intent_label_ppt_smart_editor">Akıllı PPT Düzenleyici</string>
     <string name="intent_label_ppt_print">PPT Yazdır</string>
+    <string name="congrats">Tebrikler!</string>
+    <string name="congrats_subtext">Premium\'a hoş geldiniz,\n avantajların tadını çıkarın</string>
+    <string name="ok_great">Tamam, harika!</string>
 
     <string name="click_back_to_app">Ardından uygulamaya dönmek için ⬅ tuşuna basın</string>
 

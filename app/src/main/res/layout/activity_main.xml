@@ -227,7 +227,7 @@
     <include
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_main" />
+        layout="@layout/toolbar_main_2" />
     <androidx.cardview.widget.CardView
         android:id="@+id/notification_warning_section"
         android:layout_width="match_parent"
@@ -400,7 +400,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"
             android:background="@color/input"
             android:paddingVertical="12dp"
             android:paddingHorizontal="16dp"
@@ -450,17 +449,17 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_section"
-        android:layout_margin="10dp"
-        app:fabSize="auto"
-        app:srcCompat="@drawable/ic_plus"
-        android:backgroundTint="@color/primaryColor"
-        app:borderWidth="0dp"
-        app:tint="#ffffff" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/button_create"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bottom_section"-->
+<!--        android:layout_margin="10dp"-->
+<!--        app:fabSize="auto"-->
+<!--        app:srcCompat="@drawable/ic_plus"-->
+<!--        android:backgroundTint="@color/primaryColor"-->
+<!--        app:borderWidth="0dp"-->
+<!--        app:tint="#ffffff" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

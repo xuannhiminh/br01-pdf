@@ -54,36 +54,6 @@ open class ListAllFileFragment(private val filesLiveData: LiveData<List<FileMode
         adapter =
             FileItemAdapter(requireContext(), mutableListOf(), ::onItemClick, ::onSelectedFunc, ::onReactFavorite )
         binding.rcvListFile.adapter = adapter
-//        AdmobNativeAdView.getNativeAd(
-//            requireContext(),
-//            R.layout.native_admod_home,
-//            object : NativeAdListener() {
-//                override fun onError() {
-//
-//                }
-//
-//                override fun onLoaded(nativeAd: RelativeLayout?) {
-//                    if (fromTab() == FileTab.ALL_FILE) {
-//                        adsView = nativeAd
-//                        adapter.adsView = adsView
-//
-//                        val fileModel = FileModel()
-//                        fileModel.isAds = true
-//                        adapter.addAds(fileModel, 3)
-//                    }
-//                }
-//
-//                override fun onClickAd() {
-//                }
-//
-//                override fun onPurchased(nativeAd: RelativeLayout?) {
-//                    super.onPurchased(nativeAd)
-//                    adsView = null
-//                    adapter.adsView = null
-//                    viewModel.sortFile(SortState.getSortState(PreferencesUtils.getInteger(PresKey.SORT_STATE, 1)))
-//                    Log.e("Purchase", "On")
-//                }
-//            })
     }
 
 

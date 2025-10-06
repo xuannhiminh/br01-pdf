@@ -1315,6 +1315,9 @@
             android:name="pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2"
             android:exported="true" />
         <activity
+            android:name="pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapRegistrationSuccessfulActivity"
+            android:exported="true" />
+        <activity
             android:name="pdf.documents.pdfreader.pdfviewer.editor.screen.search.FeedBackActivity"
             android:exported="true" />
         <activity

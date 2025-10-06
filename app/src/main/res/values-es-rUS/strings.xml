@@ -19,6 +19,9 @@
 
     <string name="intent_label_ppt_smart_editor">Editor inteligente de PPT</string>
     <string name="intent_label_ppt_print">Imprimir PPT</string>
+    <string name="congrats">¡Felicidades!</string>
+    <string name="congrats_subtext">Bienvenido a Premium,\n disfruta de los beneficios</string>
+    <string name="ok_great">¡Ok, genial!</string>
 
     <string name="add_in_fav">Añadir a favoritos</string>
 

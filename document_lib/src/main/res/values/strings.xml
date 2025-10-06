@@ -4,8 +4,8 @@
     <!--DEBUG-->
     <string name="key_id_open_default" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
 
-<!--    <string name="facebook_app_id" translatable="false">141126074871515</string>-->
-<!--    <string name="fb_login_protocol_scheme" translatable="false">fb141126074871515</string>-->
+    <string name="facebook_app_id" translatable="false">141126074871515</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb141126074871515</string>
 
 
     <string name="sodk_app_name" translatable="false">Word Office</string>
@@ -704,7 +704,7 @@ Customer: %s"</string>
     <string name="ppt">PPT</string>
     <string name="xls">XLS</string>
     <string name="txt">TXT</string>
-    <string name="EMAIL_DEVELOPER">brianapp.customerservices@gmail.com</string>
+    <string name="EMAIL_DEVELOPER">goldenboat.customerservices@gmail.com</string>
     <string name="save_as">Save As</string>
     <string name="name">Name</string>
     <string name="ok">OK</string>

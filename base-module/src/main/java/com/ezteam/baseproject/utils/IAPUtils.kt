@@ -117,7 +117,6 @@ object IAPUtils {
     }
 
     fun isPremium(): Boolean {
-        return true
 //        if (BuildConfig.DEBUG) return false; // for debug builds, always return true
         val isPremium  = bp?.isSubscribed(KEY_PREMIUM)  == true
         Log.i(TAG, "isPremium: $isPremium")

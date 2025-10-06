@@ -452,7 +452,7 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
     override fun onDestroy() {
         super.onDestroy()
         IAPUtils.unregisterListener(iBillingHandler)
-        //AppOpenManager.getInstance().enableAppResume()
+        AppOpenManager.getInstance().enableAppResume()
         TemporaryStorage.interAdPreloaded = null
     }
 

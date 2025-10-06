@@ -19,7 +19,9 @@
     <string name="start_free_trial">Start Free Trial</string>
 
     <string name="intent_label_ppt_print">Imprimir PPT</string>
-
+    <string name="congrats">¡Felicidades!</string>
+    <string name="congrats_subtext">Bienvenido a Premium,\n disfruta de los beneficios</string>
+    <string name="ok_great">¡Ok, genial!</string>
     <string name="add_in_fav">Añadir a favoritos</string>
 
     <string name="app_name">All PDF Reader</string>

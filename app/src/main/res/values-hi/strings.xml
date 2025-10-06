@@ -19,7 +19,9 @@
     <string name="intent_label_ppt_smart_editor">स्मार्ट PPT संपादक</string>
     <string name="intent_label_ppt_print">PPT प्रिंट करें</string>
     <string name="start_free_trial">Start Free Trial</string>
-
+    <string name="congrats">बधाई हो!</string>
+    <string name="congrats_subtext">प्रीमियम में आपका स्वागत है,\n लाभों का आनंद लें</string>
+    <string name="ok_great">ठीक है, बढ़िया!</string>
 
     <string name="add_in_fav">पसंदीदा में जोड़ें</string>
 

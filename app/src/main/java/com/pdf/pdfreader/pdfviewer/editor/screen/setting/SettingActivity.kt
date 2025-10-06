@@ -474,7 +474,7 @@ class SettingActivity : PdfBaseActivity<ActivitySettingsBinding>() {
         if (IAPUtils.isPremium()) {
             binding.layoutIap.visibility = View.GONE
         } else {
-            binding.layoutIap.visibility = View.GONE
+            binding.layoutIap.visibility = View.VISIBLE
         }
         checkFeatureRequestToShowUI()
         applyKeepScreenOnState()

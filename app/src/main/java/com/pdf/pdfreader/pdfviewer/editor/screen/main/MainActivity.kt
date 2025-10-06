@@ -69,7 +69,11 @@ import pdf.documents.pdfreader.pdfviewer.editor.screen.search.SearchFileActivity
 import pdf.documents.pdfreader.pdfviewer.editor.screen.search.SettingActivity
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.Html
+import android.text.TextWatcher
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -171,7 +175,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-//        //AppOpenManager.getInstance().enableAppResume()
+        AppOpenManager.getInstance().enableAppResume()
         handleIntentToMove()
         super.onCreate(savedInstanceState)
         handleIntentToShowUI()
@@ -266,49 +270,6 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         } else binding.bannerContainer.visibility = View.GONE
 
     }
-//    private fun loadNativeNomedia() {
-//    if (IAPUtils.isPremium()) {
-//        binding.layoutNative.visibility = View.GONE
-//        return
-//    }
-
-//        if (SystemUtils.isInternetAvailable(this)) {
-//            binding.layoutNative.visibility = View.VISIBLE
-//            val loadingView = LayoutInflater.from(this)
-//                .inflate(R.layout.ads_native_loading_short, null)
-//            binding.layoutNative.removeAllViews()
-//            binding.layoutNative.addView(loadingView)
-//
-//            val callback = object : NativeCallback() {
-//                override fun onNativeAdLoaded(nativeAd: NativeAd?) {
-//                    super.onNativeAdLoaded(nativeAd)
-//
-//                    val layoutRes = R.layout.ads_native_bot_no_media_short
-//                    val adView = LayoutInflater.from(this@MainActivity)
-//                        .inflate(layoutRes, null) as NativeAdView
-//
-//                    binding.layoutNative.removeAllViews()
-//                    binding.layoutNative.addView(adView)
-//
-//                    // Gán dữ liệu quảng cáo vào view
-//                    Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-//                }
-//
-//                override fun onAdFailedToLoad() {
-//                    super.onAdFailedToLoad()
-//                    binding.layoutNative.visibility = View.GONE
-//                }
-//            }
-//
-//            Admob.getInstance().loadNativeAd(
-//                applicationContext,
-//                getString(R.string.native_navbar),
-//                callback
-//            )
-//        } else {
-//            binding.layoutNative.visibility = View.GONE
-//        }
-//    }
 
     private var shouldLoadAdsMiddleFiles = true
     // if user open a file from outside app => Main Activity => File Detail (shouldn't load ads middle files in this case)
@@ -621,10 +582,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                 IAPUtils.loadOwnedPurchasesFromGoogleAsync {
                     val isPremium = IAPUtils.isPremium()
                     binding.toolbar.tvTitle.text =  handleAppNameSpannable(showIcon = isPremium)
-                    binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.GONE
-                    binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.GONE
-                    binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.GONE
-                    binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.GONE
+                    binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.VISIBLE
 
                     if (isPremium) {
                         binding.bannerContainer.visibility = View.GONE
@@ -655,7 +613,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         object : CountDownTimer(500, 500) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                //AppOpenManager.getInstance().enableAppResume()
+                AppOpenManager.getInstance().enableAppResume()
             }
         }.start()
 
@@ -998,6 +956,20 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             R.color.primaryColor,
             R.color.primaryColor
         )
+//        lifecycleScope.launch {
+//            viewModel.getListSearchFile().observe(this@MainActivity) {
+//                adapter.setList(it)
+//                adapter.notifyDataSetChanged()
+//
+//                if (it.isEmpty()) {
+//                    binding.layoutEmpty.visibility = View.VISIBLE
+//                    binding.animationView.playAnimation()
+//                } else {
+//                    binding.layoutEmpty.visibility = View.GONE
+//                    binding.animationView.cancelAnimation()
+//                }
+//            }
+//        }
     }
 
 
@@ -1140,10 +1112,10 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             SearchFileActivity.start(this)
         }
 
-        binding.buttonCreate.setOnClickListener {
-            AppOpenManager.getInstance().disableAppResume()
-            startChooseImageActivity()
-        }
+//        binding.buttonCreate.setOnClickListener {
+//            AppOpenManager.getInstance().disableAppResume()
+//            startChooseImageActivity()
+//        }
 
         binding.toolbar.tvAll.setOnClickListener {
             Log.d(TAG, "tvAll Clicked")
@@ -1356,8 +1328,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             binding.toolbar.tvPpt -> R.color.orange
             binding.toolbar.tvExcel -> R.color.green
             binding.toolbar.tvWord -> R.color.blue
-            binding.toolbar.tvPdf -> R.color.primaryColor
-            else -> R.color.red
+            binding.toolbar.tvPdf -> R.color.red
+            else -> R.color.primaryColor
         }
         val underlineResource = if (selectedTextView == binding.toolbar.tvPpt) {
             R.drawable.underline_orange
@@ -1365,6 +1337,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             R.drawable.underline_blue
         } else if (selectedTextView == binding.toolbar.tvExcel){
             R.drawable.underline_green
+        } else if (selectedTextView == binding.toolbar.tvPdf){
+            R.drawable.underline_red
         } else {
             R.drawable.underline
         }
@@ -1373,6 +1347,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         selectedTextView.setTypeface(null, Typeface.BOLD)
         selectedTextView.setTextColor(ContextCompat.getColor(this, selectedColor))
         selectedTextView.setBackgroundResource(underlineResource)
+        binding.toolbar.headerBackground.setBackgroundColor(ContextCompat.getColor(this, selectedColor))
     }
 
 
@@ -1455,32 +1430,32 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         return when (id) {
             3 -> {
                 viewModel.sortFile(SortState.DATE)
-                //loadNativeAdsMiddleFiles()
+                loadNativeAdsMiddleFiles()
                 false
             }
             4 -> {
                 viewModel.sortFile(SortState.DATE_DESC)
-                //loadNativeAdsMiddleFiles()
+                loadNativeAdsMiddleFiles()
                 false
             }
             1 -> {
                 viewModel.sortFile(SortState.NAME)
-                //loadNativeAdsMiddleFiles()
+                loadNativeAdsMiddleFiles()
                 false
             }
             2 -> {
                 viewModel.sortFile(SortState.NAME_DESC)
-                //loadNativeAdsMiddleFiles()
+                loadNativeAdsMiddleFiles()
                 false
             }
             5 -> {
                 viewModel.sortFile(SortState.SIZE)
-                //loadNativeAdsMiddleFiles()
+                loadNativeAdsMiddleFiles()
                 false
             }
             6 -> {
                 viewModel.sortFile(SortState.SIZE_DESC)
-                //loadNativeAdsMiddleFiles()
+                loadNativeAdsMiddleFiles()
                 false
             }
             7 -> {

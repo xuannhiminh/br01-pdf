@@ -21,6 +21,9 @@
     <string name="sort_by_date_desc">Data di creazione: decrescente</string>
     <string name="sort_by_name_asc">Nome: A → Z</string>
     <string name="sort_by_name_desc">Nome: Z → A</string>
+    <string name="congrats">Congratulazioni!</string>
+    <string name="congrats_subtext">Benvenuto a Premium,\n goditi i vantaggi</string>
+    <string name="ok_great">Ok, fantastico!</string>
     <string name="sort_by_size_asc">Dimensione file: crescente</string>
     <string name="sort_by_size_desc">Dimensione file: decrescente</string>
     <string name="replace_old_file">Sostituire il file esistente?</string>

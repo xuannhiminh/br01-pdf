@@ -22,7 +22,7 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val DEFAULT_VERSION_CODE_REVIEWING = 0
         private const val DEFAULT_FEEDBACK_TYPE = 0
         private const val DEFAULT_NOTIFICATION_FREQUENCY_MINUTES = 60L
-        private const val DEFAULT_PDF_DETAIL_TYPE = 1
+        private const val DEFAULT_PDF_DETAIL_TYPE = 0
         private const val DEFAULT_REQUEST_FEATURE_SETTING_ON_OFF = false
         private const val DEFAULT_FEEDBACK_SETTING_ON_OFF = false
         private const val DEFAULT_REQUEST_NOTI_ACTIVITY_ON_OFF = false
@@ -32,19 +32,22 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val DEFAULT_NOTIFICATION_STEP_ORGANIC = 15L
         private const val DEFAULT_NOTIFICATION_MIN_TIMEOUT = 120L
         private const val DEFAULT_NOTIFICATION_MAX_TIMEOUT = 24 * 60L
-        private const val DEFAULT_NOTIFICATION_MAX_HOUR = 23L // 11 PM
-        private const val DEFAULT_NOTIFICATION_MIN_HOUR = 8L
         private const val DEFAULT_DIALOG_CANCEL_ON_TOUCH_OUTSIDE = true
+        private const val DEFAULT_NOTIFICATION_MAX_HOUR = 23 // 11 PM
+        private const val DEFAULT_NOTIFICATION_MIN_HOUR = 8
         private const val DEFAULT_DURATION_RELOADING_FILE = 4000L
         private const val DEFAULT_TIME_DELAY_SHOWING_RELOAD_GUIDE = 3000L
         private const val DEFAULT_TIME_SHOWING_RELOAD_GUIDE = 4L
         private const val DEFAULT_INTERVAL_SHOW_INTER_SECOND = 30L // 30s
         private const val DEFAULT_TIMEOUT_LOAD_INTER_SECOND = 30L // 30s
-        private val DEFAULT_TYPE_OF_START_UP = StartUpType.ADS_OPEN_IAP_LANGUAGE.value.toLong()
-        private const val DEFAULT_PRELOAD_NATIVE_LANGUAGE = true //
+        private val DEFAULT_TYPE_OF_START_UP = StartUpType.IAP_ADS_INTER_LANGUAGE.value.toLong()
+        private const val DEFAULT_PRELOAD_NATIVE_LANGUAGE = true // 30s
+        private const val DEFAULT_LOG_PURCHASE_EVENT = false // 30s
         private const val DEFAULT_TIME_BLOCK_DEFAULT_READER = 1L
         private const val DEFAULT_TURN_OFF_NOTI_SERVICE_IF_PREMIUM = false
         private const val DEFAULT_ALWAYS_ASK_NOTI_WHEN_ENTER_APP = false
+        private const val DEFAULT_IAP_SCREEN_TYPE = 0
+        private const val DEFAULT_SHOW_ADS_MAIN = false
         private const val DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF = false
 
 
@@ -69,9 +72,9 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val REMOTE_KEY_NOTIFICATION_STEP_ORGANIC = "notification_step_organic"
         private const val REMOTE_KEY_NOTIFICATION_MIN_TIMEOUT = "notification_min_timeout"
         private const val REMOTE_KEY_NOTIFICATION_MAX_TIMEOUT = "notification_max_timeout"
+        private const val REMOTE_KEY_DIALOG_CANCEL_ON_TOUCH_OUTSIDE = "dialog_cancel_on_touch_outside"
         private const val REMOTE_KEY_NOTIFICATION_MAX_HOUR = "notification_max_hour"
         private const val REMOTE_KEY_NOTIFICATION_MIN_HOUR = "notification_min_hour"
-        private const val REMOTE_KEY_DIALOG_CANCEL_ON_TOUCH_OUTSIDE = "dialog_cancel_on_touch_outside"
         private const val REMOTE_KEY_DURATION_RELOADING_FILE = "duration_reloading_file"
         private const val REMOTE_KEY_DURATION_DELAY_SHOWING_RELOAD_GUIDE = "duration_delay_showing_reload_guide"
         private const val REMOTE_KEY_TIME_SHOWING_RELOAD_GUIDE = "time_showing_reload_guide"
@@ -79,9 +82,12 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val REMOTE_KEY_TIMEOUT_LOAD_INTER_SECOND = "timeout_load_inter_second"
         private const val REMOTE_KEY_TYPE_OF_START_UP = "type_of_start_up"
         private const val REMOTE_KEY_PRELOAD_NATIVE_LANGUAGE = "preload_native_language"
+        private const val REMOTE_KEY_LOG_PURCHASE_EVENT = "log_purchase_event"
         private const val REMOTE_KEY_TIME_BLOCK_DEFAULT_READER = "time_block_default_reader"
         private const val REMOTE_KEY_TURN_OFF_NOTI_SERVICE_IF_PREMIUM = "turn_off_noti_service_if_premium"
         private const val REMOTE_KEY_ALWAYS_REQUEST_NOTI_WHEN_ENTER_APP= "always_request_noti_when_enter_app"
+        private const val REMOTE_KEY_IAP_SCREEN_TYPE = "iap_screen_type"
+        private const val REMOTE_KEY_SHOW_ADS_MAIN = "show_ads_main"
         private const val REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF = "allow_save_excel_to_pdf"
 
 
@@ -134,9 +140,12 @@ class FirebaseRemoteConfigUtil private constructor() {
                 REMOTE_KEY_TIMEOUT_LOAD_INTER_SECOND to DEFAULT_TIMEOUT_LOAD_INTER_SECOND,
                 REMOTE_KEY_TYPE_OF_START_UP to DEFAULT_TYPE_OF_START_UP,
                 REMOTE_KEY_PRELOAD_NATIVE_LANGUAGE to DEFAULT_PRELOAD_NATIVE_LANGUAGE,
+                REMOTE_KEY_LOG_PURCHASE_EVENT to DEFAULT_LOG_PURCHASE_EVENT,
                 REMOTE_KEY_TIME_BLOCK_DEFAULT_READER to DEFAULT_TIME_BLOCK_DEFAULT_READER,
                 REMOTE_KEY_TURN_OFF_NOTI_SERVICE_IF_PREMIUM to DEFAULT_TURN_OFF_NOTI_SERVICE_IF_PREMIUM,
                 REMOTE_KEY_ALWAYS_REQUEST_NOTI_WHEN_ENTER_APP to DEFAULT_ALWAYS_ASK_NOTI_WHEN_ENTER_APP,
+                REMOTE_KEY_IAP_SCREEN_TYPE to DEFAULT_IAP_SCREEN_TYPE,
+                REMOTE_KEY_SHOW_ADS_MAIN to DEFAULT_SHOW_ADS_MAIN,
                 REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF to DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF
 
             )
@@ -249,6 +258,9 @@ class FirebaseRemoteConfigUtil private constructor() {
     fun isPreloadNativeLanguage(): Boolean {
         return firebaseRemoteConfig.getBoolean(REMOTE_KEY_PRELOAD_NATIVE_LANGUAGE)
     }
+    fun isLogPurchaseEvent(): Boolean {
+        return firebaseRemoteConfig.getBoolean(REMOTE_KEY_LOG_PURCHASE_EVENT)
+    }
     fun getTimeBlockDefaultReader(): Int {
         return firebaseRemoteConfig.getLong(REMOTE_KEY_TIME_BLOCK_DEFAULT_READER).toInt()
     }
@@ -257,6 +269,12 @@ class FirebaseRemoteConfigUtil private constructor() {
     }
     fun isAlwaysRequestNotiWhenEnterApp(): Boolean {
         return firebaseRemoteConfig.getBoolean(REMOTE_KEY_ALWAYS_REQUEST_NOTI_WHEN_ENTER_APP)
+    }
+    fun getIapScreenType(): Int {
+        return firebaseRemoteConfig.getLong(REMOTE_KEY_IAP_SCREEN_TYPE).toInt()
+    }
+    fun isShowAdsMain(): Boolean {
+        return firebaseRemoteConfig.getBoolean(REMOTE_KEY_SHOW_ADS_MAIN)
     }
     fun isAllowSaveExcelToPDF(): Boolean {
         return firebaseRemoteConfig.getBoolean(REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF)

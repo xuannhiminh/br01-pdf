@@ -15,12 +15,15 @@ import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.ezteam.baseproject.iapLib.v3.BillingProcessor
 import com.ezteam.baseproject.iapLib.v3.Constants
 import com.ezteam.baseproject.iapLib.v3.PurchaseInfo
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.ezteam.baseproject.utils.PresKey
 import com.ezteam.baseproject.utils.TemporaryStorage
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.FirebaseAnalytics.Event
+import com.google.firebase.analytics.FirebaseAnalytics.Param
 import com.nlbn.ads.callback.AdCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
@@ -60,9 +63,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
         }
     }
 
-    private val isFromSplash: Boolean by lazy {
-        intent.getBooleanExtra("${packageName}.isFromSplash", false)
-    }
+    private var isFromSplash = false
 
     override fun viewBinding(): ActivityIapV3Binding {
         return ActivityIapV3Binding.inflate(LayoutInflater.from(this))
@@ -95,55 +96,6 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
                 return@getSubscriptionListingDetails
             }
             val pd = productDetails[0] ?: return@getSubscriptionListingDetails
-            val yearlyPlanOffer = pd.subscriptionOfferDetails
-                ?.find { it.basePlanId == IAPUtils.KEY_PREMIUM_YEARLY_PLAN }
-                ?: return@getSubscriptionListingDetails
-
-            val yearlyPriceText = yearlyPlanOffer.pricingPhases.pricingPhaseList
-                .firstOrNull { it.priceAmountMicros > 0 }
-                ?.formattedPrice
-                ?: "-"
-
-            val yearlyMicros = yearlyPlanOffer.pricingPhases.pricingPhaseList
-                .firstOrNull { it.priceAmountMicros > 0 }
-                ?.priceAmountMicros
-                ?: 0L
-
-            val monthlyAmount = if (yearlyMicros > 0) {
-                (yearlyMicros / 12.0) / 1_000_000.0
-            } else {
-                0.0
-            }
-            val currencyCode = yearlyPlanOffer.pricingPhases.pricingPhaseList
-                .firstOrNull { it.priceAmountMicros > 0 }
-                ?.priceCurrencyCode
-                ?: ""
-            val monthlyPriceText = String.format(
-                Locale.getDefault(),
-                "%.2f %s",
-                monthlyAmount,
-                AppUtils.getCurrencySymbol(currencyCode)
-            )
-
-
-//            yearlyPrice = yearlyPriceText
-//            monthlyPriceFromYear = monthlyPriceText
-
-            // Enable or disable the annual button based on subscription state
-            val isSubscribed = IAPUtils.isSubscribed(pd.productId)
-
-
-
-            // --- Monthly plan ---
-            val monthlyOffer = pd.subscriptionOfferDetails
-                ?.find { it.basePlanId == IAPUtils.KEY_PREMIUM_MONTHLY_PLAN }
-
-            if (monthlyOffer != null) {
-                val monthlyPhase = monthlyOffer.pricingPhases.pricingPhaseList.firstOrNull { it.priceAmountMicros > 0 }
-                val monthlyPriceText = monthlyPhase?.formattedPrice ?: "-"
-
-
-            }
 
             // --- Weekly plan ---
             val weeklyOffer = pd.subscriptionOfferDetails
@@ -155,7 +107,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
                 binding.price.text = "$monthlyPriceText/Week after FREE 3-day Trial"
 
             }
-
+            val isSubscribed = IAPUtils.isSubscribed(pd.productId)
             // finish
             if (isSubscribed) {
                 navigateToNextScreen()
@@ -166,7 +118,8 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        AppOpenManager.getInstance().disableAppResume()
+        // AppOpenManager.getInstance().disableAppResume()
+        isFromSplash = intent.getBooleanExtra("${packageName}.isFromSplash", false)
         super.onCreate(savedInstanceState)
         val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
         windowInsetsController.show(WindowInsetsCompat.Type.navigationBars())
@@ -176,7 +129,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
 
 
     private fun showLoadedAdsInterstitial(interstitialAd: InterstitialAd?, complete: () -> Unit) {
-        Log.i("IapActivityV2", "showAdsInterstitial called with ad: $interstitialAd")
+        Log.i("IapActivity3", "showAdsInterstitial called with ad: $interstitialAd")
         Admob.getInstance().showInterAds(this, interstitialAd, object : AdCallback() {
             override fun onNextAction() {
                 complete.invoke()
@@ -188,18 +141,30 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
         if (IAPUtils.isPremium()) {
             TemporaryStorage.interAdPreloaded = null
         }
-        showLoadedAdsInterstitial(TemporaryStorage.interAdPreloaded) {
-            if (!isFromSplash) {
-                finish()
-                return@showLoadedAdsInterstitial
+        if (IAPUtils.isPremium()) {
+            proceedToNextSucess()     // đăng kí IAP thành công
+        } else {
+            showLoadedAdsInterstitial(TemporaryStorage.interAdPreloaded) {
+                // dăng kí thất bại thì ko vao màn thành công
+                proceedToNext()
             }
-            if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
-                LanguageActivity.start(this)
-            } else {
-                MainActivity.start(this)
-            }
-            finish()
         }
+    }
+    private fun proceedToNextSucess() {
+        IapRegistrationSuccessfulActivity.start(this)
+        finish()
+    }
+    private fun proceedToNext() {
+        if (!isFromSplash) {
+            finish()    // vào từ main
+            return
+        }
+        if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
+            LanguageActivity.start(this)    // lần đầu tiên
+        } else {
+            MainActivity.start(this)
+        }
+        finish()
     }
 
 
@@ -207,6 +172,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
 
         binding.btnClose.setOnClickListener {
             navigateToNextScreen()
+            logEvent("iap_close_pressed")
         }
 
 //        binding.btnRestore.setOnClickListener {
@@ -226,7 +192,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
 //                showFreeTrialDialog()
 //            } else {
 //                logEvent("purchase_month_pressed")
-//                IAPUtils.callSubscription(this@IapActivityV2, IAPUtils.KEY_PREMIUM, IAPUtils.KEY_PREMIUM_MONTHLY_PLAN)
+//                IAPUtils.callSubscription(this@IapActivity3, IAPUtils.KEY_PREMIUM, IAPUtils.KEY_PREMIUM_MONTHLY_PLAN)
 //            }
 //            IapRegistrationSuccessfulActivity.start(this)
             logEvent("purchase_week_pressed")
@@ -296,7 +262,11 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
             details: PurchaseInfo?
         ) {
             logEvent("purchase_success_$productId")
-            Toast.makeText(this@IapActivityV2, getString(R.string.you_premium), Toast.LENGTH_SHORT).show()
+            if (FirebaseRemoteConfigUtil.getInstance().isLogPurchaseEvent()) {
+                val params = Bundle()
+                params.putString(Param.TRANSACTION_ID, details?.purchaseData?.orderId )
+                firebaseAnalytics.logEvent(Event.PURCHASE, params)
+            }
             updateViewBaseOnPremiumState()
         }
 
@@ -310,7 +280,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
             Log.d("IapActivity", "Billing error: $errorCode, ${error?.message}")
             // Log or handle errors here
             if (errorCode == 1) { // user cancel
-                if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
+                if (PreferencesUtils.getBoolean(com.ezteam.baseproject.utils.PresKey.GET_START, true)) {
                     logEvent("purchase_cancelled_start")
                     //startRequestAllFilePermission()
                 } else {
@@ -319,7 +289,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
                 return
             } else if (errorCode == 3) { // Billing service unavailable
                 Toast.makeText(this@IapActivityV2, R.string.please_update_store, Toast.LENGTH_LONG).show()
-                if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
+                if (PreferencesUtils.getBoolean(com.ezteam.baseproject.utils.PresKey.GET_START, true)) {
                     navigateToNextScreen()
                 }
                 return
@@ -335,7 +305,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
 
         override fun onBillingInitialized() {
             // Billing service is initialized, you can query products or subscriptions here
-            // Toast.makeText(this@IapActivityV2, "Billing initialized", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this@IapActivity3, "Billing initialized", Toast.LENGTH_SHORT).show()
             IAPUtils.loadOwnedPurchasesFromGoogleAsync {
                 updateViewBaseOnPremiumState()
             }

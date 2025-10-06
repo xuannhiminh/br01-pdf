@@ -20,7 +20,9 @@
     <string name="intent_label_ppt_print">Cetak PPT</string>
     <string name="start_free_trial">Start Free Trial</string>
 
-
+    <string name="congrats">Selamat!</string>
+    <string name="congrats_subtext">Selamat datang di Premium,\n nikmati manfaatnya</string>
+    <string name="ok_great">Oke, hebat!</string>
     <string name="app_name">All PDF Reader</string>
 
     <string name="add_in_fav">Tambahkan dalam favorit</string>

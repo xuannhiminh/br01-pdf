@@ -208,7 +208,7 @@ class UninstallActivity : PdfBaseActivity<ActivityUninstallBinding>() {
         object : CountDownTimer(500, 500) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                //AppOpenManager.getInstance().enableAppResume()
+                AppOpenManager.getInstance().enableAppResume()
             }
         }.start()
     }

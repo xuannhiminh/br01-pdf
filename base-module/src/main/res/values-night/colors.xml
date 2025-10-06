@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#D32F2F</color>
-    <color name="iapColor">#D32F2F</color>
+    <color name="primaryColor">#E4252A</color>
+    <color name="iapColor">#E4252A</color>
     <color name="text1">#E6FFFFFF</color>
     <color name="text2">#8C8DAF</color>
     <color name="element">#262626</color>
