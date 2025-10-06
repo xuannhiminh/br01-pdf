@@ -86,8 +86,13 @@ subprojects {
     afterEvaluate { project ->
         if (project.plugins.hasPlugin("com.android.application") ||
                 project.plugins.hasPlugin("com.android.library")) {
-            dependencies {
-                implementation 'com.github.heaven-std:ads-advance-lib:1.7.8'
+            project.repositories.flatDir {
+                dirs "${rootDir}/libs"
+            }
+            project.dependencies {
+                implementation("com.appsflyer:af-android-sdk:6.14.0")
+                implementation("com.appsflyer:adrevenue:6.9.1")
+                implementation(name: 'ads-advance-lib-1.8.9', ext: 'aar')
             }
         }
         tasks.configureEach { task ->

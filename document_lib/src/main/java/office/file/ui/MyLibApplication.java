@@ -19,7 +19,7 @@ public abstract class MyLibApplication extends AdsApplication {
     public MyLibApplication() {
     }
 
-    private void a() {
+    private void initDataLibOffice() {
         try {
             BaseOpenFileActivity.b();
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public abstract class MyLibApplication extends AdsApplication {
     }
 
     public void onCreate() {
-        this.a();
+        this.initDataLibOffice();
         super.onCreate();
         context = this;
     }
