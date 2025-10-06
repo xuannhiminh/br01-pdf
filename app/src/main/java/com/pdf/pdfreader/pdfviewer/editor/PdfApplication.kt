@@ -96,7 +96,7 @@ class PdfApplication: MyLibApplication() {
     }
 
     override fun enableAdsResume(): Boolean {
-        return !IAPUtils.isPremium()
+        return true
     }
 
     override fun getKeyRemoteIntervalShowInterstitial(): String? {
@@ -122,7 +122,7 @@ class PdfApplication: MyLibApplication() {
     }
 
     override fun isPurchased(): Boolean {
-        return IAPUtils.isPremium()
+        return false
     }
 
     private fun initLanguage() {

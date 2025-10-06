@@ -118,6 +118,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
+import com.nlbn.ads.util.Helper
 import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
 import pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.FeatureRequestActivity
 import pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.ReloadLoadingActivity
@@ -174,8 +175,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
-        AppOpenManager.getInstance().enableAppResume()
+        Helper.a = true
         handleIntentToMove()
         super.onCreate(savedInstanceState)
         handleIntentToShowUI()
