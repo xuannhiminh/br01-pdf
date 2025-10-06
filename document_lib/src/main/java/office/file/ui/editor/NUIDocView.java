@@ -2005,7 +2005,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
         if (isFullScreen) {
             onClick(mFullscreenButton);
             if (mButtonOutFullScreen != null) {
-                mButtonOutFullScreen.setVisibility(VISIBLE);
+                mButtonOutFullScreen.setVisibility(GONE);
             }
         }
     }
@@ -2224,12 +2224,15 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
         if (!com.artifex.solib.a.c(var1)) {
             Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.sodk_editor_insert_image_gone_title), this.getContext().getString(R.string.sodk_editor_insert_image_gone_body));
         } else {
-            String var2 = Utilities.preInsertImage(this.getContext(), var1);
-            this.getDoc().d(var2);
-            if (!var1.equalsIgnoreCase(var2)) {
-                this.addDeleteOnClose(var2);
+            try {
+                String var2 = Utilities.preInsertImage(this.getContext(), var1);
+                this.getDoc().d(var2);
+                if (!var1.equalsIgnoreCase(var2)) {
+                    this.addDeleteOnClose(var2);
+                }
+            } catch (Exception var3) {
+                Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.sodk_editor_insert_image_gone_title), this.getContext().getString(R.string.sodk_editor_insert_image_gone_title));
             }
-
         }
     }
 
@@ -3778,6 +3781,12 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
     }
 
     public void onInsertImageButton(View var1) {
+        if (!checkStoragePermission(this.getContext())) {
+            Utilities.showMessage((Activity) NUIDocView.this.getContext(),
+                    NUIDocView.this.getContext().getString(R.string.edit),
+                    NUIDocView.this.getContext().getString(R.string.accept_all_file_permission_edit2));
+            return;
+        }
         this.showKeyboard(false, new Runnable() {
             public void run() {
                 if (NUIDocView.this.mDataLeakHandlers != null) {
@@ -4215,7 +4224,6 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
 
     public void onSaveAsButton(View var1) {
         if (!checkStoragePermission(this.getContext())) {
-            Toast.makeText(this.getContext(), "", Toast.LENGTH_SHORT).show();
             Utilities.showMessage((Activity) NUIDocView.this.getContext(),
                     NUIDocView.this.getContext().getString(R.string.edit),
                     NUIDocView.this.getContext().getString(R.string.accept_all_file_permission_edit2));
@@ -4231,7 +4239,6 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
 
     public void onSaveButton(View var1) {
         if (!checkStoragePermission(this.getContext())) {
-            Toast.makeText(this.getContext(), "", Toast.LENGTH_SHORT).show();
             Utilities.showMessage((Activity) NUIDocView.this.getContext(),
                     NUIDocView.this.getContext().getString(R.string.edit),
                     NUIDocView.this.getContext().getString(R.string.accept_all_file_permission_edit2));
@@ -4247,7 +4254,6 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
 
     public void onSavePDFButton(View var1) {
         if (!checkStoragePermission(this.getContext())) {
-            Toast.makeText(this.getContext(), "", Toast.LENGTH_SHORT).show();
             Utilities.showMessage((Activity) NUIDocView.this.getContext(),
                     NUIDocView.this.getContext().getString(R.string.edit),
                     NUIDocView.this.getContext().getString(R.string.accept_all_file_permission_edit2));
@@ -5672,7 +5678,6 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
         } else if (tab.getText() == getResources().getString(R.string.home)) {
             onBottomMenuButton(mHomeTab, getResources().getString(R.string.home));
             if (!checkStoragePermission(this.getContext())) {
-                Toast.makeText(this.getContext(), "", Toast.LENGTH_SHORT).show();
                 Utilities.showMessage((Activity) NUIDocView.this.getContext(),
                         NUIDocView.this.getContext().getString(R.string.edit),
                         NUIDocView.this.getContext().getString(R.string.accept_all_file_permission_edit2));
