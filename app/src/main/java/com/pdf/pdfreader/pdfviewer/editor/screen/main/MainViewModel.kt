@@ -11,6 +11,7 @@ import android.os.CountDownTimer
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
@@ -373,6 +374,36 @@ class MainViewModel(
             FileTab.PPT -> pptFilesLiveData
             FileTab.EXCEL -> excelFilesLiveData
         }
+    }
+
+    fun getFilteredFilesLiveData(fileTab: FileTab): LiveData<List<FileModel>> {
+        val result = MediatorLiveData<List<FileModel>>()
+        val source = getCurrentFiles(fileTab)
+        var lastList: List<FileModel> = emptyList()
+        var lastQuery: String = searchCharObservable.value ?: ""
+
+        fun applyFilter() {
+            val query = lastQuery.trim().lowercase()
+            if (query.isEmpty()) {
+                result.postValue(lastList)
+            } else {
+                val filtered = lastList.filter {
+                    (it.name ?: "").lowercase().contains(query)
+                }
+                result.postValue(filtered)
+            }
+        }
+
+        result.addSource(source) { list ->
+            lastList = list ?: emptyList()
+            applyFilter()
+        }
+        result.addSource(searchCharObservable) { query ->
+            lastQuery = query ?: ""
+            applyFilter()
+        }
+
+        return result
     }
 
     private fun getListPdfFile(): LiveData<List<FileModel>> {

@@ -420,11 +420,26 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         binding.toolbar.tvExcel.text =  getString(R.string.excel)
         binding.toolbar.tvPdf.text =  getString(R.string.pdf)
         adapter = BasePagerAdapter(supportFragmentManager, ALL_FILES_FRAGMENT_INDEX)
-        adapter.addFragment(ListAllFileFragment(viewModel.allFilesLiveData), ListAllFileFragment::class.java.name)
-        adapter.addFragment(ListFilePdfFragment(viewModel.pdfFilesLiveData), ListFilePdfFragment::class.java.name)
-        adapter.addFragment(ListFileWordFragment(viewModel.wordFilesLiveData), ListFileWordFragment::class.java.name)
-        adapter.addFragment(ListFilePPTFragment(viewModel.pptFilesLiveData), ListFilePPTFragment::class.java.name)
-        adapter.addFragment(ListFileExcelFragment(viewModel.excelFilesLiveData), ListFileExcelFragment::class.java.name)
+        adapter.addFragment(
+            ListAllFileFragment(viewModel.getFilteredFilesLiveData(FileTab.ALL_FILE)),
+            ListAllFileFragment::class.java.name
+        )
+        adapter.addFragment(
+            ListFilePdfFragment(viewModel.getFilteredFilesLiveData(FileTab.PDF)),
+            ListFilePdfFragment::class.java.name
+        )
+        adapter.addFragment(
+            ListFileWordFragment(viewModel.getFilteredFilesLiveData(FileTab.WORD)),
+            ListFileWordFragment::class.java.name
+        )
+        adapter.addFragment(
+            ListFilePPTFragment(viewModel.getFilteredFilesLiveData(FileTab.PPT)),
+            ListFilePPTFragment::class.java.name
+        )
+        adapter.addFragment(
+            ListFileExcelFragment(viewModel.getFilteredFilesLiveData(FileTab.EXCEL)),
+            ListFileExcelFragment::class.java.name
+        )
         binding.viewPager.adapter = adapter
         binding.viewPager.offscreenPageLimit = 5
 
@@ -1003,7 +1018,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
 
         binding.recentlyAddedSection.setOnClickListener {
-            binding.toolbar.ivSearch.visibility = View.VISIBLE
+          //  binding.toolbar.ivSearch.visibility = View.VISIBLE
             binding.toolbar.ivFilter.visibility = View.GONE
             binding.toolbar.ivCheck.visibility = View.GONE
             binding.navView.visibility=View.GONE
@@ -1093,8 +1108,23 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             IapActivityV2.start(this)
         }
 
-        binding.toolbar.ivSearch.setOnClickListener {
-            SearchFileActivity.start(this)
+//        binding.toolbar.ivSearch.setOnClickListener {
+//            SearchFileActivity.start(this)
+//        }
+
+        binding.toolbar.edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.searchCharObservable.postValue(s?.toString() ?: "")
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        binding.toolbar.ivClear.setOnClickListener {
+            binding.toolbar.edtSearch.setText("")
+            viewModel.searchCharObservable.postValue("")
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
         }
 
 //        binding.buttonCreate.setOnClickListener {
@@ -1576,13 +1606,17 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         when (id) {
             R.id.navigation_home -> {
+                binding.toolbar.edtSearch.setText("")
+                viewModel.searchCharObservable.postValue("")
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
                 viewModel.updateBottomTab(BottomTab.HOME)
                 checkStoragePermissionToShowUI()
                 checkNotificationPermissionToShowUI()
                 checkFeatureRequestToShowUI()
                 binding.toolbar.apply {
                     tvTitle.text = handleAppNameSpannable(showIcon = IAPUtils.isPremium())
-                    ivSearch.visibility = View.VISIBLE
+                    //ivSearch.visibility = View.VISIBLE
                     ivFilter.visibility = View.VISIBLE
                     ivCheck.visibility = View.VISIBLE
                     ivBack.visibility = View.GONE
@@ -1598,11 +1632,15 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_recent -> {
+                binding.toolbar.edtSearch.setText("")
+                viewModel.searchCharObservable.postValue("")
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
                 viewModel.updateBottomTab(BottomTab.RECENT)
 
                 binding.toolbar.apply {
                     tvTitle.text = getString(R.string.title_recent)
-                    ivSearch.visibility = View.VISIBLE
+                    //ivSearch.visibility = View.VISIBLE
                     ivFilter.visibility = View.GONE
                     ivCheck.visibility = View.GONE
                     ivBack.visibility = View.GONE
@@ -1612,11 +1650,15 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_favorite -> {
+                binding.toolbar.edtSearch.setText("")
+                viewModel.searchCharObservable.postValue("")
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
                 viewModel.updateBottomTab(BottomTab.FAVORITE)
 
                 binding.toolbar.apply {
                     tvTitle.text = getString(R.string.title_fav)
-                    ivSearch.visibility = View.GONE
+                   // ivSearch.visibility = View.GONE
                     ivFilter.visibility = View.GONE
                     ivCheck.visibility = View.GONE
                     ivBack.visibility = View.GONE
