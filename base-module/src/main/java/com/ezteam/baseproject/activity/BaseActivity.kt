@@ -72,6 +72,57 @@ open abstract class BaseActivity<B : ViewBinding> : LocalizationActivity() {
         return false
     }
 
+    fun handleAppNameSpannable2(showIcon: Boolean = false): SpannableString {
+        return try {
+            val appName = getString(R.string.app_name)
+            val spannable = if (showIcon) SpannableString("$appName\u00A0") else SpannableString(appName)
+
+            val startIndex = 0
+            val endIndex = appName.indexOf(' ', appName.indexOf(' ') + 1).takeIf { it >= 0 } ?: appName.length
+
+            val redColor = ContextCompat.getColor(this, R.color.primaryColor)
+            spannable.setSpan(
+                ForegroundColorSpan(redColor),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            spannable.setSpan(
+                StyleSpan(Typeface.BOLD),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            if (showIcon) {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_premium_small)
+                val iconSizeInDp = 16f
+                val iconSizeInPx = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    iconSizeInDp,
+                    resources.displayMetrics
+                ).toInt()
+
+                drawable?.setBounds(0, 0, iconSizeInPx, iconSizeInPx)
+
+                drawable?.let {
+                    val imageSpan = TopAlignImageSpan(it)
+                    spannable.setSpan(
+                        imageSpan,
+                        spannable.length - 1,
+                        spannable.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+            }
+
+
+            return spannable
+        } catch (e: Exception) {
+            Log.e("SplashActivity", "Error creating spannable app name: ${e.message}")
+            SpannableString(getString(R.string.app_name))
+        }
+    }
     fun handleAppNameSpannable(showIcon: Boolean = false): SpannableString {
         return try {
             val appName = getString(R.string.app_name)

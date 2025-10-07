@@ -125,7 +125,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             Log.e("SplashActivity", "Error starting service: ${e.message}")
         }
 
-        binding.loadingTitle.text =  handleAppNameSpannable()
+        binding.loadingTitle.text =  handleAppNameSpannable2()
 
     }
 //    private var ads_inter_id = ""
@@ -526,16 +526,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
 
         if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
-//            if (ContextCompat.checkSelfPermission(this,
-//                    Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-//                Log.i("SplashActivity", "Notification permission not granted, go to Intro")
-//                logEvent("splash_to_intro")
-////                IntroActivity.start(this)
-//                PreferencesUtils.putBoolean(PresKey.FIRST_TIME_OPEN_APP, false)
-//                LanguageActivity.start(this@SplashActivity)
-//                finish()
-//                return
-//            }
             TemporaryStorage.shouldLoadAdsLanguageScreen = true
             LanguageActivity.start(this@SplashActivity)
             //            logEvent("splash_to_language")
@@ -549,7 +539,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             ) {
                 Log.i("SplashActivity", "Notification permission not granted, go to Noti request")
                 RequestNotificationPermissionActivity.start(this)
-        } else {
+            } else {
                 MainActivity.start(this@SplashActivity)
 
             }
