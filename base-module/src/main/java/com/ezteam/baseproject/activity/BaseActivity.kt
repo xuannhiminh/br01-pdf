@@ -94,27 +94,6 @@ open abstract class BaseActivity<B : ViewBinding> : LocalizationActivity() {
                 endIndex,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-//            if (showIcon) {
-//                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_premium_small)
-//                val iconSizeInDp = 16f
-//                val iconSizeInPx = TypedValue.applyDimension(
-//                    TypedValue.COMPLEX_UNIT_DIP,
-//                    iconSizeInDp,
-//                    resources.displayMetrics
-//                ).toInt()
-//
-//                drawable?.setBounds(0, 0, iconSizeInPx, iconSizeInPx)
-//
-//                drawable?.let {
-//                    val imageSpan = TopAlignImageSpan(it)
-//                    spannable.setSpan(
-//                        imageSpan,
-//                        spannable.length - 1,
-//                        spannable.length,
-//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-//                    )
-//                }
-//            }
 
 
             return spannable

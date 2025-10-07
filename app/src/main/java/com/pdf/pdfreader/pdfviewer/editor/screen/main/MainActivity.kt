@@ -427,11 +427,6 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         adapter.addFragment(ListFileExcelFragment(viewModel.excelFilesLiveData), ListFileExcelFragment::class.java.name)
         binding.viewPager.adapter = adapter
         binding.viewPager.offscreenPageLimit = 5
-//        adsCallbackListeners.add(adapter.getItem(ALL_FILES_FRAGMENT_INDEX) as IAdsControl)
-//        adsCallbackListeners.add(adapter.getItem(PDF_FILES_FRAGMENT_INDEX) as IAdsControl)
-//        adsCallbackListeners.add(adapter.getItem(WORD_FILES_FRAGMENT_INDEX) as IAdsControl)
-//        adsCallbackListeners.add(adapter.getItem(EXCEL_FILES_FRAGMENT_INDEX) as IAdsControl)
-//        adsCallbackListeners.add(adapter.getItem(PPT_FILES_FRAGMENT_INDEX) as IAdsControl)
 
         // Kotlin
 
@@ -581,7 +576,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                 Log.d(TAG, "onBillingInitialized")
                 IAPUtils.loadOwnedPurchasesFromGoogleAsync {
                     val isPremium = IAPUtils.isPremium()
-                    binding.toolbar.tvTitle.text =  handleAppNameSpannable(showIcon = isPremium)
+                    // binding.toolbar.tvTitle.text =  handleAppNameSpannable(showIcon = isPremium)
                     binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.VISIBLE
 
                     if (isPremium) {
@@ -988,16 +983,6 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             handleSortAction(sortState)
         }
 
-//        binding.toolbar.ivBack.visibility = View.GONE
-//        binding.toolbar.ivFilter.visibility = View.VISIBLE
-//        binding.toolbar.ivCheck.visibility = View.VISIBLE
-//        binding.toolbar.chooseType.visibility = View.VISIBLE
-//        binding.recentlyAddedSection.visibility = View.VISIBLE
-//        binding.toolbar.tvTitle.text = handleAppNameSpannable()
-//        handleUIBaseOnBottomTab(R.id.navigation_home, false)
-//        handleUIBaseOnFileTab(binding.toolbar.tvAll)
-//        viewModel.updateFileTab(FileTab.ALL_FILE)
-//        handleSortAction(4)
     }
 
     override fun initListener() {
@@ -1328,8 +1313,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             binding.toolbar.tvPpt -> R.color.orange
             binding.toolbar.tvExcel -> R.color.green
             binding.toolbar.tvWord -> R.color.blue
-            binding.toolbar.tvPdf -> R.color.red
-            else -> R.color.primaryColor
+            binding.toolbar.tvPdf -> R.color.primaryColor
+            else -> R.color.all
         }
         val underlineResource = if (selectedTextView == binding.toolbar.tvPpt) {
             R.drawable.underline_orange
@@ -1338,9 +1323,9 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         } else if (selectedTextView == binding.toolbar.tvExcel){
             R.drawable.underline_green
         } else if (selectedTextView == binding.toolbar.tvPdf){
-            R.drawable.underline_red
-        } else {
             R.drawable.underline
+        } else {
+            R.drawable.underline_all
         }
 
         // Cập nhật màu, kiểu chữ và underline cho item được chọn
