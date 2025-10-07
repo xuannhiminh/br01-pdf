@@ -142,94 +142,94 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
     }
 
     private fun updateViewBaseOnPremiumState() {
-            IAPUtils.getSubscriptionListingDetails(IAPUtils.KEY_PREMIUM) { productDetails ->
-                if (productDetails.isNullOrEmpty()) {
-                    // No details returned
-                    Log.e("IapActivity", "No subscription details")
-                    return@getSubscriptionListingDetails
-                }
-                val pd = productDetails[0] ?: return@getSubscriptionListingDetails
-                val yearlyPlanOffer = pd.subscriptionOfferDetails
-                    ?.find { it.basePlanId == IAPUtils.KEY_PREMIUM_YEARLY_PLAN }
-                    ?: return@getSubscriptionListingDetails
+        IAPUtils.getSubscriptionListingDetails(IAPUtils.KEY_PREMIUM) { productDetails ->
+            if (productDetails.isNullOrEmpty()) {
+                // No details returned
+                Log.e("IapActivity", "No subscription details")
+                return@getSubscriptionListingDetails
+            }
+            val pd = productDetails[0] ?: return@getSubscriptionListingDetails
+            val yearlyPlanOffer = pd.subscriptionOfferDetails
+                ?.find { it.basePlanId == IAPUtils.KEY_PREMIUM_YEARLY_PLAN }
+                ?: return@getSubscriptionListingDetails
 
-                val yearlyPriceText = yearlyPlanOffer.pricingPhases.pricingPhaseList
-                    .firstOrNull { it.priceAmountMicros > 0 }
-                    ?.formattedPrice
-                    ?: "-"
+            val yearlyPriceText = yearlyPlanOffer.pricingPhases.pricingPhaseList
+                .firstOrNull { it.priceAmountMicros > 0 }
+                ?.formattedPrice
+                ?: "-"
 
-                val yearlyMicros = yearlyPlanOffer.pricingPhases.pricingPhaseList
-                    .firstOrNull { it.priceAmountMicros > 0 }
-                    ?.priceAmountMicros
-                    ?: 0L
+            val yearlyMicros = yearlyPlanOffer.pricingPhases.pricingPhaseList
+                .firstOrNull { it.priceAmountMicros > 0 }
+                ?.priceAmountMicros
+                ?: 0L
 
-                val monthlyAmount = if (yearlyMicros > 0) {
-                    (yearlyMicros / 12.0) / 1_000_000.0
+            val monthlyAmount = if (yearlyMicros > 0) {
+                (yearlyMicros / 12.0) / 1_000_000.0
+            } else {
+                0.0
+            }
+            val currencyCode = yearlyPlanOffer.pricingPhases.pricingPhaseList
+                .firstOrNull { it.priceAmountMicros > 0 }
+                ?.priceCurrencyCode
+                ?: ""
+            val monthlyPriceText = String.format(
+                Locale.getDefault(),
+                "%.2f %s",
+                monthlyAmount,
+                AppUtils.getCurrencySymbol(currencyCode)
+            )
+
+            // Bind to your UI
+            binding.apply {
+                // e.g. "Yearly: $23.94"
+                priceDetail.text = getString(R.string.price_annual_note, yearlyPriceText)
+                // e.g. "Monthly: $1.99"
+                price.text = getString(R.string.price_monthly, monthlyPriceText)
+            }
+
+            yearlyPrice = yearlyPriceText
+            monthlyPriceFromYear = monthlyPriceText
+
+            // Enable or disable the annual button based on subscription state
+            val isSubscribed = IAPUtils.isSubscribed(pd.productId)
+            binding.btnSubscribeAnnual.apply {
+                isEnabled = !isSubscribed
+                alpha = if (isEnabled) 1f else 0.5f
+            }
+
+
+
+            // --- Monthly plan ---
+            val monthlyOffer = pd.subscriptionOfferDetails
+                ?.find { it.basePlanId == IAPUtils.KEY_PREMIUM_MONTHLY_PLAN }
+
+            if (monthlyOffer != null) {
+                val monthlyPhase = monthlyOffer.pricingPhases.pricingPhaseList.firstOrNull { it.priceAmountMicros > 0 }
+                val monthlyPriceText = monthlyPhase?.formattedPrice ?: "-"
+
+                binding.priceMonthly.text = getString(R.string.price_monthly, monthlyPriceText)
+
+                if (!IAPUtils.isSubscribed(pd.productId)) {
+                    isMonthlySelectable = true
+                    binding.btnSubscribeMonthly.isEnabled = true
+                    binding.btnSubscribeMonthly.alpha = 1f
+
                 } else {
-                    0.0
-                }
-                val currencyCode = yearlyPlanOffer.pricingPhases.pricingPhaseList
-                    .firstOrNull { it.priceAmountMicros > 0 }
-                    ?.priceCurrencyCode
-                    ?: ""
-                val monthlyPriceText = String.format(
-                    Locale.getDefault(),
-                    "%.2f %s",
-                    monthlyAmount,
-                    AppUtils.getCurrencySymbol(currencyCode)
-                )
-
-                // Bind to your UI
-                binding.apply {
-                    // e.g. "Yearly: $23.94"
-                    priceDetail.text = getString(R.string.price_annual_note, yearlyPriceText)
-                    // e.g. "Monthly: $1.99"
-                    price.text = getString(R.string.price_monthly, monthlyPriceText)
-                }
-
-                yearlyPrice = yearlyPriceText
-                monthlyPriceFromYear = monthlyPriceText
-
-                // Enable or disable the annual button based on subscription state
-                val isSubscribed = IAPUtils.isSubscribed(pd.productId)
-                binding.btnSubscribeAnnual.apply {
-                    isEnabled = !isSubscribed
-                    alpha = if (isEnabled) 1f else 0.5f
-                }
-
-
-
-                // --- Monthly plan ---
-                val monthlyOffer = pd.subscriptionOfferDetails
-                    ?.find { it.basePlanId == IAPUtils.KEY_PREMIUM_MONTHLY_PLAN }
-
-                if (monthlyOffer != null) {
-                    val monthlyPhase = monthlyOffer.pricingPhases.pricingPhaseList.firstOrNull { it.priceAmountMicros > 0 }
-                    val monthlyPriceText = monthlyPhase?.formattedPrice ?: "-"
-
-                    binding.priceMonthly.text = getString(R.string.price_monthly, monthlyPriceText)
-
-                    if (!IAPUtils.isSubscribed(pd.productId)) {
-                        isMonthlySelectable = true
-                        binding.btnSubscribeMonthly.isEnabled = true
-                        binding.btnSubscribeMonthly.alpha = 1f
-
-                    } else {
-                        isMonthlySelectable = false
-                        binding.btnSubscribeMonthly.isEnabled = false
-                        binding.btnSubscribeMonthly.alpha = 0.5f
-                    }
-                }
-
-                // finish
-                if (isSubscribed) {
-                    if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
-                        startRequestAllFilePermission()
-                    } else {
-                        finish()
-                    }
+                    isMonthlySelectable = false
+                    binding.btnSubscribeMonthly.isEnabled = false
+                    binding.btnSubscribeMonthly.alpha = 0.5f
                 }
             }
+
+            // finish
+            if (isSubscribed) {
+                if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
+                    startRequestAllFilePermission()
+                } else {
+                    finish()
+                }
+            }
+        }
 
     }
 
@@ -506,7 +506,7 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
 
         override fun onBillingInitialized() {
             // Billing service is initialized, you can query products or subscriptions here
-           // Toast.makeText(this@IapActivity, "Billing initialized", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this@IapActivity, "Billing initialized", Toast.LENGTH_SHORT).show()
             IAPUtils.loadOwnedPurchasesFromGoogleAsync {
                 updateViewBaseOnPremiumState()
             }
