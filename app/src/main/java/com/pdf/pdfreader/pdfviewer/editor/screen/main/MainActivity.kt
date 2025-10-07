@@ -80,6 +80,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.widget.doOnTextChanged
 import com.ezteam.baseproject.iapLib.v3.BillingProcessor
 import com.ezteam.baseproject.iapLib.v3.PurchaseInfo
 import com.ezteam.baseproject.utils.IAPUtils
@@ -982,7 +983,13 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 //        }
     }
 
+    private fun clearSearchField() {
+        binding.toolbar.edtSearch.setText("")
+        viewModel.searchCharObservable.postValue("")
 
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
+    }
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         Log.d(TAG, "onNewIntent")
@@ -1112,19 +1119,18 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 //            SearchFileActivity.start(this)
 //        }
 
-        binding.toolbar.edtSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.searchCharObservable.postValue(s?.toString() ?: "")
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        binding.toolbar.edtSearch.doOnTextChanged { text, _, _, _ ->
+            val hasText = !text.isNullOrEmpty()
+
+            binding.toolbar.ivClear.visibility = if (hasText) View.VISIBLE else View.GONE
+            binding.toolbar.ivShow.visibility = if (hasText) View.GONE else View.VISIBLE
+
+            viewModel.searchCharObservable.postValue(text?.toString() ?: "")
+        }
+
 
         binding.toolbar.ivClear.setOnClickListener {
-            binding.toolbar.edtSearch.setText("")
-            viewModel.searchCharObservable.postValue("")
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
+            clearSearchField()
         }
 
 //        binding.buttonCreate.setOnClickListener {
@@ -1343,8 +1349,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             binding.toolbar.tvPpt -> R.color.orange
             binding.toolbar.tvExcel -> R.color.green
             binding.toolbar.tvWord -> R.color.blue
-            binding.toolbar.tvPdf -> R.color.primaryColor
-            else -> R.color.all
+            binding.toolbar.tvPdf -> R.color.red
+            else -> R.color.primaryColor
         }
         val underlineResource = if (selectedTextView == binding.toolbar.tvPpt) {
             R.drawable.underline_orange
@@ -1353,9 +1359,9 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         } else if (selectedTextView == binding.toolbar.tvExcel){
             R.drawable.underline_green
         } else if (selectedTextView == binding.toolbar.tvPdf){
-            R.drawable.underline
+            R.drawable.underline_red
         } else {
-            R.drawable.underline_all
+            R.drawable.underline
         }
 
         // Cập nhật màu, kiểu chữ và underline cho item được chọn
@@ -1606,10 +1612,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         when (id) {
             R.id.navigation_home -> {
-                binding.toolbar.edtSearch.setText("")
-                viewModel.searchCharObservable.postValue("")
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
+                clearSearchField()
                 viewModel.updateBottomTab(BottomTab.HOME)
                 checkStoragePermissionToShowUI()
                 checkNotificationPermissionToShowUI()
@@ -1632,10 +1635,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_recent -> {
-                binding.toolbar.edtSearch.setText("")
-                viewModel.searchCharObservable.postValue("")
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
+                clearSearchField()
                 viewModel.updateBottomTab(BottomTab.RECENT)
 
                 binding.toolbar.apply {
@@ -1650,10 +1650,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_favorite -> {
-                binding.toolbar.edtSearch.setText("")
-                viewModel.searchCharObservable.postValue("")
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(binding.toolbar.edtSearch.windowToken, 0)
+                clearSearchField()
                 viewModel.updateBottomTab(BottomTab.FAVORITE)
 
                 binding.toolbar.apply {
