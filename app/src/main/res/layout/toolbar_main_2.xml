@@ -118,7 +118,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Find here..."
+                android:hint="@string/search"
                 android:textSize="12sp"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
