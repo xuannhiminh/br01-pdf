@@ -75,6 +75,7 @@ import android.text.TextWatcher
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
@@ -120,6 +121,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.nlbn.ads.util.Helper
+import pdf.documents.pdfreader.pdfviewer.editor.dialog.ExitAppDialog
 import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
 import pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.FeatureRequestActivity
 import pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.ReloadLoadingActivity
@@ -180,6 +182,16 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         handleIntentToMove()
         super.onCreate(savedInstanceState)
         handleIntentToShowUI()
+        onBackPressedDispatcher.addCallback(this) {
+            val exitAppDialog = ExitAppDialog()
+            try {
+                exitAppDialog.show(supportFragmentManager, ExitAppDialog::class.java.name)
+                logEvent("exit_app")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("MainActivity", "Error showing exit dialog: ${e.message}", e)
+            }
+        }
     }
 
     /*
@@ -1010,6 +1022,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
     override fun initListener() {
         binding.navView. setOnItemSelectedListener(onNavigationItemSelectedListener)
         binding.toolbar.ivFilter.setOnClickListener {
+            logEvent("filter")
             val dialog = SortDialog()
             dialog.setOnSortSelectedListener(::handleSortAction)
             dialog.show(supportFragmentManager, "SortDialog")
@@ -1025,7 +1038,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
 
         binding.recentlyAddedSection.setOnClickListener {
-          //  binding.toolbar.ivSearch.visibility = View.VISIBLE
+            logEvent("recently_added")
+            binding.toolbar.ivSearch.visibility = View.VISIBLE
             binding.toolbar.ivFilter.visibility = View.GONE
             binding.toolbar.ivCheck.visibility = View.GONE
             binding.navView.visibility=View.GONE
@@ -1076,48 +1090,42 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                 BottomTab.HOME -> {
                     binding.recentlyAddedSection.visibility = View.VISIBLE
                     if(viewModel.loadAddedTodayFiles.value != 0) binding.recentlyAddedNumber.visibility = View.VISIBLE else View.GONE
-//                    binding.toolbar.ivSetting.setOnClickListener {
-//                        showMenuFunction()
-//                    }
                     binding.toolbar.ivSetting.setOnClickListener {
+                        logEvent("setting_press")
                         SettingActivity.start(this)
                     }
                 }
                 BottomTab.RECENT -> {
                     binding.recentlyAddedSection.visibility = View.GONE
-//                    binding.toolbar.ivSetting.setOnClickListener {
-//                        showMenuFunction()
-//                    }
                     binding.toolbar.ivSetting.setOnClickListener {
+                        logEvent("setting_press")
                         SettingActivity.start(this)
                     }
                 }
                 BottomTab.FAVORITE -> {
                     binding.recentlyAddedSection.visibility = View.GONE
-//                    binding.toolbar.ivSetting.setOnClickListener {
-//                        showMenuFunction()
-//                    }
                     binding.toolbar.ivSetting.setOnClickListener {
+                        logEvent("setting_press")
                         SettingActivity.start(this)
                     }
                 }
                 else -> {
-//                    binding.toolbar.ivSetting.setOnClickListener {
-//                        showMenuFunction()
-//                    }
                     binding.toolbar.ivSetting.setOnClickListener {
+                        logEvent("setting_press")
                         SettingActivity.start(this)
                     }
                 }
             }
         }
         binding.toolbar.ivIap.setOnClickListener {
+            logEvent("iap_press")
             IapActivityV2.start(this)
         }
 
-//        binding.toolbar.ivSearch.setOnClickListener {
-//            SearchFileActivity.start(this)
-//        }
+        binding.toolbar.ivSearch.setOnClickListener {
+            logEvent("search_press")
+            SearchFileActivity.start(this)
+        }
 
         binding.toolbar.edtSearch.doOnTextChanged { text, _, _, _ ->
             val hasText = !text.isNullOrEmpty()
@@ -1139,6 +1147,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 //        }
 
         binding.toolbar.tvAll.setOnClickListener {
+            logEvent("all_tab_press")
             Log.d(TAG, "tvAll Clicked")
             binding.viewPager.currentItem = ALL_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvAll)
@@ -1146,24 +1155,28 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
 
         binding.toolbar.tvPdf.setOnClickListener {
+            logEvent("pdf_tab_press")
             Log.d(TAG, "tvPdf Clicked")
             binding.viewPager.currentItem = PDF_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvPdf)
         }
 
         binding.toolbar.tvWord.setOnClickListener {
+            logEvent("word_tab_press")
             Log.d(TAG, "tvWord Clicked")
             binding.viewPager.currentItem = WORD_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvWord)
         }
 
         binding.toolbar.tvExcel.setOnClickListener {
+            logEvent("excel_tab_press")
             Log.d(TAG, "tvExcel Clicked")
             binding.viewPager.currentItem = EXCEL_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvExcel)
         }
 
         binding.toolbar.tvPpt.setOnClickListener {
+            logEvent("ppt_tab_press")
             Log.d(TAG, "tvPpt Clicked")
             binding.viewPager.currentItem = PPT_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvPpt)
@@ -1171,8 +1184,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         binding.toolbar.ivCheck.setOnClickListener {
 
-
-
+            logEvent("select_multifile_press")
             val currentIndex = binding.viewPager.currentItem
 
             val fileTab = when (currentIndex) {
@@ -1612,6 +1624,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         when (id) {
             R.id.navigation_home -> {
+                logEvent("home_bottom_tab_press")
                 clearSearchField()
                 viewModel.updateBottomTab(BottomTab.HOME)
                 checkStoragePermissionToShowUI()
@@ -1619,7 +1632,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                 checkFeatureRequestToShowUI()
                 binding.toolbar.apply {
                     tvTitle.text = handleAppNameSpannable(showIcon = IAPUtils.isPremium())
-                    //ivSearch.visibility = View.VISIBLE
+                    ivSearch.visibility = View.VISIBLE
                     ivFilter.visibility = View.VISIBLE
                     ivCheck.visibility = View.VISIBLE
                     ivBack.visibility = View.GONE
@@ -1635,12 +1648,13 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_recent -> {
+                logEvent("recent_bottom_tab_press")
                 clearSearchField()
                 viewModel.updateBottomTab(BottomTab.RECENT)
 
                 binding.toolbar.apply {
                     tvTitle.text = getString(R.string.title_recent)
-                    //ivSearch.visibility = View.VISIBLE
+                    ivSearch.visibility = View.VISIBLE
                     ivFilter.visibility = View.GONE
                     ivCheck.visibility = View.GONE
                     ivBack.visibility = View.GONE
@@ -1650,12 +1664,13 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_favorite -> {
+                logEvent("favourite_bottom_tab_press")
                 clearSearchField()
                 viewModel.updateBottomTab(BottomTab.FAVORITE)
 
                 binding.toolbar.apply {
                     tvTitle.text = getString(R.string.title_fav)
-                   // ivSearch.visibility = View.GONE
+                    ivSearch.visibility = View.GONE
                     ivFilter.visibility = View.GONE
                     ivCheck.visibility = View.GONE
                     ivBack.visibility = View.GONE

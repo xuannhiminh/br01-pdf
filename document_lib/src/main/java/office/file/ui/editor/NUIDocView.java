@@ -25,6 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
@@ -85,6 +86,7 @@ import com.ezteam.baseproject.utils.PresKey;
 import com.ezteam.baseproject.utils.TemporaryStorage;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.nlbn.ads.callback.AdCallback;
 import com.nlbn.ads.util.Admob;
 import com.nlbn.ads.util.AppOpenManager;
@@ -338,6 +340,13 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
     private void D() {
         DocView var1 = this.getDocView();
         var1.smoothScrollBy(0, -var1.getHeight() / 20, 100);
+    }
+    private void logEvent(String event) {
+        try {
+            FirebaseAnalytics.getInstance(this.activity().getApplicationContext()).logEvent(event, new Bundle());
+        } catch (Exception e) {
+            Log.e("DefaultReaderGuideDialog", "Error initializing FirebaseAnalytics " + e);
+        }
     }
 
     private boolean E() {
@@ -3357,6 +3366,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
             if (this.mConfigOptions.z()) {
                 ImageView var2 = this.mFullscreenButton;
                 if (var2 != null && var1 == var2) {
+                    logEvent("NUI_fullscreen_press");
                     this.onFullScreen(var1);
                 }
             }
@@ -3369,6 +3379,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
                 if (keyboardShown) {
                     Utilities.hideKeyboard(getContext());
                 } else {
+                    logEvent("NUI_keyboard_press");
                     Utilities.showKeyboard(getContext());
                 }
             }
@@ -5109,6 +5120,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
     }
 
     public boolean showKeyboard() {
+
         /*if (!isMenuOpen) {
             Utilities.showKeyboard(this.getContext());
         }
@@ -5675,8 +5687,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
 
     protected void selectedTab(TabLayout.Tab tab) {
         if (tab.getText() == getResources().getString(R.string.file)) {
+            logEvent("NUI_File_tab_press");
             onBottomMenuButton(mFileTab, getResources().getString(R.string.file));
         } else if (tab.getText() == getResources().getString(R.string.home)) {
+            logEvent("NUI_Home_tab_press");
             onBottomMenuButton(mHomeTab, getResources().getString(R.string.home));
             if (!checkStoragePermission(this.getContext())) {
                 Utilities.showMessage((Activity) NUIDocView.this.getContext(),
@@ -5685,16 +5699,22 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
                 return;
             }
         } else if (tab.getText() == getResources().getString(R.string.edit)) {
+            logEvent("NUI_Edit_tab_press");
             onBottomMenuButton(mEditTab, getResources().getString(R.string.edit));
         } else if (tab.getText() == getResources().getString(R.string.insert)) {
+            logEvent("NUI_insert_tab_press");
             onBottomMenuButton(mInsertTab, getResources().getString(R.string.insert));
         } else if (tab.getText() == getResources().getString(R.string.lib_page)) {
+            logEvent("NUI_Page_tab_press");
             onBottomMenuButton(mPagesTab, getResources().getString(R.string.lib_page));
         } else if (tab.getText() == getResources().getString(R.string.format)) {
+            logEvent("NUI_format_tab_press");
             onBottomMenuButton(mFormatTab, getResources().getString(R.string.format));
         } else if (tab.getText() == getResources().getString(R.string.formulas)) {
+            logEvent("NUI_formulas_tab_press");
             onBottomMenuButton(mFormulasTab, getResources().getString(R.string.formulas));
         } else if (tab.getText() == getResources().getString(R.string.annotate)) {
+            logEvent("NUI_annotate_tab_press");
             onBottomMenuButton(mAnnotateTab, getResources().getString(R.string.annotate));
         }
     }
