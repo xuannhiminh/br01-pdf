@@ -19,9 +19,6 @@ import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
 import pdf.documents.pdfreader.pdfviewer.editor.R
 import pdf.documents.pdfreader.pdfviewer.editor.databinding.ExitAppDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.SatisfactionDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.search.FeedBackActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.setting.RateUsDialog
 
 class ExitAppDialog : DialogFragment() {
     override fun getTheme(): Int {
@@ -61,11 +58,7 @@ class ExitAppDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (TemporaryStorage.isLoadAds) {
-            loadNativeNomedia()
-        } else {
-            Log.d("ExitAppDialog", "Not load Ads")
-        }
+        //loadNativeNomedia()
         isViewDestroyed = false
         try {
             firebaseAnalytics = FirebaseAnalytics.getInstance(requireContext())
