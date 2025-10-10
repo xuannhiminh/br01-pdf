@@ -28,6 +28,9 @@
     <string name="congrats">Gefeliciteerd!</string>
     <string name="congrats_subtext">Welkom bij Premium,\n geniet van de voordelen</string>
     <string name="ok_great">Oké, geweldig!</string>
+    <string name="access_to_all_feature">Onbeperkte toegang tot alle functies</string>
+    <string name="go_premium">Word Premium</string>
+    <string name="rating">Beoordeling</string>
 
     <string name="ok">OK</string>
     <string name="convert_to_pdf">Converteren naar PDF</string>

@@ -23,6 +23,9 @@
     <string name="word">Word</string>
 
     <string name="excel">Excel</string>
+    <string name="access_to_all_feature">גישה בלתי מוגבלת לכל התכונות</string>
+    <string name="go_premium">עבור לפרימיום</string>
+    <string name="rating">דירוג</string>
 
     <string name="ppt">PPT</string>
     <string name="congrats">מזל טוב!</string>

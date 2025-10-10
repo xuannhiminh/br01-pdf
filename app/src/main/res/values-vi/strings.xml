@@ -271,6 +271,9 @@
     <string name="file_name_invalid">Tên tệp không hợp lệ</string>
     <string name="convert_success">Đã chuyển đổi thành công sang PDF!</string>
     <string name="open">Mở</string>
+    <string name="access_to_all_feature">Truy cập không giới hạn tất cả tính năng</string>
+    <string name="go_premium">Nâng cấp Premium</string>
+    <string name="rating">Đánh giá</string>
 
     <string name="detail">Chi tiết</string>
     <string name="properties">Thuộc tính</string>

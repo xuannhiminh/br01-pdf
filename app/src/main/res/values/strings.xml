@@ -554,6 +554,9 @@
     <string name="swipe_refresh_guide">Swipe down to reload new files</string>
 
     <string name="uprange_to_premium">Upgrade to Premium</string>
+    <string name="access_to_all_feature">Unlimited Access To All Features</string>
+    <string name="go_premium">Go Premium</string>
+    <string name="rating">Rating</string>
     <string name="full_premium_features">Enjoy all premium features</string>
     <string name="see_full_offer">See full exclusive offers!</string>
 

@@ -26,6 +26,9 @@
     <string name="congrats">おめでとう！</string>
     <string name="congrats_subtext">プレミアムへようこそ、\n特典をお楽しみください</string>
     <string name="ok_great">OK、素晴らしい！</string>
+    <string name="access_to_all_feature">すべての機能に無制限アクセス</string>
+    <string name="go_premium">プレミアムに移行</string>
+    <string name="rating">評価</string>
 
     <string name="sort_by_size_desc">ファイルサイズ：降順</string>
     <string name="replace_old_file">古いファイルを置き換えますか？</string>

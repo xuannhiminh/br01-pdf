@@ -19,6 +19,9 @@
     <string name="congrats">Glückwunsch!</string>
     <string name="congrats_subtext">Willkommen bei Premium,\n genieße die Vorteile</string>
     <string name="ok_great">Ok, super!</string>
+    <string name="access_to_all_feature">Unbegrenzter Zugriff auf alle Funktionen</string>
+    <string name="go_premium">Premium werden</string>
+    <string name="rating">Bewertung</string>
 
     <string name="sort_by">Sortieren nach</string>
     <string name="sort_by_date">Erstellungsdatum: Aufsteigend</string>

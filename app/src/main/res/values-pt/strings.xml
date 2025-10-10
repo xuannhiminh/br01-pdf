@@ -18,6 +18,9 @@
     <string name="intent_label_ppt_smart_editor">Editor Inteligente de PPT</string>
     <string name="intent_label_ppt_print">Imprimir PPT</string>
     <string name="click_back_to_app">Depois pressione ⬅ para voltar ao aplicativo</string>
+    <string name="access_to_all_feature">Acesso ilimitado a todos os recursos</string>
+    <string name="go_premium">Torne-se Premium</string>
+    <string name="rating">Avaliação</string>
 
 
     <string name="add_in_fav">Adicionar aos favoritos</string>

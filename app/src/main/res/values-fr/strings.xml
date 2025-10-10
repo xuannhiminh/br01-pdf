@@ -20,6 +20,9 @@
     <string name="intent_label_ppt_print">Imprimer PPT</string>
 
     <string name="start_free_trial">Start Free Trial</string>
+    <string name="access_to_all_feature">Accès illimité à toutes les fonctionnalités</string>
+    <string name="go_premium">Passer en Premium</string>
+    <string name="rating">Évaluation</string>
 
     <string name="app_name">All PDF Reader</string>
     <string name="congrats">Félicitations !</string>

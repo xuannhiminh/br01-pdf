@@ -23,6 +23,9 @@
     <string name="congrats_subtext">Bem-vindo ao Premium,\n aproveite os benefícios</string>
     <string name="ok_great">Ok, ótimo!</string>
     <string name="add_in_fav">Adicionar aos favoritos</string>
+    <string name="access_to_all_feature">Acesso ilimitado a todos os recursos</string>
+    <string name="go_premium">Seja Premium</string>
+    <string name="rating">Avaliação</string>
 
     <string name="app_name">All PDF Reader</string>
 

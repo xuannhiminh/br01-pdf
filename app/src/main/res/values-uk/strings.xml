@@ -29,6 +29,9 @@
     <string name="congrats">Вітаємо!</string>
     <string name="congrats_subtext">Ласкаво просимо до Premium,\n насолоджуйтесь перевагами</string>
     <string name="ok_great">Гаразд, чудово!</string>
+    <string name="access_to_all_feature">Необмежений доступ до всіх функцій</string>
+    <string name="go_premium">Перейти на Premium</string>
+    <string name="rating">Рейтинг</string>
 
     <string name="convert_to_pdf">Конвертувати в PDF</string>
     <string name="pdf_file_name">Назва PDF-файлу</string>

@@ -21,6 +21,9 @@
     <string name="congrats">¡Felicidades!</string>
     <string name="congrats_subtext">Bienvenido a Premium,\n disfruta de los beneficios</string>
     <string name="ok_great">¡Ok, genial!</string>
+    <string name="access_to_all_feature">Acceso ilimitado a todas las funciones</string>
+    <string name="go_premium">Hazte Premium</string>
+    <string name="rating">Calificación</string>
 
     <string name="add_in_fav">Añadir a favoritos</string>
 

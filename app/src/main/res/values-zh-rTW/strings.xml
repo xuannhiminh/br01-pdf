@@ -29,6 +29,9 @@
     <string name="congrats">恭喜！</string>
     <string name="congrats_subtext">歡迎使用高級版，\n享受優惠</string>
     <string name="ok_great">好的，太棒了！</string>
+    <string name="access_to_all_feature">無限存取所有功能</string>
+    <string name="go_premium">升級為高級版</string>
+    <string name="rating">評分</string>
 
     <string name="convert_to_pdf">轉換為 PDF</string>
     <string name="pdf_file_name">PDF 檔案名稱</string>

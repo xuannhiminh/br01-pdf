@@ -25,6 +25,9 @@
     <string name="congrats_subtext">Добро пожаловать в Premium,\n наслаждайтесь преимуществами</string>
     <string name="ok_great">Хорошо, отлично!</string>
     <string name="add_in_fav">Добавить в избранное</string>
+    <string name="access_to_all_feature">Неограниченный доступ ко всем функциям</string>
+    <string name="go_premium">Стать Premium</string>
+    <string name="rating">Рейтинг</string>
 
     <string name="app_name">All PDF Reader</string>
 
