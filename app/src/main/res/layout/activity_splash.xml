@@ -16,10 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="@dimen/_84sdp"
-            android:layout_height="@dimen/_84sdp"
-            android:src="@drawable/icon_pdf" />
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/_84sdp"-->
+<!--            android:layout_height="@dimen/_84sdp"-->
+<!--            android:src="@drawable/icon_pdf" />-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/splash_animation" />
     </LinearLayout>
 
     <LinearLayout

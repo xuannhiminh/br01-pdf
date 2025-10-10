@@ -126,6 +126,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
 
         binding.loadingTitle.text =  handleAppNameSpannable2()
+        binding.animationView.playAnimation()
+        binding.animationView.scaleX = 1.5f
+        binding.animationView.scaleY = 1.5f
 
     }
 //    private var ads_inter_id = ""
