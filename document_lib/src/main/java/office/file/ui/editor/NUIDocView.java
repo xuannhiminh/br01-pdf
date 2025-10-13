@@ -344,7 +344,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
     }
     private void logEvent(String event) {
         try {
-            FirebaseAnalytics.getInstance(this.activity().getApplicationContext()).logEvent(event, new Bundle());
+            FirebaseAnalytics.getInstance(this.getContext()).logEvent(event, new Bundle());
         } catch (Exception e) {
             Log.e("DefaultReaderGuideDialog", "Error initializing FirebaseAnalytics " + e);
         }
