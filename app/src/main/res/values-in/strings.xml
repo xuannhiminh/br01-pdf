@@ -12,6 +12,8 @@
     <string name="intent_label_pdf_excel">Editor Excel</string>
     <string name="intent_label_excel_smart_editor">Editor Cerdas Excel</string>
     <string name="intent_label_excel_print">Cetak Excel</string>
+    <string name="you_have_unfinished_file">Anda memiliki file yang belum selesai</string>
+    <string name="click_to_see_more">Klik untuk melihat lebih banyak.</string>
 
     <string name="intent_label_ppt_pdf">PPT ke PDF</string>
     <string name="intent_label_ppt_reader">Pembaca PPT</string>

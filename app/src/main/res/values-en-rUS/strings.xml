@@ -14,6 +14,8 @@
     <string name="file_not_found">File not found!!!</string>
 
     <string name="rate_now">Rate now</string>
+    <string name="you_have_unfinished_file">You have an unfinished file</string>
+    <string name="click_to_see_more">Click to see more.</string>
 
     <string name="recent_add">Recently added</string>
     <string name="access_to_all_feature">Unlimited Access To All Features</string>

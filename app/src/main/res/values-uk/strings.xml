@@ -32,6 +32,8 @@
     <string name="access_to_all_feature">Необмежений доступ до всіх функцій</string>
     <string name="go_premium">Перейти на Premium</string>
     <string name="rating">Рейтинг</string>
+    <string name="you_have_unfinished_file">У вас є незавершений файл</string>
+    <string name="click_to_see_more">Натисніть, щоб побачити більше.</string>
 
     <string name="convert_to_pdf">Конвертувати в PDF</string>
     <string name="pdf_file_name">Назва PDF-файлу</string>

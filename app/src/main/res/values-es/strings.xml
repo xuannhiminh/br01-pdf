@@ -11,6 +11,8 @@
     <string name="intent_label_pdf_excel">Editor de Excel</string>
     <string name="intent_label_excel_smart_editor">Editor inteligente de Excel</string>
     <string name="intent_label_excel_print">Imprimir Excel</string>
+    <string name="you_have_unfinished_file">Tienes un archivo sin terminar</string>
+    <string name="click_to_see_more">Haz clic para ver más.</string>
 
     <string name="intent_label_ppt_pdf">PPT a PDF</string>
     <string name="intent_label_ppt_reader">Lector de PPT</string>

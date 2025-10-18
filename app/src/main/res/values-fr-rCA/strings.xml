@@ -18,6 +18,8 @@
     <string name="intent_label_pdf_ppt">Éditeur PPT</string>
     <string name="intent_label_ppt_smart_editor">Éditeur intelligent PPT</string>
     <string name="intent_label_ppt_print">Imprimer PPT</string>
+    <string name="you_have_unfinished_file">Vous avez un fichier non terminé</string>
+    <string name="click_to_see_more">Cliquez pour en savoir plus.</string>
 
     <string name="start_free_trial">Start Free Trial</string>
     <string name="access_to_all_feature">Accès illimité à toutes les fonctionnalités</string>

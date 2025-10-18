@@ -9,6 +9,8 @@
     <string name="agree">מסכים</string>
 
     <string name="app_version">גרסה %s</string>
+    <string name="you_have_unfinished_file">יש לך קובץ שלא הושלם</string>
+    <string name="click_to_see_more">לחץ כדי לראות עוד.</string>
 
     <string name="file_not_found">קובץ לא נמצא!!!</string>
 

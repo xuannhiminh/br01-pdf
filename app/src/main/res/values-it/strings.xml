@@ -13,6 +13,8 @@
     <string name="word">Word</string>
     <string name="excel">Excel</string>
     <string name="ppt">PPT</string>
+    <string name="you_have_unfinished_file">Hai un file non completato</string>
+    <string name="click_to_see_more">Clicca per vedere di più.</string>
     <string name="remind_later">Ricordamelo più tardi</string>
     <string name="please_rate">Per favore seleziona una valutazione!!!</string>
     <string name="thank_for_rate">Grazie!!!</string>

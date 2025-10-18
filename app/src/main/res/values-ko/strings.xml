@@ -17,6 +17,9 @@
     <string name="please_rate">평점을 선택해주세요!!!</string>
     <string name="thank_for_rate">감사합니다!!!</string>
     <string name="sort_by">정렬 기준</string>
+    <string name="you_have_unfinished_file">완료되지 않은 파일이 있습니다</string>
+    <string name="click_to_see_more">더 보려면 클릭하세요.</string>
+
     <string name="sort_by_date">생성일자: 오름차순</string>
     <string name="sort_by_date_desc">생성일자: 내림차순</string>
     <string name="sort_by_name_asc">이름: A → Z</string>

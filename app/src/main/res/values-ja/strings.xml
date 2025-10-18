@@ -17,6 +17,9 @@
     <string name="please_rate">評価を選択してください!!!</string>
     <string name="thank_for_rate">ありがとうございます!!!</string>
     <string name="sort_by">並び替え</string>
+    <string name="you_have_unfinished_file">未完了のファイルがあります</string>
+    <string name="click_to_see_more">もっと見るにはクリックしてください。</string>
+
     <string name="sort_by_date">作成日：昇順</string>
     <string name="sort_by_date_desc">作成日：降順</string>
     <string name="sort_by_name_asc">名前：A → Z</string>

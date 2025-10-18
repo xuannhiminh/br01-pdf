@@ -17,6 +17,9 @@
     <string name="please_rate">Selecteer een beoordeling!!!</string>
     <string name="thank_for_rate">Dank u wel!!!</string>
     <string name="sort_by">Sorteren op</string>
+    <string name="you_have_unfinished_file">U heeft een onvoltooid bestand</string>
+    <string name="click_to_see_more">Klik om meer te zien.</string>
+
     <string name="sort_by_date">Aanmaakdatum: oplopend</string>
     <string name="sort_by_date_desc">Aanmaakdatum: aflopend</string>
     <string name="sort_by_name_asc">Naam: A tot Z</string>

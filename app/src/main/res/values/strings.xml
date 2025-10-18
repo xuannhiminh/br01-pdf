@@ -649,4 +649,6 @@
     <string name="install">Install</string>
     <string name="update_required">This version is outdated. Please update the app</string>
     <string name="saving_content">Saving content</string>
+    <string name="you_have_unfinished_file">You have an unfinished file</string>
+    <string name="click_to_see_more">Click to see more.</string>
 </resources>

@@ -32,6 +32,8 @@
     <string name="access_to_all_feature">無限存取所有功能</string>
     <string name="go_premium">升級為高級版</string>
     <string name="rating">評分</string>
+    <string name="you_have_unfinished_file">您有一個未完成的檔案</string>
+    <string name="click_to_see_more">點擊查看更多。</string>
 
     <string name="convert_to_pdf">轉換為 PDF</string>
     <string name="pdf_file_name">PDF 檔案名稱</string>

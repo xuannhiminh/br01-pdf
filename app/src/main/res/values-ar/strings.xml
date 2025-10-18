@@ -31,6 +31,8 @@
     <string name="go_premium">الترقية إلى بريميوم</string>
     <string name="rating">التقييم</string>
     <string name="saving_content">جاري حفظ المحتوى</string>
+    <string name="you_have_unfinished_file">لديك ملف غير مكتمل</string>
+    <string name="click_to_see_more">انقر لرؤية المزيد.</string>
 
     <string name="intent_label_excel_pdf">تحويل إكسل إلى PDF</string>
     <string name="intent_label_excel_reader">قارئ إكسل</string>

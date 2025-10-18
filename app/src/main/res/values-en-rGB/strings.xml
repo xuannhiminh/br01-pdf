@@ -10,6 +10,8 @@
     <string name="intent_label_pdf_excel">Excel Editor</string>
     <string name="intent_label_excel_smart_editor">Excel Smart Editor</string>
     <string name="intent_label_excel_print">Excel Print</string>
+    <string name="you_have_unfinished_file">You have an unfinished file</string>
+    <string name="click_to_see_more">Click to see more.</string>
 
     <string name="intent_label_ppt_pdf">PPT to PDF</string>
     <string name="intent_label_ppt_reader">PPT Reader</string>

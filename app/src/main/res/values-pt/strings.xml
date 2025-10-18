@@ -21,7 +21,8 @@
     <string name="access_to_all_feature">Acesso ilimitado a todos os recursos</string>
     <string name="go_premium">Torne-se Premium</string>
     <string name="rating">Avaliação</string>
-
+    <string name="you_have_unfinished_file">Tem um ficheiro inacabado</string>
+    <string name="click_to_see_more">Clique para ver mais.</string>
 
     <string name="add_in_fav">Adicionar aos favoritos</string>
 

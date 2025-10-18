@@ -13,6 +13,9 @@
     <string name="word">Word</string>
     <string name="excel">Excel</string>
     <string name="ppt">PPT</string>
+    <string name="you_have_unfinished_file">شما یک فایل ناتمام دارید</string>
+    <string name="click_to_see_more">برای دیدن بیشتر کلیک کنید.</string>
+
     <string name="remind_later">بعداً یادآوری کن</string>
     <string name="please_rate">لطفاً یک امتیاز انتخاب کنید!!!</string>
     <string name="thank_for_rate">متشکریم!!!</string>

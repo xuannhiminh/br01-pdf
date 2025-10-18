@@ -455,4 +455,6 @@
    <string name="feedback_disclaimer">Indem Sie diese E-Mail senden, stimmen Sie zu, die oben genannten Informationen mit uns zu teilen, um die App zu verbessern.</string>
     <string name="update_required">Diese Version ist veraltet. Bitte aktualisiere die App</string>
     <string name="saving_content">Inhalt wird gespeichert</string>
+    <string name="you_have_unfinished_file">Sie haben eine unvollständige Datei</string>
+    <string name="click_to_see_more">Klicken Sie, um mehr zu sehen.</string>
 </resources> 

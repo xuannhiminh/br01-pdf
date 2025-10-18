@@ -33,6 +33,8 @@
     <string name="access_to_all_feature">无限访问所有功能</string>
     <string name="go_premium">升级为高级版</string>
     <string name="rating">评分</string>
+    <string name="you_have_unfinished_file">您有一个未完成的文件</string>
+    <string name="click_to_see_more">点击查看更多。</string>
 
     <string name="pdf_file_name">PDF 文件名</string>
     <string name="password">密码</string>

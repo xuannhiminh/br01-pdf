@@ -12,6 +12,8 @@
     <string name="intent_label_pdf_excel">Excel संपादक</string>
     <string name="intent_label_excel_smart_editor">स्मार्ट Excel संपादक</string>
     <string name="intent_label_excel_print">Excel प्रिंट करें</string>
+    <string name="you_have_unfinished_file">आपके पास एक अधूरी फ़ाइल है</string>
+    <string name="click_to_see_more">अधिक देखने के लिए क्लिक करें।</string>
 
     <string name="intent_label_ppt_pdf">PPT को PDF में बदलें</string>
     <string name="intent_label_ppt_reader">PPT रीडर</string>
