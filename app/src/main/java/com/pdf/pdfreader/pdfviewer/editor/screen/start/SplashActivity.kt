@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.window.OnBackInvokedDispatcher
@@ -108,9 +109,37 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         super.onCreate(savedInstanceState)
     }
 
+    private var mCountDownTimer: CountDownTimer? = null
+
     override fun onResume() {
         super.onResume()
         PreferencesHelper.putLong(PreferencesHelper.KEY_LAST_ENGAGE, System.currentTimeMillis())
+
+        mCountDownTimer?.cancel()
+        mCountDownTimer = object : CountDownTimer(FirebaseRemoteConfigUtil.getInstance().getTimeoutLoadInterMillisecond()+10000L, FirebaseRemoteConfigUtil.getInstance().getTimeoutLoadInterMillisecond()) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                Log.e("SplashActivity", "Splash timeout reached, navigating to next screen")
+                navigateToNextScreen()
+            }
+        }.start()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mCountDownTimer?.cancel()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        try {
+            Admob.getInstance().dismissLoadingDialog()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun initView() {
@@ -235,7 +264,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     if (!SystemUtils.isInternetAvailable(this@SplashActivity)) {
                         Log.e("SplashActivity", "No internet, skipping ad load")
                         if (cont.isActive) cont.resume(Unit)
-                        return@obtainConsentAndShow
+                        //return@obtainConsentAndShow
                     }
 
                     AppOpenManager.getInstance().loadOpenAppAdSplash(
@@ -519,7 +548,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 intent.apply {
                     putExtra("${packageName}.isFromSplash", true)
                 }
-                IapActivityV2.start(this)
+                when (FirebaseRemoteConfigUtil.getInstance().getIapScreenType()) {
+                    0 -> IapActivityV2.start(this)
+                    1 -> IapActivity.start(this)
+                    else -> IapActivityV2.start(this)
+                }
                 finish()
                 return
             }
