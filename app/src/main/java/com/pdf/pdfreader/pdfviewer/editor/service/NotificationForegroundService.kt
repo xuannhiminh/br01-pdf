@@ -28,6 +28,7 @@ import pdf.documents.pdfreader.pdfviewer.editor.receiver.HomeButtonReceiver
 import pdf.documents.pdfreader.pdfviewer.editor.receiver.UnlockReceiver
 import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
+import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 
 class NotificationForegroundService: Service() {
 
@@ -167,17 +168,22 @@ class NotificationForegroundService: Service() {
         }
 
         override fun onBillingInitialized() {
-            if (IAPUtils.isPremium()) {
-                Log.d(TAG, "IAP initialized and user is premium")
-                if (FirebaseRemoteConfigUtil.getInstance().isTurnOffNotiServiceIfPremium())
-                {
-                    Log.d(TAG, "User is premium and turn off noti service if premium is true, so stop service")
-                    stopSelf()
+            IAPUtils.loadOwnedPurchasesFromGoogleAsync { success ->
+                Log.i(TAG, "loadOwnedPurchasesFromGoogleAsync: $success")
+                FCMTopicHandler.resetFCMTopic(this@NotificationForegroundService)
+                if (IAPUtils.isPremium()) {
+                    Log.d(TAG, "IAP initialized and user is premium")
+                    if (FirebaseRemoteConfigUtil.getInstance().isTurnOffNotiServiceIfPremium()) {
+                        Log.d(
+                            TAG,
+                            "User is premium and turn off noti service if premium is true, so stop service"
+                        )
+                        stopSelf()
+                    }
+                } else {
+                    Log.d(TAG, "IAP initialized and user is not premium")
                 }
-            } else {
-                Log.d(TAG, "IAP initialized and user is not premium")
             }
-
         }
     }
 

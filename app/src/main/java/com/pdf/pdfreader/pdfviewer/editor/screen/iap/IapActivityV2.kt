@@ -27,6 +27,7 @@ import com.google.firebase.analytics.FirebaseAnalytics.Param
 import com.nlbn.ads.callback.AdCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
+import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import pdf.documents.pdfreader.pdfviewer.editor.R
 import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapV3Binding
 import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
@@ -267,6 +268,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
                 params.putString(Param.TRANSACTION_ID, details?.purchaseData?.orderId )
                 firebaseAnalytics.logEvent(Event.PURCHASE, params)
             }
+            FCMTopicHandler.resetFCMTopic(this@IapActivityV2)
             updateViewBaseOnPremiumState()
         }
 
@@ -307,6 +309,7 @@ class IapActivityV2 : PdfBaseActivity<ActivityIapV3Binding>() {
             // Billing service is initialized, you can query products or subscriptions here
             // Toast.makeText(this@IapActivity3, "Billing initialized", Toast.LENGTH_SHORT).show()
             IAPUtils.loadOwnedPurchasesFromGoogleAsync {
+                FCMTopicHandler.resetFCMTopic(this@IapActivityV2)
                 updateViewBaseOnPremiumState()
             }
         }

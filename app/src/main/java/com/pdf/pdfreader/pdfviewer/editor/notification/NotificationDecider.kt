@@ -17,7 +17,6 @@ object NotificationDecider {
 
     const val TAG = "NotificationDecider"
 
-    private const val PREF_NAME = "device_notification_prefs"
     private const val KEY_LAST_NOTI_TIME = "last_noti_time"
     private const val KEY_TIMEOUT_DELTA = "timeout_delta" // store only adjustment
 
@@ -30,7 +29,7 @@ object NotificationDecider {
     private const val DEFAULT_MAX_TIMEOUT = 24 * 60L
 
     private fun getPrefs(context: Context) =
-        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
 
     // ===== Remote Config Fetchers =====
     private fun getRemoteConfigBase(): Long {

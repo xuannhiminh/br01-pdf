@@ -27,6 +27,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.nlbn.ads.callback.AdCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
+import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import pdf.documents.pdfreader.pdfviewer.editor.R
 import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
 import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapBinding
@@ -324,6 +325,7 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
 
         binding.btnRestore.setOnClickListener {
             IAPUtils.loadOwnedPurchasesFromGoogleAsync {
+                FCMTopicHandler.resetFCMTopic(this@IapActivity)
                 if (it) {
                     Toast.makeText(this, getString(R.string.restore_success), Toast.LENGTH_SHORT).show()
                 } else {
@@ -468,6 +470,7 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
         ) {
             logEvent("purchase_success_$productId")
             Toast.makeText(this@IapActivity, getString(R.string.you_premium), Toast.LENGTH_SHORT).show()
+            FCMTopicHandler.resetFCMTopic(this@IapActivity)
             updateViewBaseOnPremiumState()
         }
 
@@ -508,6 +511,7 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
             // Billing service is initialized, you can query products or subscriptions here
             // Toast.makeText(this@IapActivity, "Billing initialized", Toast.LENGTH_SHORT).show()
             IAPUtils.loadOwnedPurchasesFromGoogleAsync {
+                FCMTopicHandler.resetFCMTopic(this@IapActivity)
                 updateViewBaseOnPremiumState()
             }
         }

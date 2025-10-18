@@ -11,19 +11,15 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.OnApplyWindowInsetsListener
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate
 import com.ezstudio.pdftoolmodule.di.toolModule
 import com.ezteam.baseproject.BuildConfig
 import com.ezteam.baseproject.di.baseModule
-import com.ezteam.baseproject.utils.IAPUtils
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.facebook.ads.AdSettings
 import com.google.firebase.FirebaseApp
@@ -33,16 +29,18 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.nlbn.ads.util.AppFlyer
 import com.nlbn.ads.util.AppOpenManager
+import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import office.file.ui.MyLibApplication
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import pdf.documents.pdfreader.pdfviewer.editor.common.LocaleManager
 import pdf.documents.pdfreader.pdfviewer.editor.di.appModule
 import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
 import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
 import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
-import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
-import office.file.ui.MyLibApplication
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 
 
 class PdfApplication: MyLibApplication() {
@@ -61,6 +59,9 @@ class PdfApplication: MyLibApplication() {
         PreferencesUtils.init(this)
         setupKoin()
         PreferencesHelper.init(this)
+        if (PreferencesHelper.getLong(PreferencesHelper.KEY_FIRST_OPEN, 0L) == 0L) {
+            PreferencesHelper.putLong(PreferencesHelper.KEY_FIRST_OPEN, System.currentTimeMillis())
+        }
         initLanguage()
         if (!BuildConfig.DEBUG) {
             Log.i(TAG, "onCreate: init Firebase")
@@ -70,14 +71,22 @@ class PdfApplication: MyLibApplication() {
                     PlayIntegrityAppCheckProviderFactory.getInstance()
                 )
             FirebaseMessaging.getInstance()
-                .subscribeToTopic("release_devices")
+                .subscribeToTopic("release_devices").addOnCompleteListener {
+                    Log.d(TAG,"Subscribed to topic: release_devices")
+                }
         } else {
 //            FirebaseAppCheck.getInstance()
 //                .installAppCheckProviderFactory(
 //                    DebugAppCheckProviderFactory.getInstance()
 //                )
-            FirebaseMessaging.getInstance().subscribeToTopic("debug_device")
+            FirebaseMessaging.getInstance().subscribeToTopic("debug_device").addOnCompleteListener {
+                Log.d(TAG,"Subscribed to topic: debug_device")
+            }
         }
+
+        FCMTopicHandler.resetFCMTopic(this@PdfApplication)
+
+
         subscribeToTimezoneTopic()
 
         FirebaseRemoteConfigUtil.getInstance().fetchRemoteConfig { Log.d(TAG, "fetched") }

@@ -45,6 +45,7 @@ import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
 import pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
 import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
+import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -53,6 +54,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.android.ext.android.inject
+import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import kotlin.coroutines.resume
 
 @SuppressLint("CustomSplashScreen")
@@ -108,13 +110,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun onResume() {
         super.onResume()
-        Admob.getInstance().setIntervalShowInterstitial(FirebaseRemoteConfigUtil.getInstance().getIntervalShowInterSecond())
-        // place here for every engagement new data will be set for interval show ad
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Admob.getInstance().dismissLoadingDialog()
+        PreferencesHelper.putLong(PreferencesHelper.KEY_LAST_ENGAGE, System.currentTimeMillis())
     }
 
     override fun initView() {
@@ -326,6 +322,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 IAPUtils.loadOwnedPurchasesFromGoogleAsync { success ->
                     Log.i("SplashActivity", "loadOwnedPurchasesFromGoogleAsync: $success")
                     // resume the coroutine
+                    FCMTopicHandler.resetFCMTopic(this@SplashActivity)
                     if (cont.isActive) cont.resume(Unit)
                 }
                 // unregister listener right away

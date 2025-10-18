@@ -121,6 +121,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.nlbn.ads.util.Helper
+import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import pdf.documents.pdfreader.pdfviewer.editor.dialog.ExitAppDialog
 import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
 import pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.FeatureRequestActivity
@@ -591,6 +592,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
     }
     override fun onResume() {
+        Admob.getInstance().setIntervalShowInterstitial(FirebaseRemoteConfigUtil.getInstance().getIntervalShowInterSecond())
+        // place here for every engagement new data will be set for interval show ad
         super.onResume()
 
         binding.swipeRefresh.isRefreshing = false
@@ -603,6 +606,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             override fun onBillingInitialized() {
                 Log.d(TAG, "onBillingInitialized")
                 IAPUtils.loadOwnedPurchasesFromGoogleAsync {
+                    FCMTopicHandler.resetFCMTopic(this@MainActivity)
                     val isPremium = IAPUtils.isPremium()
                     // binding.toolbar.tvTitle.text =  handleAppNameSpannable(showIcon = isPremium)
                     binding.toolbar.ivIap.visibility = if (isPremium) View.GONE else View.VISIBLE
