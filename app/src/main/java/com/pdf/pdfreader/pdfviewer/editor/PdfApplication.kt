@@ -15,14 +15,21 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate
 import com.ezstudio.pdftoolmodule.di.toolModule
 import com.ezteam.baseproject.BuildConfig
 import com.ezteam.baseproject.di.baseModule
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
+import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.facebook.ads.AdSettings
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.firestore.FirebaseFirestore
@@ -43,7 +50,7 @@ import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelpe
 import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 
 
-class PdfApplication: MyLibApplication() {
+class PdfApplication: MyLibApplication(), DefaultLifecycleObserver {
     companion object {
         private const val TAG = "PdfApplication"
     }
@@ -51,7 +58,7 @@ class PdfApplication: MyLibApplication() {
     private val delegate = LocalizationApplicationDelegate()
 
     override fun onCreate() {
-        super.onCreate()
+        super<MyLibApplication>.onCreate()
         AppOpenManager.getInstance().disableAppResumeWithActivity(SplashActivity::class.java)
         AppOpenManager.getInstance().disableAppResumeWithActivity(IapActivity::class.java)
         AppFlyer.getInstance().initAppFlyer(this, getString(R.string.app_flyer_id), true, false, true) // thay
@@ -82,11 +89,9 @@ class PdfApplication: MyLibApplication() {
             FirebaseMessaging.getInstance().subscribeToTopic("debug_device").addOnCompleteListener {
                 Log.d(TAG,"Subscribed to topic: debug_device")
             }
+
+            FirebaseAnalytics.getInstance(this).setAnalyticsCollectionEnabled(false)
         }
-
-        FCMTopicHandler.resetFCMTopic(this@PdfApplication)
-
-
         subscribeToTimezoneTopic()
 
         FirebaseRemoteConfigUtil.getInstance().fetchRemoteConfig { Log.d(TAG, "fetched") }
@@ -97,15 +102,23 @@ class PdfApplication: MyLibApplication() {
             }
         FirebaseFirestore.getInstance()
         NotificationManager(this).createNotificationChannel()
+
+        // Register lifecycle observer (replaces deprecated @OnLifecycleEvent)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+
+        val testDeviceIds = listTestDeviceId
+        val configuration = RequestConfiguration.Builder()
+            .setTestDeviceIds(testDeviceIds)
+            .build()
+
+        MobileAds.setRequestConfiguration(configuration)
         applyAdMobAPI35WorkaroundIfNeeded(this)
-        AdSettings.addTestDevice("f8fb2c9d-1e1b-4f6d-b9c9-2f955bb05c2c")
-        AdSettings.addTestDevice("2aa3aa2c-8872-40db-bb15-05c9a3b80a85")
-        AdSettings.addTestDevice("5db0a3d6-511b-4503-9d3d-4bc1961dce5c")
-        AdSettings.addTestDevice("72ff1d58-5ff3-41f2-8615-5613430d593b");
+        AdSettings.addTestDevice("5ea02202-adb6-4eaa-8761-d4b29ad58851")
+        RequestConfiguration.Builder().setTestDeviceIds(listTestDeviceId)
     }
 
     override fun enableAdsResume(): Boolean {
-        return true
+        return !IAPUtils.isPremium()
     }
 
     override fun getKeyRemoteIntervalShowInterstitial(): String? {
@@ -114,7 +127,7 @@ class PdfApplication: MyLibApplication() {
 
     override fun getListTestDeviceId(): MutableList<String>? {
         return listOf("9C9F13F96407265FD1AD8B7217DFBB4F", "19CF3EF910710E71DA25CC42219EC340", "21EA4B3FCEDFE792A5CE1655F1B92B1F", "6877F63B09F390A8A9C2FBF6C0A89106",
-            "DB2BB2022DEE9BB6351662532A8F6F05","7BF8EBE42FEB24B9C0231207C37B53FD", "87BCCFEB97F85D17C4D63F0257B0CBE5") as MutableList<String>?
+            "DB2BB2022DEE9BB6351662532A8F6F05","7BF8EBE42FEB24B9C0231207C37B53FD", "87BCCFEB97F85D17C4D63F0257B0CBE5", "772B2E85D9A498676884AA26D2E687E7", "87BCCFEB97F85D17C4D63F0257B0CBE5") as MutableList<String>?
     }
 
     override fun getResumeAdId(): String {
@@ -131,7 +144,7 @@ class PdfApplication: MyLibApplication() {
     }
 
     override fun isPurchased(): Boolean {
-        return false
+        return IAPUtils.isPremium()
     }
 
     private fun initLanguage() {
@@ -218,7 +231,16 @@ class PdfApplication: MyLibApplication() {
         val controller = activity.window.insetsController
         controller?.hide(WindowInsets.Type.systemBars())
         controller?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
+    }
 
+    override fun onStop(owner: LifecycleOwner) {
+        // App in background
+        NotificationManager(this).showCallUseAppNotificationWhenOutApp()
+
+    }
+
+    override fun onStart(owner: LifecycleOwner) {
+        // App in foreground
     }
 
 }
