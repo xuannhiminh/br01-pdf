@@ -34,6 +34,10 @@ object PresKey {
     const val FIRST_TIME_OPEN_PPT = "first_time_open_ppt"
     const val FIRST_TIME_OPEN_PDF = "first_time_open_pdf"
     const val TIME_ENTER_FILES = "time_enter_files"
+    const val TIME_ENTER_FILE_PDF = "time_enter_file_pdf"
+    const val TIME_ENTER_FILE_DOC = "time_enter_file_doc"
+    const val TIME_ENTER_FILE_EXCEL = "time_enter_file_excel"
+    const val TIME_ENTER_FILE_PPT = "time_enter_file_ppt"
     const val FIRST_TIME_UNDER_LINE = "first_time_under_line"
 
     const val FIRST_TIME_HIGHLIGHT = "first_time_highlight"
