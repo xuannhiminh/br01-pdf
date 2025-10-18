@@ -2,6 +2,8 @@ package pdf.documents.pdfreader.pdfviewer.editor.service
 
 import android.annotation.SuppressLint
 import android.app.ForegroundServiceStartNotAllowedException
+import android.app.NotificationChannel
+import android.app.NotificationManager as AndroidNotificationManager
 import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
@@ -28,6 +30,9 @@ import pdf.documents.pdfreader.pdfviewer.editor.receiver.HomeButtonReceiver
 import pdf.documents.pdfreader.pdfviewer.editor.receiver.UnlockReceiver
 import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
+import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_DESCRIPTION_FOREGROUND
+import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_ID_FOREGROUND
+import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_NAME_SERVICE
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 
 class NotificationForegroundService: Service() {
@@ -160,6 +165,38 @@ class NotificationForegroundService: Service() {
     )
     private val observers = mutableListOf<FileObserverWrapper>()
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    override fun onCreate() {
+        super.onCreate()
+        Log.d(TAG, "Service created")
+        notificationManager = NotificationManager(this)
+
+        createForegroundNotificationChannel()
+
+
+
+        showForegroundNotification()
+
+        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(homeButtonReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS), RECEIVER_NOT_EXPORTED)
+            } else {
+                registerReceiver(homeButtonReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
+            }
+        } catch (e: SecurityException) {
+            Log.w("HomeReceiver", "RegisterReceiver failed: " + e.message)
+        }
+        startObservers()
+        registerScreenCaptureDetection()
+
+//        wakeLock =
+//            (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
+//                newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EndlessService::lock").apply {
+//                    acquire()
+//                }
+//            }
+    }
     private val iapHandler = object : BillingProcessor.IBillingHandler {
         override fun onProductPurchased(productId: String, details: PurchaseInfo?) { /*--*/ }
         override fun onPurchaseHistoryRestored() { /*--*/ }
@@ -186,36 +223,24 @@ class NotificationForegroundService: Service() {
             }
         }
     }
-
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    override fun onCreate() {
-        super.onCreate()
-        Log.d(TAG, "Service created")
-        notificationManager = NotificationManager(this)
-
-        showForegroundNotification()
-
-        registerReceiver(unlockReceiver, IntentFilter(Intent.ACTION_USER_PRESENT))
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                registerReceiver(homeButtonReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS), RECEIVER_NOT_EXPORTED)
-            } else {
-                registerReceiver(homeButtonReceiver, IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
-            }
-        } catch (e: SecurityException) {
-            Log.w("HomeReceiver", "RegisterReceiver failed: " + e.message)
-        }
-        startObservers()
-        registerScreenCaptureDetection()
-
-//        wakeLock =
-//            (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
-//                newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "EndlessService::lock").apply {
-//                    acquire()
-//                }
-//            }
-    }
     private lateinit var installStateUpdatedListener : InstallStateUpdatedListener
+
+
+    private fun createForegroundNotificationChannel() {
+        // Create a foreground service notification channel
+        val foregroundChannel = NotificationChannel(
+            CHANNEL_ID_FOREGROUND,
+            CHANNEL_NAME_SERVICE,
+            AndroidNotificationManager.IMPORTANCE_DEFAULT
+        ).apply {
+            description = CHANNEL_DESCRIPTION_FOREGROUND
+            setSound(null, null) // Disable sound for foreground service notifications
+        }
+        (getSystemService(NOTIFICATION_SERVICE) as AndroidNotificationManager).createNotificationChannel(
+            foregroundChannel
+        )
+    }
+
 
     private fun startListeningUpdate() {
         Log.d(TAG, "Start listening update")
