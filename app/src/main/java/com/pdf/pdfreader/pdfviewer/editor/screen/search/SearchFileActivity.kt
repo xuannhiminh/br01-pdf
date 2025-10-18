@@ -14,6 +14,7 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import pdf.documents.pdfreader.pdfviewer.editor.R
 import pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
 import pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
@@ -55,7 +56,15 @@ class SearchFileActivity : PdfBaseActivity<ActivitySearchFileBinding>() {
         binding.rcvListFile.adapter = adapter
         binding.toolbar.edtSearch.hint = Html.fromHtml("<i>${getString(R.string.search)}</i>", Html.FROM_HTML_MODE_LEGACY)
     }
-
+    private fun showAdsOr(action: () -> Unit) {
+        if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain()) {
+            showAdsInterstitial(R.string.inter_home) {
+                action()
+            }
+        } else {
+            action()
+        }
+    }
     override fun initData() {
         lifecycleScope.launch {
             viewModel.getListSearchFile().observe(this@SearchFileActivity) {
@@ -77,7 +86,9 @@ class SearchFileActivity : PdfBaseActivity<ActivitySearchFileBinding>() {
         binding.toolbar.ivBack.setOnClickListener {
             if (!binding.toolbar.edtSearch.getText().isNullOrEmpty())
                 binding.toolbar.edtSearch.setText("")
-            finish()
+            showAdsOr {
+                finish()
+            }
         }
 
         binding.toolbar.ivClear.setOnClickListener {

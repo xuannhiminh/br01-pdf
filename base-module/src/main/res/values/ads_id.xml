@@ -6,6 +6,8 @@
     <string name="app_flyer_id" translatable="false">testAppFlyer12345</string>
 
     <string name="inter_splash" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="inter_file_type" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="inter_home" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="open_splash" translatable="false">ca-app-pub-3940256099942544/9257395921</string>
     <string name="open_reload" translatable="false">ca-app-pub-3940256099942544/9257395921</string>
     <string name="native_language" translatable="false">ca-app-pub-3940256099942544/2247696110</string>

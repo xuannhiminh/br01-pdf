@@ -197,7 +197,9 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
         }
     }
-
+    private fun isAllowShowAds(): Boolean {
+        return System.currentTimeMillis() >= allowShowAdsAt
+    }
     /*
  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
@@ -1027,7 +1029,30 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
     }
 
     override fun initListener() {
-        binding.navView. setOnItemSelectedListener(onNavigationItemSelectedListener)
+        // Bottom nav
+        binding.navView.setOnItemSelectedListener(onNavigationItemSelectedListener)
+
+        initToolbarListeners()
+
+        initRecentlyListeners()
+
+        initFileTabListeners()
+
+        initViewModelObservers()
+
+        initOtherListeners()
+    }
+    private fun showAdsOr(action: () -> Unit) {
+        if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain() && isAllowShowAds()) {
+            showAdsInterstitial(R.string.inter_home) {
+                action()
+            }
+        } else {
+            action()
+        }
+    }
+
+    private fun initToolbarListeners() {
         binding.toolbar.ivFilter.setOnClickListener {
             logEvent("main_filter")
             val dialog = SortDialog()
@@ -1035,95 +1060,6 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             dialog.show(supportFragmentManager, "SortDialog")
         }
 
-        viewModel.loadAddedTodayFiles.observe(this) { addedNumber ->
-            if (addedNumber == 0) {
-                binding.recentlyAddedNumber.visibility = View.GONE
-            } else {
-                if (viewModel.currentBottomTab.value == BottomTab.HOME && viewModel.sortStateObservable.value != SortState.DATE_TODAY)  binding.recentlyAddedNumber.visibility = View.VISIBLE
-            }
-            binding.recentlyAddedNumber.text = "+ $addedNumber"
-        }
-
-        binding.recentlyAddedSection.setOnClickListener {
-            logEvent("main_recently_added")
-            binding.toolbar.ivSearch.visibility = View.VISIBLE
-            binding.toolbar.ivFilter.visibility = View.GONE
-            binding.toolbar.ivCheck.visibility = View.GONE
-            binding.navView.visibility=View.GONE
-            TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
-            binding.recentlyAddedSection.visibility = View.GONE
-            binding.toolbar.chooseType.visibility = View.GONE
-            binding.toolbar.ivBack.visibility = View.VISIBLE
-            binding.toolbar.tvTitle.text = resources.getString(R.string.recent_add)
-            handleSortAction(7)
-        }
-        binding.toolbar.ivBack.setOnClickListener {
-            TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
-            binding.toolbar.ivBack.visibility = View.GONE
-            binding.toolbar.ivFilter.visibility = View.VISIBLE
-            binding.toolbar.ivCheck.visibility = View.VISIBLE
-            binding.toolbar.chooseType.visibility = View.VISIBLE
-            binding.recentlyAddedSection.visibility = View.VISIBLE
-            binding.toolbar.tvTitle.text = handleAppNameSpannable(showIcon = IAPUtils.isPremium())
-            setOutRecently()
-            handleSortAction(4)
-            binding.navView.visibility = View.VISIBLE
-        }
-
-        binding.goSetting.setOnClickListener {
-            Log.d(TAG, "binding.goSetting.setOnClickListener")
-            AppOpenManager.getInstance().disableAppResume()
-            requestPermissionStorage {
-                if(it) {
-                    val intent = Intent(this, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    }
-                    startActivity(intent)
-
-                    lifecycleScope.launch {
-                        viewModel.migrateFileData()
-                    }
-
-                } else {
-                    checkStoragePermissionToShowUI()
-                }
-            }
-        }
-
-        viewModel.currentBottomTab.observe(this) { tab ->
-            Log.d(this.javaClass.simpleName, "Current Bottom Tabs: $tab")
-            // Update UI based on the new tab list
-            when (tab) {
-                BottomTab.HOME -> {
-                    binding.recentlyAddedSection.visibility = View.VISIBLE
-                    if(viewModel.loadAddedTodayFiles.value != 0) binding.recentlyAddedNumber.visibility = View.VISIBLE else View.GONE
-                    binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("main_setting_press")
-                        SettingActivity.start(this)
-                    }
-                }
-                BottomTab.RECENT -> {
-                    binding.recentlyAddedSection.visibility = View.GONE
-                    binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("main_setting_press")
-                        SettingActivity.start(this)
-                    }
-                }
-                BottomTab.FAVORITE -> {
-                    binding.recentlyAddedSection.visibility = View.GONE
-                    binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("main_setting_press")
-                        SettingActivity.start(this)
-                    }
-                }
-                else -> {
-                    binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("main_setting_press")
-                        SettingActivity.start(this)
-                    }
-                }
-            }
-        }
         binding.toolbar.ivIap.setOnClickListener {
             logEvent("main_iap_press")
             IapActivityV2.start(this)
@@ -1131,69 +1067,32 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         binding.toolbar.ivSearch.setOnClickListener {
             logEvent("main_search_press")
-            SearchFileActivity.start(this)
+            if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain()) {
+                if (isAllowShowAds()) {
+                    showAdsInterstitial(R.string.inter_home) {
+                        SearchFileActivity.start(this)
+                    }
+                } else {
+                    SearchFileActivity.start(this)
+                }
+            } else {
+                SearchFileActivity.start(this)
+            }
         }
 
         binding.toolbar.edtSearch.doOnTextChanged { text, _, _, _ ->
             val hasText = !text.isNullOrEmpty()
-
             binding.toolbar.ivClear.visibility = if (hasText) View.VISIBLE else View.GONE
             binding.toolbar.ivShow.visibility = if (hasText) View.GONE else View.VISIBLE
-
             viewModel.searchCharObservable.postValue(text?.toString() ?: "")
         }
 
+        binding.toolbar.ivClear.setOnClickListener { clearSearchField() }
 
-        binding.toolbar.ivClear.setOnClickListener {
-            clearSearchField()
-        }
-
-//        binding.buttonCreate.setOnClickListener {
-//            AppOpenManager.getInstance().disableAppResume()
-//            startChooseImageActivity()
-//        }
-
-        binding.toolbar.tvAll.setOnClickListener {
-            logEvent("main_all_tab_press")
-            Log.d(TAG, "tvAll Clicked")
-            binding.viewPager.currentItem = ALL_FILES_FRAGMENT_INDEX
-            handleUIBaseOnFileTab(binding.toolbar.tvAll)
-
-        }
-
-        binding.toolbar.tvPdf.setOnClickListener {
-            logEvent("main_pdf_tab_press")
-            Log.d(TAG, "tvPdf Clicked")
-            binding.viewPager.currentItem = PDF_FILES_FRAGMENT_INDEX
-            handleUIBaseOnFileTab(binding.toolbar.tvPdf)
-        }
-
-        binding.toolbar.tvWord.setOnClickListener {
-            logEvent("main_word_tab_press")
-            Log.d(TAG, "tvWord Clicked")
-            binding.viewPager.currentItem = WORD_FILES_FRAGMENT_INDEX
-            handleUIBaseOnFileTab(binding.toolbar.tvWord)
-        }
-
-        binding.toolbar.tvExcel.setOnClickListener {
-            logEvent("main_excel_tab_press")
-            Log.d(TAG, "tvExcel Clicked")
-            binding.viewPager.currentItem = EXCEL_FILES_FRAGMENT_INDEX
-            handleUIBaseOnFileTab(binding.toolbar.tvExcel)
-        }
-
-        binding.toolbar.tvPpt.setOnClickListener {
-            logEvent("main_ppt_tab_press")
-            Log.d(TAG, "tvPpt Clicked")
-            binding.viewPager.currentItem = PPT_FILES_FRAGMENT_INDEX
-            handleUIBaseOnFileTab(binding.toolbar.tvPpt)
-        }
-
+        // Multi-select button
         binding.toolbar.ivCheck.setOnClickListener {
-
             logEvent("main_select_multifile_press")
             val currentIndex = binding.viewPager.currentItem
-
             val fileTab = when (currentIndex) {
                 ALL_FILES_FRAGMENT_INDEX -> FileTab.ALL_FILE
                 PDF_FILES_FRAGMENT_INDEX -> FileTab.PDF
@@ -1202,35 +1101,156 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                 PPT_FILES_FRAGMENT_INDEX -> FileTab.PPT
                 else -> FileTab.ALL_FILE
             }
-
-            SelectMultipleFilesActivity.start(this, fileTab = fileTab)
+            showAdsOr { SelectMultipleFilesActivity.start(this, fileTab = fileTab) }
         }
 
-//        binding.toolbar.ivRemoveAds.setOnClickListener {
-//            launchActivity<PremiumActivityJava> { }
-//        }
-        binding.notificationWarningSection.setOnClickListener {
-            requestNotificationPermission()
+        // Back button used when in "recently added" mode
+        binding.toolbar.ivBack.setOnClickListener {
+            showAdsOr {
+                restoreHomeUIFromRecently()
+            }
         }
-        binding.featureRequestSection.setOnClickListener {
-            FeatureRequestActivity.start(this)
+
+        // Setting icon common handler (set in observer to respect tab-specific UI)
+        binding.toolbar.ivSetting.setOnClickListener {
+            openSetting()
         }
+    }
+
+    private fun initRecentlyListeners() {
+        binding.recentlyAddedSection.setOnClickListener {
+            logEvent("main_recently_added")
+            // Update toolbar and UI to show recently added detail
+            binding.toolbar.ivSearch.visibility = View.VISIBLE
+            binding.toolbar.ivFilter.visibility = View.GONE
+            binding.toolbar.ivCheck.visibility = View.GONE
+            binding.navView.visibility = View.GONE
+
+            TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
+            binding.recentlyAddedSection.visibility = View.GONE
+            binding.toolbar.chooseType.visibility = View.GONE
+            binding.toolbar.ivBack.visibility = View.VISIBLE
+            binding.toolbar.tvTitle.text = resources.getString(R.string.recent_add)
+            handleSortAction(7)
+        }
+    }
+
+    private fun restoreHomeUIFromRecently() {
+        TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
+        binding.toolbar.ivBack.visibility = View.GONE
+        binding.toolbar.ivFilter.visibility = View.VISIBLE
+        binding.toolbar.ivCheck.visibility = View.VISIBLE
+        binding.toolbar.chooseType.visibility = View.VISIBLE
+        binding.recentlyAddedSection.visibility = View.VISIBLE
+        binding.toolbar.tvTitle.text = handleAppNameSpannable(showIcon = IAPUtils.isPremium())
+        setOutRecently()
+        handleSortAction(4)
+        binding.navView.visibility = View.VISIBLE
+    }
+
+    private fun initFileTabListeners() {
+        val fileTabs = mapOf(
+            binding.toolbar.tvAll to ALL_FILES_FRAGMENT_INDEX,
+            binding.toolbar.tvPdf to PDF_FILES_FRAGMENT_INDEX,
+            binding.toolbar.tvWord to WORD_FILES_FRAGMENT_INDEX,
+            binding.toolbar.tvExcel to EXCEL_FILES_FRAGMENT_INDEX,
+            binding.toolbar.tvPpt to PPT_FILES_FRAGMENT_INDEX
+        )
+
+        fileTabs.forEach { (textView, index) ->
+            textView.setOnClickListener {
+                // logEvent: keep original event names - you can refine naming if needed
+                val eventName = when (textView) {
+                    binding.toolbar.tvAll -> "main_all_tab_press"
+                    binding.toolbar.tvPdf -> "main_pdf_tab_press"
+                    binding.toolbar.tvWord -> "main_word_tab_press"
+                    binding.toolbar.tvExcel -> "main_excel_tab_press"
+                    binding.toolbar.tvPpt -> "main_ppt_tab_press"
+                    else -> "main_file_tab_press"
+                }
+                logEvent(eventName)
+                showAdsOr {
+                    binding.viewPager.currentItem = index
+                    handleUIBaseOnFileTab(textView)
+                }
+            }
+        }
+    }
+
+    private fun initViewModelObservers() {
+        viewModel.loadAddedTodayFiles.observe(this) { addedNumber ->
+            if (addedNumber == 0) {
+                binding.recentlyAddedNumber.visibility = View.GONE
+            } else {
+                if (viewModel.currentBottomTab.value == BottomTab.HOME &&
+                    viewModel.sortStateObservable.value != SortState.DATE_TODAY
+                ) {
+                    binding.recentlyAddedNumber.visibility = View.VISIBLE
+                }
+            }
+            binding.recentlyAddedNumber.text = "+ $addedNumber"
+        }
+
+        viewModel.currentBottomTab.observe(this) { tab ->
+            Log.d(this.javaClass.simpleName, "Current Bottom Tabs: $tab")
+
+            when (tab) {
+                BottomTab.HOME -> {
+                    binding.recentlyAddedSection.visibility = View.VISIBLE
+                    if (viewModel.loadAddedTodayFiles.value != 0) binding.recentlyAddedNumber.visibility =
+                        View.VISIBLE else View.GONE
+
+                    // Set setting click
+                    binding.toolbar.ivSetting.setOnClickListener { openSetting() }
+                }
+
+                BottomTab.RECENT, BottomTab.FAVORITE -> {
+                    binding.recentlyAddedSection.visibility = View.GONE
+                    binding.toolbar.ivSetting.setOnClickListener { openSetting() }
+                }
+
+                else -> {
+                    binding.toolbar.ivSetting.setOnClickListener { openSetting() }
+                }
+            }
+        }
+    }
+
+    private fun initOtherListeners() {
+        binding.goSetting.setOnClickListener {
+            Log.d(TAG, "binding.goSetting.setOnClickListener")
+            AppOpenManager.getInstance().disableAppResume()
+            requestPermissionStorage { granted ->
+                if (granted) {
+                    val intent = Intent(this, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    }
+                    startActivity(intent)
+
+                    lifecycleScope.launch {
+                        viewModel.migrateFileData()
+                    }
+                } else {
+                    checkStoragePermissionToShowUI()
+                }
+            }
+        }
+
+        binding.notificationWarningSection.setOnClickListener { requestNotificationPermission() }
+        binding.featureRequestSection.setOnClickListener { FeatureRequestActivity.start(this) }
+
         binding.swipeRefresh.setOnRefreshListener {
             binding.swipeRefresh.isRefreshing = false
             logEvent("main_refresh_files")
-//            lifecycleScope.launch(Dispatchers.IO) {
-//                if (isAcceptManagerStorage()) {
-//                    viewModel.migrateFileData()
-//                } else {
-//                    viewModel.addSameFilesInternal()
-//                    Log.w("SplashActivity", "Skipping migration, no storage permission")
-//                }
-//            }
-            TemporaryStorage.isShowedReloadGuideInThisSession = true // if user refresh files by swipe, not show reload guide anymore
+            TemporaryStorage.isShowedReloadGuideInThisSession = true
             val intent = Intent(this, ReloadLoadingActivity::class.java)
             startActivity(intent)
         }
+    }
 
+    private fun openSetting() {
+        logEvent("main_setting_press")
+        showAdsOr { SettingActivity.start(this) }
     }
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -1632,58 +1652,65 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         when (id) {
             R.id.navigation_home -> {
                 logEvent("main_home_bottom_tab_press")
-                clearSearchField()
-                viewModel.updateBottomTab(BottomTab.HOME)
-                checkStoragePermissionToShowUI()
-                checkNotificationPermissionToShowUI()
-                checkFeatureRequestToShowUI()
-                binding.toolbar.apply {
-                    tvTitle.text = handleAppNameSpannable(showIcon = IAPUtils.isPremium())
-                    ivSearch.visibility = View.VISIBLE
-                    ivFilter.visibility = View.VISIBLE
-                    ivCheck.visibility = View.VISIBLE
-                    ivBack.visibility = View.GONE
-                }
+                showAdsOr {
+                    clearSearchField()
+                    viewModel.updateBottomTab(BottomTab.HOME)
+                    checkStoragePermissionToShowUI()
+                    checkNotificationPermissionToShowUI()
+                    checkFeatureRequestToShowUI()
 
-                binding.recentlyAddedSection.visibility = View.VISIBLE
-                binding.recentlyAddedNumber.visibility =
-                    if (viewModel.loadAddedTodayFiles.value != 0) View.VISIBLE else View.GONE
+                    binding.toolbar.apply {
+                        tvTitle.text = handleAppNameSpannable(showIcon = IAPUtils.isPremium())
+                        ivSearch.visibility = View.VISIBLE
+                        ivFilter.visibility = View.VISIBLE
+                        ivCheck.visibility = View.VISIBLE
+                        ivBack.visibility = View.GONE
+                    }
 
-                if (viewModel.sortStateObservable.value == SortState.DATE_TODAY) {
-                    handleSortAction(4)
+                    binding.recentlyAddedSection.visibility = View.VISIBLE
+                    binding.recentlyAddedNumber.visibility =
+                        if (viewModel.loadAddedTodayFiles.value != 0) View.VISIBLE else View.GONE
+
+                    if (viewModel.sortStateObservable.value == SortState.DATE_TODAY) {
+                        handleSortAction(4)
+                    }
                 }
             }
 
             R.id.navigation_recent -> {
                 logEvent("main_recent_bottom_tab_press")
-                clearSearchField()
-                viewModel.updateBottomTab(BottomTab.RECENT)
+                showAdsOr {
+                    clearSearchField()
+                    viewModel.updateBottomTab(BottomTab.RECENT)
 
-                binding.toolbar.apply {
-                    tvTitle.text = getString(R.string.title_recent)
-                    ivSearch.visibility = View.VISIBLE
-                    ivFilter.visibility = View.GONE
-                    ivCheck.visibility = View.GONE
-                    ivBack.visibility = View.GONE
+                    binding.toolbar.apply {
+                        tvTitle.text = getString(R.string.title_recent)
+                        ivSearch.visibility = View.VISIBLE
+                        ivFilter.visibility = View.GONE
+                        ivCheck.visibility = View.GONE
+                        ivBack.visibility = View.GONE
+                    }
+
+                    binding.recentlyAddedSection.visibility = View.GONE
                 }
-
-                binding.recentlyAddedSection.visibility = View.GONE
             }
 
             R.id.navigation_favorite -> {
                 logEvent("main_fav_bottom_tab_press")
-                clearSearchField()
-                viewModel.updateBottomTab(BottomTab.FAVORITE)
+                showAdsOr {
+                    clearSearchField()
+                    viewModel.updateBottomTab(BottomTab.FAVORITE)
 
-                binding.toolbar.apply {
-                    tvTitle.text = getString(R.string.title_fav)
-                    ivSearch.visibility = View.GONE
-                    ivFilter.visibility = View.GONE
-                    ivCheck.visibility = View.GONE
-                    ivBack.visibility = View.GONE
+                    binding.toolbar.apply {
+                        tvTitle.text = getString(R.string.title_fav)
+                        ivSearch.visibility = View.GONE
+                        ivFilter.visibility = View.GONE
+                        ivCheck.visibility = View.GONE
+                        ivBack.visibility = View.GONE
+                    }
+
+                    binding.recentlyAddedSection.visibility = View.GONE
                 }
-
-                binding.recentlyAddedSection.visibility = View.GONE
             }
         }
     }
