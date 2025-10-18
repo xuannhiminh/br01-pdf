@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
 import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityLanguageBinding
 import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
 import com.ezteam.baseproject.activity.BaseActivity
@@ -27,14 +28,20 @@ import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
 import pdf.documents.pdfreader.pdfviewer.editor.screen.start.IntroActivity
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
+import com.pdf.pdfreader.pdfviewer.editor.screen.language.Language2Adapter
+import com.pdf.pdfreader.pdfviewer.editor.screen.language.LanguageAdapter
 import pdf.documents.pdfreader.pdfviewer.editor.R
 import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
 import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
 import pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
+import kotlin.collections.get
+import kotlin.text.toInt
 
 class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
-    private var adapter: Language2Adapter? = null
+    private var adapter: RecyclerView.Adapter<*>? = null
+    private var baseAdapter: BaseLanguageAdapter? = null
+
     private val datas = listOf(*Config.itemsLanguage)
 
     companion object {
@@ -80,18 +87,39 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             showIvDoneChecked()
         }
 
-        val selected = PreferencesHelper.getString(
+        // Get the saved language from preferences — used only to show iv_hand initially
+        val cached = PreferencesHelper.getString(
             PreferencesHelper.KEY_LANGUAGE, Config.itemsLanguage[0].value
         )
 
-        adapter = Language2Adapter(datas, this, selected, object : Language2Adapter.OnLanguageSelectedListener {
-            override fun onLanguageSelected(item: ItemSelected) {
-//                startDoneCountdown()
-//                loadNativeNomedia()
-            }
-        })
+        if (FirebaseRemoteConfigUtil.getInstance().getLanguageAdapterType() == 0) {
+            val a = LanguageAdapter(
+                datas,
+                this,
+                cached,
+                object : LanguageAdapter.OnLanguageSelectedListener {
+                    override fun onLanguageSelected(item: ItemSelected) {
+                        // Do something when selected
+                    }
+                })
+            adapter = a
+            baseAdapter = a
+        } else {
+            val a = Language2Adapter(
+                datas,
+                this,
+                cached,
+                object : Language2Adapter.OnLanguageSelectedListener {
+                    override fun onLanguageSelected(item: ItemSelected) {
+                        binding.ivDone.isEnabled = true
+                        binding.ivDone.alpha = 1f
+                    }
+                })
+            adapter = a
+            baseAdapter = a
+        }
         binding.rcvData.adapter = adapter
-        
+
         // Tối ưu hiệu suất RecyclerView
         binding.rcvData.setHasFixedSize(true)
         binding.rcvData.setItemViewCacheSize(20)
@@ -104,23 +132,23 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             setMaxRecycledViews(1, 10)
             setMaxRecycledViews(2, 10)
         })
-        
-        scrollToSelectedLanguageSmooth(selected)
-        
+
+        scrollToSelectedLanguageSmooth(cached)
+
         binding.edtSearchLanguage.setCompoundDrawablesWithIntrinsicBounds(
             R.drawable.ic_search, 0, 0, 0
         )
         binding.edtSearchLanguage.addTextChangedListener(object : android.text.TextWatcher {
             private var searchJob: Handler? = null
-            
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchJob?.removeCallbacksAndMessages(null)
 
                 searchJob = Handler().apply {
                     postDelayed({
-                        adapter?.filter(s?.toString() ?: "")
-                        if (adapter?.itemCount == 0) {
+                        baseAdapter?.filter(s?.toString() ?: "")
+                        if (baseAdapter?.getDisplayList()?.isEmpty() == true) {
                             binding.layoutEmpty.visibility = View.VISIBLE
                             binding.rcvData.visibility = View.GONE
                             binding.animationView.playAnimation()
@@ -169,12 +197,18 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     override fun initData() {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        if (FirebaseRemoteConfigUtil.getInstance().getLanguageAdapterType() == 0) {
+            // do nothing
+        } else {
+            binding.ivDone.isEnabled = false
+            binding.ivDone.alpha = 0.5f
+        }
         binding.ivDone.setOnClickListener { v: View? ->
             TemporaryStorage.shouldLoadAdsLanguageScreen = false
-            PreferencesHelper.putString(PreferencesHelper.KEY_LANGUAGE, adapter!!.selected)
+            PreferencesHelper.putString(PreferencesHelper.KEY_LANGUAGE, baseAdapter!!.selected)
             if (PreferencesUtils.getBoolean(PresKey.GET_START, true)) {
                 logEvent(firebaseAnalytics, "language_first_time_done", "button_action", "done_click")
-               // startIntro()
+                // startIntro()
                 startRequestAllFilePermission()
 //                if (!IAPUtils.isPremium() && BillingProcessor.isIabServiceAvailable(this)) {
 //                    startIAP()
@@ -183,7 +217,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 //                }
             } else {
                 logEvent(firebaseAnalytics, "language_from_main_done", "button_action", "done_click")
-                setLanguageUpDate(adapter!!.selected)
+                setLanguageUpDate(baseAdapter!!.selected)
                 onBackPressed()
             }
         }
@@ -213,7 +247,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             showIvDoneChecked()
 
             val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
-                R.layout.ads_native_bot
+                R.layout.ads_native_bot_2
             } else {
                 R.layout.ads_native_bot_no_media_short
             }
@@ -226,7 +260,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         } else if (TemporaryStorage.isLoadingNativeAdsLanguage) {
             Log.d(TAG, "loadNativeNomedia: TemporaryStorage.isLoadingNativeAdsLanguage " + TemporaryStorage.isLoadingNativeAdsLanguage)
             val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
-                R.layout.ads_native_bot_loading
+                R.layout.ads_native_bot_loading_2
             } else {
                 R.layout.ads_native_loading_short
             }
@@ -247,7 +281,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
                     // Inflate and bind your NativeAdView
                     val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
-                        R.layout.ads_native_bot
+                        R.layout.ads_native_bot_2
                     } else {
                         R.layout.ads_native_bot_no_media_short
                     }
@@ -271,7 +305,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             return
         } else {
             val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
-                R.layout.ads_native_bot_loading
+                R.layout.ads_native_bot_loading_2
             } else {
                 R.layout.ads_native_loading_short
             }
@@ -284,7 +318,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                     if (isFinishing || isDestroyed) return
                     showIvDoneChecked()
                     val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
-                        R.layout.ads_native_bot
+                        R.layout.ads_native_bot_2
                     } else {
                         R.layout.ads_native_bot_no_media_short
                     }
@@ -347,22 +381,15 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
     }
 
     private fun setLanguageUpDate(language: String) {
-        if(adapter!!.selected.contains("-")) {
-            val language = adapter!!.selected.split("-")[0]
-            val country = adapter!!.selected.split("-")[1]
+        if(baseAdapter!!.selected.contains("-")) {
+            val language = baseAdapter!!.selected.split("-")[0]
+            val country = baseAdapter!!.selected.split("-")[1]
             setLanguage(language, country)
         } else {
-            setLanguage(adapter!!.selected)
+            setLanguage(baseAdapter!!.selected)
         }
     }
 
-    private fun openMain() {
-        val mIntent = Intent(this, MainActivity::class.java)
-        mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(mIntent)
-        finish()
-        setLanguageUpDate(adapter!!.selected)
-    }
 //    override fun onResume() {
 //        super.onResume()
 //        if (TemporaryStorage.shouldLoadAdsLanguageScreen) {
@@ -372,17 +399,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 //            showIvDoneChecked()
 //        }
 //    }
-    private fun startIntro() {
-        IntroActivity.start(this);
-        setLanguageUpDate(adapter!!.selected)
-        finish()
-    }
-
-    private fun startIAP() {
-        IapActivityV2.start(this);
-        setLanguageUpDate(adapter!!.selected)
-        finish()
-    }
 
     private fun startRequestAllFilePermission() {
         if(intent == null) intent = Intent(this, RequestAllFilePermissionActivity::class.java)
@@ -393,7 +409,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         }
         RequestAllFilePermissionActivity.start(this)
         finish()
-        setLanguageUpDate(adapter!!.selected)
+        setLanguageUpDate(baseAdapter!!.selected)
     }
 
     override fun onStop() {
@@ -411,7 +427,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     private fun scrollToSelectedLanguageSmooth(selected: String) {
         binding.rcvData.post {
-            val adapter = binding.rcvData.adapter as? Language2Adapter ?: return@post
+            val adapter = binding.rcvData.adapter as? BaseLanguageAdapter ?: return@post
             val displayList = adapter.getDisplayList()
             val selectedPosition = displayList.indexOfFirst { it.value == selected }
 

@@ -47,7 +47,7 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val DEFAULT_TURN_OFF_NOTI_SERVICE_IF_PREMIUM = false
         private const val DEFAULT_ALWAYS_ASK_NOTI_WHEN_ENTER_APP = false
         private const val DEFAULT_IAP_SCREEN_TYPE = 0
-        private const val DEFAULT_LANGUAGE_ADAPTER_TYPE = 0
+        private const val DEFAULT_LANGUAGE_ADAPTER_TYPE = 1
         private const val DEFAULT_SHOW_ADS_MAIN = false
         private const val DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF = false
         private const val DEFAULT_IS_BIG_ADS = true

@@ -22,24 +22,23 @@ import pdf.documents.pdfreader.pdfviewer.editor.screen.language.BaseLanguageAdap
 import pdf.documents.pdfreader.pdfviewer.editor.screen.language.ItemSelected;
 import pdf.documents.pdfreader.pdfviewer.editor.screen.language.Toolbox;
 
-public class Language2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class LanguageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         implements BaseLanguageAdapter {
+
 
     private final List<ItemSelected> list;
     private final List<ItemSelected> displayList = new ArrayList<>();
     private final Context context;
-    private String selected = null;
+    private String selected;
     private final OnLanguageSelectedListener listener;
-    // pendingSelection: language code from PreferencesHelper => used only to show iv_hand initially
-    private String pendingSelection = null;
 
     public interface OnLanguageSelectedListener {
         void onLanguageSelected(ItemSelected item);
     }
-    public Language2Adapter(List<ItemSelected> list, Context context, String pendingSelection, OnLanguageSelectedListener listener) {
+    public LanguageAdapter(List<ItemSelected> list, Context context, String selected, OnLanguageSelectedListener listener) {
         this.list = list;
         this.context = context;
-        this.pendingSelection = pendingSelection;
+        this.selected = selected;
         this.listener = listener;
         for (ItemSelected item : list) {
             if (item.getGroup() == 1) {
@@ -53,6 +52,7 @@ public class Language2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public String getSelected() {
         return selected;
     }
+
     @Override
     public List<ItemSelected> getDisplayList() {
         return displayList;
@@ -150,12 +150,6 @@ public class Language2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .into(holder.binding2.ivFlag);
             holder.binding2.rdSelect.setVisibility(View.VISIBLE);
             holder.binding2.rdSelect.setChecked(TextUtils.equals(item.getValue(), selected));
-            if (selected == null && TextUtils.equals(item.getValue(), pendingSelection)) {
-                holder.binding2.ivHand.setVisibility(View.VISIBLE);
-                startScalePulse(holder.binding2.ivHand, 1f, 1.8f, 800);
-            } else {
-                holder.binding2.ivHand.setVisibility(View.GONE);
-            }
         } else {
             root = holder.bindingChild.getRoot();
             holder.bindingChild.tvTitle.setText(name);
@@ -169,39 +163,15 @@ public class Language2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .into(holder.bindingChild.ivFlag);
             holder.bindingChild.rdSelect.setVisibility(View.VISIBLE);
             holder.bindingChild.rdSelect.setChecked(TextUtils.equals(item.getValue(), selected));
-            if (selected == null && TextUtils.equals(item.getValue(), pendingSelection)) {
-                holder.bindingChild.ivHand.setVisibility(View.VISIBLE);
-            } else {
-                holder.bindingChild.ivHand.setVisibility(View.GONE);
-            }
         }
 
         root.setOnClickListener(v -> {
-            String value = item.getValue();
-            if (selected == null || !selected.equals(value)) {
-                selected = value;
-                pendingSelection = null;
-                notifyDataSetChanged();
-                if (listener != null) {
-                    listener.onLanguageSelected(item);
-                }
+            selected = item.getValue();
+            notifyDataSetChanged();
+            if (listener != null) {
+                listener.onLanguageSelected(item);
             }
         });
-    }
-    public static void startScalePulse(View view, float from, float to, long duration) {
-        view.animate()
-                .scaleX(to)
-                .scaleY(to)
-                .setDuration(duration)
-                .withEndAction(() -> {
-                    view.animate()
-                            .scaleX(from)
-                            .scaleY(from)
-                            .setDuration(duration)
-                            .withEndAction(() -> startScalePulse(view, from, to, duration))
-                            .start();
-                })
-                .start();
     }
 
     private String getLanguageNameEn(String code) {
@@ -269,7 +239,6 @@ public class Language2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         return displayList.size();
     }
-
     @Override
     public void filter(String query) {
         int oldSize = displayList.size();

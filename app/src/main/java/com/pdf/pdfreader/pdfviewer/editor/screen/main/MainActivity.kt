@@ -137,6 +137,7 @@ private const val EXCEL_FILES_FRAGMENT_INDEX = 4
 class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
     private val TAG = "MainActivity"
     private val viewModel by inject<MainViewModel>()
+    private var allowShowAdsAt: Long = 0
     private lateinit var adapter: BasePagerAdapter
     private val myBroadcastReceiver: BroadcastSubmodule by lazy {
         BroadcastSubmodule()
@@ -179,6 +180,8 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        val timeoutSec = FirebaseRemoteConfigUtil.getInstance().getIntervalShowInterSecond()
+        allowShowAdsAt = System.currentTimeMillis() + timeoutSec * 1000
         Helper.a = true
         handleIntentToMove()
         super.onCreate(savedInstanceState)
@@ -187,7 +190,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             val exitAppDialog = ExitAppDialog()
             try {
                 exitAppDialog.show(supportFragmentManager, ExitAppDialog::class.java.name)
-                logEvent("exit_app")
+                logEvent("main_exit_app")
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.e("MainActivity", "Error showing exit dialog: ${e.message}", e)
@@ -730,7 +733,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                     }
                 } else { // default reader is our app => do nothing
                     Log.d("DefaultReader", "defaultPdfViewer: $defaultPdfViewerResolveInfo")
-                    logEvent("app_default_reader")
+                    logEvent("main_app_default_reader")
                 }
             }
         }
@@ -1026,7 +1029,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
     override fun initListener() {
         binding.navView. setOnItemSelectedListener(onNavigationItemSelectedListener)
         binding.toolbar.ivFilter.setOnClickListener {
-            logEvent("filter")
+            logEvent("main_filter")
             val dialog = SortDialog()
             dialog.setOnSortSelectedListener(::handleSortAction)
             dialog.show(supportFragmentManager, "SortDialog")
@@ -1042,7 +1045,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
 
         binding.recentlyAddedSection.setOnClickListener {
-            logEvent("recently_added")
+            logEvent("main_recently_added")
             binding.toolbar.ivSearch.visibility = View.VISIBLE
             binding.toolbar.ivFilter.visibility = View.GONE
             binding.toolbar.ivCheck.visibility = View.GONE
@@ -1095,39 +1098,39 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                     binding.recentlyAddedSection.visibility = View.VISIBLE
                     if(viewModel.loadAddedTodayFiles.value != 0) binding.recentlyAddedNumber.visibility = View.VISIBLE else View.GONE
                     binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("setting_press")
+                        logEvent("main_setting_press")
                         SettingActivity.start(this)
                     }
                 }
                 BottomTab.RECENT -> {
                     binding.recentlyAddedSection.visibility = View.GONE
                     binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("setting_press")
+                        logEvent("main_setting_press")
                         SettingActivity.start(this)
                     }
                 }
                 BottomTab.FAVORITE -> {
                     binding.recentlyAddedSection.visibility = View.GONE
                     binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("setting_press")
+                        logEvent("main_setting_press")
                         SettingActivity.start(this)
                     }
                 }
                 else -> {
                     binding.toolbar.ivSetting.setOnClickListener {
-                        logEvent("setting_press")
+                        logEvent("main_setting_press")
                         SettingActivity.start(this)
                     }
                 }
             }
         }
         binding.toolbar.ivIap.setOnClickListener {
-            logEvent("iap_press")
+            logEvent("main_iap_press")
             IapActivityV2.start(this)
         }
 
         binding.toolbar.ivSearch.setOnClickListener {
-            logEvent("search_press")
+            logEvent("main_search_press")
             SearchFileActivity.start(this)
         }
 
@@ -1151,7 +1154,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 //        }
 
         binding.toolbar.tvAll.setOnClickListener {
-            logEvent("all_tab_press")
+            logEvent("main_all_tab_press")
             Log.d(TAG, "tvAll Clicked")
             binding.viewPager.currentItem = ALL_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvAll)
@@ -1159,28 +1162,28 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
 
         binding.toolbar.tvPdf.setOnClickListener {
-            logEvent("pdf_tab_press")
+            logEvent("main_pdf_tab_press")
             Log.d(TAG, "tvPdf Clicked")
             binding.viewPager.currentItem = PDF_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvPdf)
         }
 
         binding.toolbar.tvWord.setOnClickListener {
-            logEvent("word_tab_press")
+            logEvent("main_word_tab_press")
             Log.d(TAG, "tvWord Clicked")
             binding.viewPager.currentItem = WORD_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvWord)
         }
 
         binding.toolbar.tvExcel.setOnClickListener {
-            logEvent("excel_tab_press")
+            logEvent("main_excel_tab_press")
             Log.d(TAG, "tvExcel Clicked")
             binding.viewPager.currentItem = EXCEL_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvExcel)
         }
 
         binding.toolbar.tvPpt.setOnClickListener {
-            logEvent("ppt_tab_press")
+            logEvent("main_ppt_tab_press")
             Log.d(TAG, "tvPpt Clicked")
             binding.viewPager.currentItem = PPT_FILES_FRAGMENT_INDEX
             handleUIBaseOnFileTab(binding.toolbar.tvPpt)
@@ -1188,7 +1191,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         binding.toolbar.ivCheck.setOnClickListener {
 
-            logEvent("select_multifile_press")
+            logEvent("main_select_multifile_press")
             val currentIndex = binding.viewPager.currentItem
 
             val fileTab = when (currentIndex) {
@@ -1214,7 +1217,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
         binding.swipeRefresh.setOnRefreshListener {
             binding.swipeRefresh.isRefreshing = false
-            logEvent("refresh_files")
+            logEvent("main_refresh_files")
 //            lifecycleScope.launch(Dispatchers.IO) {
 //                if (isAcceptManagerStorage()) {
 //                    viewModel.migrateFileData()
@@ -1628,7 +1631,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         when (id) {
             R.id.navigation_home -> {
-                logEvent("home_bottom_tab_press")
+                logEvent("main_home_bottom_tab_press")
                 clearSearchField()
                 viewModel.updateBottomTab(BottomTab.HOME)
                 checkStoragePermissionToShowUI()
@@ -1652,7 +1655,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_recent -> {
-                logEvent("recent_bottom_tab_press")
+                logEvent("main_recent_bottom_tab_press")
                 clearSearchField()
                 viewModel.updateBottomTab(BottomTab.RECENT)
 
@@ -1668,7 +1671,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             }
 
             R.id.navigation_favorite -> {
-                logEvent("favourite_bottom_tab_press")
+                logEvent("main_fav_bottom_tab_press")
                 clearSearchField()
                 viewModel.updateBottomTab(BottomTab.FAVORITE)
 
