@@ -468,4 +468,5 @@
    <string name="feedback_disclaimer">このメールを送信することで、上記の情報を共有し、アプリの改善にご協力いただくことに同意したものとみなされます。</string>
     <string name="reload_file_successful">成功</string>
     <string name="update_required">このバージョンは古くなっています。アプリを更新してください</string>
+    <string name="saving_content">コンテンツを保存しています</string>
 </resources> 

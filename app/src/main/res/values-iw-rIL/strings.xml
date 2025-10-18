@@ -609,5 +609,6 @@
         <item>A4</item>
         <item>Letter</item>
     </string-array>
+    <string name="saving_content">שומר תוכן</string>
 
 </resources>

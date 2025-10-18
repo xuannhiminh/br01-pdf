@@ -552,4 +552,5 @@
     <string name="your_feedback">Ваш отзыв</string>
    <string name="feedback_disclaimer">Отправляя это письмо, вы соглашаетесь поделиться указанной выше информацией с нами, чтобы помочь улучшить приложение.</string>
     <string name="update_required">Эта версия устарела. Пожалуйста, обновите приложение</string>
+    <string name="saving_content">Сохранение содержимого</string>
 </resources>

@@ -469,4 +469,5 @@
     <string name="your_feedback">بازخورد شما</string>
    <string name="feedback_disclaimer">با ارسال این ایمیل، شما موافقت می‌کنید اطلاعات فوق را با ما به اشتراک بگذارید تا به بهبود برنامه کمک کند.</string>
     <string name="update_required">این نسخه قدیمی است. لطفاً برنامه را به‌روزرسانی کنید</string>
+    <string name="saving_content">در حال ذخیره محتوا</string>
 </resources> 

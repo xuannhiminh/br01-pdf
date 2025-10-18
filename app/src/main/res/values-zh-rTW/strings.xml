@@ -447,4 +447,5 @@
     <string name="your_feedback">您的回</string>
    <string name="feedback_disclaimer">傳送此電子郵件即表示您同意與我們共享上述資訊，以協助改進此應用程</string>
     <string name="update_required">此版本已過時。請更新應用程式</string>
+    <string name="saving_content">正在儲存內容</string>
 </resources> 

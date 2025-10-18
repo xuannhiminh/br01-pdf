@@ -472,4 +472,5 @@
     <string name="your_feedback">Uw feedback</string>
    <string name="feedback_disclaimer">Door deze e-mail te verzenden, stemt u ermee in de bovenstaande informatie met ons te delen om de app te verbeteren.</string>
     <string name="update_required">Deze versie is verouderd. Werk de app bij</string>
+    <string name="saving_content">Inhoud wordt opgeslagen</string>
 </resources> 

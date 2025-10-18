@@ -30,6 +30,7 @@
     <string name="access_to_all_feature">وصول غير محدود إلى جميع الميزات</string>
     <string name="go_premium">الترقية إلى بريميوم</string>
     <string name="rating">التقييم</string>
+    <string name="saving_content">جاري حفظ المحتوى</string>
 
     <string name="intent_label_excel_pdf">تحويل إكسل إلى PDF</string>
     <string name="intent_label_excel_reader">قارئ إكسل</string>

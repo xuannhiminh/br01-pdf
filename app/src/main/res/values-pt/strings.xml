@@ -552,4 +552,5 @@
     <string name="your_feedback">Seu feedback</string>
    <string name="feedback_disclaimer">Ao enviar este e-mail, você concorda em compartilhar as informações acima conosco para ajudar a melhorar o aplicativo.</string>
     <string name="update_required">Esta versão está desatualizada. Atualize a aplicação</string>
+    <string name="saving_content">A guardar conteúdo</string>
 </resources>

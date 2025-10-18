@@ -30,7 +30,14 @@
             android:fontFamily="sans-serif"
             android:textFontWeight="500" />
 
-        <!-- Nội dung -->
+        <ImageView
+            android:id="@+id/iv_loading"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:visibility="gone"
+            android:src="@drawable/ic_loading" />
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="match_parent"
@@ -45,19 +52,8 @@
             android:textColor="@color/text1"
             android:textSize="16sp" />
 
-        <FrameLayout
-            android:id="@+id/layout_native"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:layout_height="wrap_content">
-
-            <FrameLayout
-                android:id="@+id/frNativeAds"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </FrameLayout>
-
         <LinearLayout
+            android:id="@+id/button_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -100,6 +96,17 @@
                 android:letterSpacing="0"
                 android:background="@drawable/button_cancel"/>
         </LinearLayout>
+        <FrameLayout
+            android:id="@+id/layout_native"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/frNativeAds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
 
     </LinearLayout>
 </FrameLayout>

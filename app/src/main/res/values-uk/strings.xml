@@ -448,4 +448,5 @@
     <string name="your_feedback">Ваш відгук</string>
    <string name="feedback_disclaimer">Надсилаючи цей лист, ви погоджуєтеся поділитися наведеними вище даними з нами, щоб допомогти покращити додаток.</string>
     <string name="update_required">Ця версія застаріла. Будь ласка, оновіть додаток</string>
+    <string name="saving_content">Збереження вмісту</string>
 </resources> 

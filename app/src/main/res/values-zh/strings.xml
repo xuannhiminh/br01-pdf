@@ -448,4 +448,5 @@
     <string name="your_feedback">您的反馈</string>
    <string name="feedback_disclaimer">发送此电子邮件即表示您同意与我们共享上述信息，以帮助改进该应用。</string>
     <string name="update_required">此版本已过时。请更新应用</string>
+    <string name="saving_content">正在保存内容</string>
 </resources> 

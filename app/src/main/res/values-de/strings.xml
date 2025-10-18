@@ -454,4 +454,5 @@
     <string name="your_feedback">Ihr Feedback</string>
    <string name="feedback_disclaimer">Indem Sie diese E-Mail senden, stimmen Sie zu, die oben genannten Informationen mit uns zu teilen, um die App zu verbessern.</string>
     <string name="update_required">Diese Version ist veraltet. Bitte aktualisiere die App</string>
+    <string name="saving_content">Inhalt wird gespeichert</string>
 </resources> 

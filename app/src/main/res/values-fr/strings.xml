@@ -554,4 +554,5 @@
     <string name="your_feedback">Vos commentaires</string>
    <string name="feedback_disclaimer">En envoyant cet e-mail, vous acceptez de partager les informations ci-dessus avec nous pour aider à améliorer l\'application.</string>
     <string name="update_required">Cette version est obsolète. Veuillez mettre à jour l’application</string>
+    <string name="saving_content">Enregistrement du contenu</string>
 </resources>
