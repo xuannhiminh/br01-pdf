@@ -15,6 +15,7 @@ import com.ezteam.baseproject.activity.BaseActivity
 import com.ezteam.baseproject.animation.AnimationUtils
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.ezteam.baseproject.iapLib.v3.BillingProcessor
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.ezteam.baseproject.utils.SystemUtils
@@ -211,8 +212,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             }
             showIvDoneChecked()
 
-            val adView = LayoutInflater.from(this@LanguageActivity)
-                .inflate(R.layout.ads_native_bot_no_media_short, null) as NativeAdView
+            val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
+                R.layout.ads_native_bot
+            } else {
+                R.layout.ads_native_bot_no_media_short
+            }
+            val adView = LayoutInflater.from(this@LanguageActivity).inflate(layoutRes, null) as NativeAdView
             binding.layoutNative.removeAllViews()
             binding.layoutNative.addView(adView)
             Admob.getInstance().pushAdsToViewCustom(TemporaryStorage.nativeAdPreload, adView)
@@ -220,8 +225,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             return
         } else if (TemporaryStorage.isLoadingNativeAdsLanguage) {
             Log.d(TAG, "loadNativeNomedia: TemporaryStorage.isLoadingNativeAdsLanguage " + TemporaryStorage.isLoadingNativeAdsLanguage)
-            val loadingView = LayoutInflater.from(this)
-                .inflate(R.layout.ads_native_loading_short, null)
+            val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
+                R.layout.ads_native_bot_loading
+            } else {
+                R.layout.ads_native_loading_short
+            }
+            val loadingView = LayoutInflater.from(this).inflate(layoutRes, null)
             binding.layoutNative.removeAllViews()
             binding.layoutNative.addView(loadingView)
 
@@ -237,8 +246,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                     showIvDoneChecked()
 
                     // Inflate and bind your NativeAdView
-                    val adView = LayoutInflater.from(this@LanguageActivity)
-                        .inflate(R.layout.ads_native_bot_no_media_short, null) as NativeAdView
+                    val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
+                        R.layout.ads_native_bot
+                    } else {
+                        R.layout.ads_native_bot_no_media_short
+                    }
+                    val adView = LayoutInflater.from(this@LanguageActivity).inflate(layoutRes, null) as NativeAdView
                     binding.layoutNative.removeAllViews()
                     binding.layoutNative.addView(adView)
                     Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
@@ -257,8 +270,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
             return
         } else {
-            val loadingView = LayoutInflater.from(this)
-                .inflate(R.layout.ads_native_loading_short, null)
+            val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
+                R.layout.ads_native_bot_loading
+            } else {
+                R.layout.ads_native_loading_short
+            }
+            val loadingView = LayoutInflater.from(this).inflate(layoutRes, null)
             binding.layoutNative.removeAllViews()
             binding.layoutNative.addView(loadingView)
 
@@ -266,8 +283,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                 override fun onNativeAdLoaded(nativeAd: NativeAd?) {
                     if (isFinishing || isDestroyed) return
                     showIvDoneChecked()
-                    val adView = LayoutInflater.from(this@LanguageActivity)
-                        .inflate(R.layout.ads_native_bot_no_media_short, null) as NativeAdView
+                    val layoutRes = if (FirebaseRemoteConfigUtil.getInstance().isBigAds()) {
+                        R.layout.ads_native_bot
+                    } else {
+                        R.layout.ads_native_bot_no_media_short
+                    }
+                    val adView = LayoutInflater.from(this@LanguageActivity).inflate(layoutRes, null) as NativeAdView
                     binding.layoutNative.removeAllViews()
                     binding.layoutNative.addView(adView)
                     Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)

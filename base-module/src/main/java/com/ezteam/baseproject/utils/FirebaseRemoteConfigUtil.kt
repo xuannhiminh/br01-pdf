@@ -47,10 +47,11 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val DEFAULT_TURN_OFF_NOTI_SERVICE_IF_PREMIUM = false
         private const val DEFAULT_ALWAYS_ASK_NOTI_WHEN_ENTER_APP = false
         private const val DEFAULT_IAP_SCREEN_TYPE = 0
+        private const val DEFAULT_LANGUAGE_ADAPTER_TYPE = 0
         private const val DEFAULT_SHOW_ADS_MAIN = false
         private const val DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF = false
-
-
+        private const val DEFAULT_IS_BIG_ADS = true
+        private const val DEFAULT_NOTIFICATION_OUT_APP_INTERVAL_SECOND = 10
 
 
 
@@ -87,8 +88,17 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val REMOTE_KEY_TURN_OFF_NOTI_SERVICE_IF_PREMIUM = "turn_off_noti_service_if_premium"
         private const val REMOTE_KEY_ALWAYS_REQUEST_NOTI_WHEN_ENTER_APP= "always_request_noti_when_enter_app"
         private const val REMOTE_KEY_IAP_SCREEN_TYPE = "iap_screen_type"
+        private const val REMOTE_KEY_LANGUAGE_ADAPTER_TYPE = "language_adapter_type"
         private const val REMOTE_KEY_SHOW_ADS_MAIN = "show_ads_main"
         private const val REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF = "allow_save_excel_to_pdf"
+        private const val REMOTE_KEY_IS_BIG_ADS = "is_big_ads"
+        private const val REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND = "notification_out_app_interval_second"
+
+
+
+
+
+
 
 
         private var instance: FirebaseRemoteConfigUtil? = null
@@ -145,8 +155,11 @@ class FirebaseRemoteConfigUtil private constructor() {
                 REMOTE_KEY_TURN_OFF_NOTI_SERVICE_IF_PREMIUM to DEFAULT_TURN_OFF_NOTI_SERVICE_IF_PREMIUM,
                 REMOTE_KEY_ALWAYS_REQUEST_NOTI_WHEN_ENTER_APP to DEFAULT_ALWAYS_ASK_NOTI_WHEN_ENTER_APP,
                 REMOTE_KEY_IAP_SCREEN_TYPE to DEFAULT_IAP_SCREEN_TYPE,
+                REMOTE_KEY_LANGUAGE_ADAPTER_TYPE to DEFAULT_LANGUAGE_ADAPTER_TYPE,
                 REMOTE_KEY_SHOW_ADS_MAIN to DEFAULT_SHOW_ADS_MAIN,
-                REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF to DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF
+                REMOTE_KEY_IS_BIG_ADS to DEFAULT_IS_BIG_ADS,
+                REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF to DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF,
+                REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND to DEFAULT_NOTIFICATION_OUT_APP_INTERVAL_SECOND
 
             )
         )
@@ -273,10 +286,19 @@ class FirebaseRemoteConfigUtil private constructor() {
     fun getIapScreenType(): Int {
         return firebaseRemoteConfig.getLong(REMOTE_KEY_IAP_SCREEN_TYPE).toInt()
     }
+    fun getLanguageAdapterType(): Int {
+        return firebaseRemoteConfig.getLong(REMOTE_KEY_LANGUAGE_ADAPTER_TYPE).toInt()
+    }
     fun isShowAdsMain(): Boolean {
         return firebaseRemoteConfig.getBoolean(REMOTE_KEY_SHOW_ADS_MAIN)
     }
     fun isAllowSaveExcelToPDF(): Boolean {
         return firebaseRemoteConfig.getBoolean(REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF)
+    }
+    fun isBigAds(): Boolean {
+        return firebaseRemoteConfig.getBoolean(REMOTE_KEY_IS_BIG_ADS)
+    }
+    fun getNotificationOutAppIntervalSecond(): Int {
+        return firebaseRemoteConfig.getLong(REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND).toInt()
     }
 }
