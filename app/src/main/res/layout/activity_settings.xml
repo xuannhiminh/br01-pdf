@@ -119,11 +119,89 @@
         android:paddingHorizontal="@dimen/_20sdp">
 
         <LinearLayout
+            android:id="@+id/func_set_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_setting_background"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textFontWeight="400"
+                app:fvTextColor="@color/text1"
+                android:layout_height="wrap_content"
+                app:fvTitle="@string/set_app_default"
+                app:fvIcon="@drawable/icon_setting_widget" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_setting_more"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/func_change_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_setting_background"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center_vertical">
+
+            <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textFontWeight="400"
+                app:fvTextColor="@color/text1"
+                app:fvTitle="@string/change_language"
+                app:fvIcon="@drawable/icon_setting_language" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_setting_more"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/func_add_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_setting_background"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center_vertical">
+
+            <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textFontWeight="400"
+                app:fvTextColor="@color/text1"
+                android:layout_height="wrap_content"
+                app:fvTitle="@string/add_widget"
+                app:fvIcon="@drawable/icon_widget_scan" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_setting_more"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/func_feature_request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_setting_background"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
             android:gravity="center_vertical">
 
             <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
@@ -175,31 +253,6 @@
                 android:duplicateParentState="true" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/func_change_language"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_setting_background"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="center_vertical">
-
-            <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
-                android:textFontWeight="400"
-                app:fvTextColor="@color/text1"
-                app:fvTitle="@string/change_language"
-                app:fvIcon="@drawable/icon_setting_language" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_setting_more"/>
-        </LinearLayout>
         <LinearLayout
             android:id="@+id/func_notification"
             android:layout_width="match_parent"
@@ -277,57 +330,6 @@
                 android:id="@+id/switch_night_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/func_add_widget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_setting_background"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="center_vertical">
-
-            <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
-                android:textFontWeight="400"
-                app:fvTextColor="@color/text1"
-                android:layout_height="wrap_content"
-                app:fvTitle="@string/add_widget"
-                app:fvIcon="@drawable/icon_widget_scan" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_setting_more"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/func_set_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_setting_background"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="center_vertical">
-
-            <pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
-                android:textFontWeight="400"
-                app:fvTextColor="@color/text1"
-                android:layout_height="wrap_content"
-                app:fvTitle="@string/set_app_default"
-                app:fvIcon="@drawable/icon_setting_widget" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_setting_more"/>
         </LinearLayout>
 
         <View
