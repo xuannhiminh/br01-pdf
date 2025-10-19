@@ -50,7 +50,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="Button"
-            android:textColor="@color/white"
+            android:textColor="#fff"
             android:textSize="12.0sp"
             android:textStyle="bold" />
     </RelativeLayout>

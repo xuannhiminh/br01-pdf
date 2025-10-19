@@ -64,7 +64,7 @@
             android:layout_height="@dimen/_31sdp"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="#fff"
             android:gravity="center"
             android:fontFamily="sans-serif"
             android:text="@string/open"
