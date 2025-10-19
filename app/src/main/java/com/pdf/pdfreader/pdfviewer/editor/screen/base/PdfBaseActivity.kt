@@ -3,6 +3,8 @@ package pdf.documents.pdfreader.pdfviewer.editor.screen.base
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -43,8 +45,11 @@ import pdf.documents.pdfreader.pdfviewer.editor.utils.createPdf.model.ImageToPDF
 import kotlinx.coroutines.launch
 import office.file.ui.extension.openDocuments
 import org.apache.commons.io.FilenameUtils
+import pdf.documents.pdfreader.pdfviewer.editor.dialog.DefaultReaderRequestDialog
+import pdf.documents.pdfreader.pdfviewer.editor.dialog.DefaultReaderUninstallDialog
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.net.URLConnection
 
 abstract class PdfBaseActivity<B : ViewBinding> : BaseActivity<B>(), IControl {
@@ -418,6 +423,79 @@ abstract class PdfBaseActivity<B : ViewBinding> : BaseActivity<B>(), IControl {
                     .show()
             }
         }
+    }
+    fun showDefaultReaderDialog(closable : Boolean = false) {
+
+        val defaultViewer = getDefaultPdfViewerClass()
+
+        Log.i("DefaultReader", "Check default viewer")
+
+        if (defaultViewer?.activityInfo == null ||
+            defaultViewer.activityInfo.name.contains("internal.app.ResolverActivity") ||
+            defaultViewer.activityInfo.name.contains("com.android.intentresolver")
+        ) {
+            // ❌ not default => show dialog request
+            val dialog = DefaultReaderRequestDialog();
+            try {
+                dialog.show(this.supportFragmentManager, "RequestDefaultReaderDialog")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("MainActivity", "Error showing RequestDefaultReaderDialog: ${e.message}", e)
+            }
+        } else if (!defaultViewer.activityInfo.name.contains(packageName)) {
+            // ❌ have default but not my app => show dialog clear
+            val fragmentManager = supportFragmentManager
+            val existingDialog = fragmentManager.findFragmentByTag("DefaultReaderUninstallDialog")
+            if (existingDialog == null) {
+                val dialog = DefaultReaderUninstallDialog()
+                dialog.defaultPdfViewer = defaultViewer
+                dialog.listener = {
+                    isGoingToSettingToClearDefault = true
+                }
+                try {
+                    dialog.show(fragmentManager, "DefaultReaderUninstallDialog")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.e("MainActivity", "Error showing DefaultReaderUninstallDialog: ${e.message}", e)
+                }
+            }
+        } else {
+            // ✅ Default is my app => skip ext type
+            logEventBase("default_reader")
+        }
+    }
+
+    var isGoingToSettingToClearDefault = false
+    private fun getDefaultPdfViewerClass(): ResolveInfo? {
+        val fileName = "file_example_PDF.pdf"
+        val assetManager = assets
+        val file = File(File(filesDir, "defaultFiles").apply { mkdirs() }, fileName)
+
+        // Copy file từ assets nếu chưa tồn tại
+        if (!file.exists()) {
+            try {
+                assetManager.open(fileName).use { inputStream ->
+                    FileOutputStream(file).use { outputStream ->
+                        inputStream.copyTo(outputStream)
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return null
+            }
+        }
+
+        val uri = Uri.fromFile(file)
+
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/pdf")
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+
+        val resolveInfo = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        Log.d("DefaultReader", "resolveInfo: $resolveInfo")
+
+        return resolveInfo
     }
 
 }

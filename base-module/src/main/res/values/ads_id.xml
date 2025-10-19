@@ -15,6 +15,7 @@
     <string name="native_navbar" translatable="false">ca-app-pub-3940256099942544/2247696110></string>
     <string name="banner_navbar" translatable="false">ca-app-pub-3940256099942544/9214589741</string>
     <string name="native_between_files_home" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="native_reload_file_success" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name="native_filedetail" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name="native_exit_app" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
     <string name="native_home_v112" translatable="false">ca-app-pub-3940256099942544/2247696110</string>

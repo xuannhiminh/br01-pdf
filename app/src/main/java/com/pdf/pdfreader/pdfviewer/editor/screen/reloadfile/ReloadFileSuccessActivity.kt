@@ -77,6 +77,8 @@ class ReloadFileSuccessActivity : PdfBaseActivity<ActivityReloadFileBinding>() {
             emitter = Emitter(Long.MAX_VALUE, TimeUnit.MILLISECONDS).perSecond(20)
         )
         konfettiView.start(party)
+
+        showDefaultReaderDialog(true)
     }
 
     override fun initData() {
@@ -118,7 +120,7 @@ class ReloadFileSuccessActivity : PdfBaseActivity<ActivityReloadFileBinding>() {
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_between_files_home),
+                getString(R.string.native_reload_file_success),
                 callback
             )
         } else {
@@ -211,7 +213,7 @@ class ReloadFileSuccessActivity : PdfBaseActivity<ActivityReloadFileBinding>() {
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_home_v112),
+                getString(R.string.native_reload_file_success),
                 callback
             )
         }
