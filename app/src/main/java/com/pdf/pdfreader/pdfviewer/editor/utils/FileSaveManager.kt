@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.utils
+package free.pdf.documents.pdfreader.pdfviewer.editor.utils
 
 import android.content.ContentValues
 import android.content.Context
@@ -10,7 +10,7 @@ import android.os.Environment
 import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.util.Log
-import pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
 import com.ezteam.baseproject.EzListener
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import org.apache.commons.io.FilenameUtils

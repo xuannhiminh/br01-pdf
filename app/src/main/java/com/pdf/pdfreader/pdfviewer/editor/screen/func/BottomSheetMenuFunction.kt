@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.func
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.func
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetMenuFuncBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetMenuFuncBinding
 import com.ezteam.baseproject.listener.EzItemListener
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.SystemUtils
@@ -20,7 +20,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
 
 
 class BottomSheetMenuFunction(

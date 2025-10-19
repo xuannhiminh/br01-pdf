@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.overlay;
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.overlay;
 
 import android.app.Activity
 import android.os.Build
@@ -8,8 +8,8 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderUninstallInstructDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderUninstallInstructDialogBinding
 
 class ClearDefaultReaderOverlayActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.start
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.start
 
 //import com.google.android.gms.ads.ez.EzAdControl
 //import com.google.android.gms.ads.ez.listenner.ShowAdCallback
@@ -19,13 +19,13 @@ import androidx.lifecycle.lifecycleScope
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.nlbn.ads.util.AppOpenManager
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityGetStartBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityGetStartBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject

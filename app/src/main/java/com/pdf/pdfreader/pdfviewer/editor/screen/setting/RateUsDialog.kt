@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.setting
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.setting
 
 import android.app.Dialog
 import android.os.Bundle
@@ -16,9 +16,9 @@ import com.google.android.play.core.review.ReviewException
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.review.model.ReviewErrorCode
 import com.google.firebase.analytics.FirebaseAnalytics
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.RateUsDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.search.FeedBackActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.RateUsDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.search.FeedBackActivity
 
 class RateUsDialog : DialogFragment() {
     override fun getTheme(): Int {

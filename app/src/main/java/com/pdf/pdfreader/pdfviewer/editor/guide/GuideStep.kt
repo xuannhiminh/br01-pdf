@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.view.View
 

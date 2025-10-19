@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.notification
+package free.pdf.documents.pdfreader.pdfviewer.editor.notification
 
 import android.Manifest
 import android.app.Notification
@@ -22,8 +22,8 @@ import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.messaging.RemoteMessage
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 import java.io.File
 import kotlin.compareTo
 import android.app.NotificationManager as AndroidNotificationManager

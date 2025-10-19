@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -19,8 +19,8 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderUninstallDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderUninstallDialogBinding
 import com.nlbn.ads.util.AppOpenManager
 
 class DefaultReaderUninstallDialog : DialogFragment() {

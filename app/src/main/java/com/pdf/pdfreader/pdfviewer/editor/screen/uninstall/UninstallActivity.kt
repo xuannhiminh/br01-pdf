@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.uninstall
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.uninstall
 
 //import com.google.android.gms.ads.ez.EzAdControl
 //import com.google.android.gms.ads.ez.listenner.ShowAdCallback
@@ -28,11 +28,11 @@ import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
 import com.nlbn.ads.util.ConsentHelper
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityUninstallBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityUninstallBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 import org.koin.android.ext.android.inject
 
 class UninstallActivity : PdfBaseActivity<ActivityUninstallBinding>() {

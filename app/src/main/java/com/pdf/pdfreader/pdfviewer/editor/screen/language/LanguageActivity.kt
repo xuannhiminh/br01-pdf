@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.language
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.language
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewTreeObserver
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityLanguageBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityLanguageBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
 import com.ezteam.baseproject.activity.BaseActivity
 import com.ezteam.baseproject.animation.AnimationUtils
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
@@ -24,16 +24,16 @@ import com.ezteam.baseproject.utils.TemporaryStorage
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.firebase.analytics.FirebaseAnalytics
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.IntroActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.IntroActivity
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
 import com.pdf.pdfreader.pdfviewer.editor.screen.language.Language2Adapter
 import com.pdf.pdfreader.pdfviewer.editor.screen.language.LanguageAdapter
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
 import kotlin.collections.get
 import kotlin.text.toInt
 

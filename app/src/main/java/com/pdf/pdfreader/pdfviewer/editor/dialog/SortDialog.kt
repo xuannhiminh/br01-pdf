@@ -1,8 +1,8 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.app.Dialog
 import android.content.DialogInterface
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -19,8 +19,8 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderSortDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderSortDialogBinding
 
 class SortDialog : DialogFragment() {
     override fun getTheme(): Int {

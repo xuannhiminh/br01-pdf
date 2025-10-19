@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.func
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.func
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetDetailsFuncBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetDetailsFuncBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 import com.ezteam.baseproject.listener.EzItemListener
 import com.ezteam.baseproject.utils.DateUtils
 import com.ezteam.baseproject.utils.PreferencesUtils

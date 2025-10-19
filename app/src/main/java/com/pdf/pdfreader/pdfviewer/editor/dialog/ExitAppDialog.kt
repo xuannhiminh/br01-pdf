@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -19,8 +19,8 @@ import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ExitAppDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ExitAppDialogBinding
 
 class ExitAppDialog : DialogFragment() {
     override fun getTheme(): Int {

@@ -1,10 +1,10 @@
-package pdf.documents.pdfreader.pdfviewer.editor.receiver
+package free.pdf.documents.pdfreader.pdfviewer.editor.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
 
 class UnlockReceiver : BroadcastReceiver() {
 

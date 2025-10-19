@@ -1,9 +1,9 @@
-package pdf.documents.pdfreader.pdfviewer.editor.database.repository
+package free.pdf.documents.pdfreader.pdfviewer.editor.database.repository
 
 import androidx.lifecycle.LiveData
-import pdf.documents.pdfreader.pdfviewer.editor.common.SortState
-import pdf.documents.pdfreader.pdfviewer.editor.database.AppDatabase
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.SortState
+import free.pdf.documents.pdfreader.pdfviewer.editor.database.AppDatabase
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 
 class FileModelRepositoryImpl(
     private var appDatabase: AppDatabase

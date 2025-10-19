@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
 
 class FeatureAdapter(private val items: List<FeatureItem>) : RecyclerView.Adapter<FeatureAdapter.FeatureViewHolder>() {
 

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.language;
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.language;
 
 import android.content.Context;
 import android.content.SharedPreferences;

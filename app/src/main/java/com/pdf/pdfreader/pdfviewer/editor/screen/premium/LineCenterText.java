@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.premium;
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.premium;
 
 import android.content.Context;
 import android.graphics.Canvas;

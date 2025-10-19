@@ -1,12 +1,12 @@
-package pdf.documents.pdfreader.pdfviewer.editor.adapter
+package free.pdf.documents.pdfreader.pdfviewer.editor.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemPdfFileBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemPdfFileBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 import com.ezteam.baseproject.adapter.BaseRecyclerAdapter
 import com.ezteam.baseproject.listener.EzItemListener
 import com.ezteam.baseproject.utils.DateUtils
@@ -15,7 +15,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
 import java.util.Locale
 
 class FileItemAdapter(

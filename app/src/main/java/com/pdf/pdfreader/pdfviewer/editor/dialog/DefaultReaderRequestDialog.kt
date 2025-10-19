@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -17,9 +17,9 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderRequestDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderRequestDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 
 class DefaultReaderRequestDialog : DialogFragment() {

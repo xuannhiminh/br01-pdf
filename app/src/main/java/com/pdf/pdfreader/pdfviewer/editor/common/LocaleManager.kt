@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.common
+package free.pdf.documents.pdfreader.pdfviewer.editor.common
 
 import android.annotation.SuppressLint
 import android.content.Context

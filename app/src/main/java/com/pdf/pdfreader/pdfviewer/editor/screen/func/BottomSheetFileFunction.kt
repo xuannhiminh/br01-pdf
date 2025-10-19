@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.func
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.func
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -14,11 +14,11 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
-import pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.SelectFileDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.SelectFileDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 import com.ezteam.baseproject.listener.EzItemListener
 import com.ezteam.baseproject.utils.DateUtils
 import com.ezteam.baseproject.utils.IAPUtils

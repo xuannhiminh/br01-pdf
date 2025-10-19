@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.view
+package free.pdf.documents.pdfreader.pdfviewer.editor.view
 
 import android.content.Context
 import android.graphics.Color
@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StyleableRes
 import androidx.constraintlayout.widget.ConstraintLayout
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemFuncBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemFuncBinding
 
 class ItemFunctionView @JvmOverloads constructor(
     context: Context,

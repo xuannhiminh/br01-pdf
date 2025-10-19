@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile
 
 import android.content.Intent
 import android.graphics.Color
@@ -16,11 +16,11 @@ import com.ezteam.baseproject.utils.PreferencesUtils
 import com.ezteam.baseproject.utils.SystemUtils
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityFeatureRequestBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FeedbackData
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.featurerequest.FeatureRequestSuccessDialog
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityFeatureRequestBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FeedbackData
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.featurerequest.FeatureRequestSuccessDialog
 
 class FeatureRequestActivity : PdfBaseActivity<ActivityFeatureRequestBinding>() {
 

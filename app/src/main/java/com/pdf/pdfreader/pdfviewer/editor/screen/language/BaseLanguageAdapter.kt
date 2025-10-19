@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.language
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.language
 
 interface BaseLanguageAdapter {
     fun filter(query: String)

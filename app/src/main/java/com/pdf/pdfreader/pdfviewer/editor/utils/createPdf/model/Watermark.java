@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.utils.createPdf.model;
+package free.pdf.documents.pdfreader.pdfviewer.editor.utils.createPdf.model;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;

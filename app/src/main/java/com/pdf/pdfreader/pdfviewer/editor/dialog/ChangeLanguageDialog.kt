@@ -1,10 +1,10 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.content.Context
 import android.view.LayoutInflater
-import pdf.documents.pdfreader.pdfviewer.editor.adapter.LanguageItemAdapter
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DialogChangeLanguageBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.LanguageModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.adapter.LanguageItemAdapter
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DialogChangeLanguageBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.LanguageModel
 import com.ezteam.baseproject.dialog.BaseDialog
 import com.ezteam.baseproject.dialog.BuilderDialog
 

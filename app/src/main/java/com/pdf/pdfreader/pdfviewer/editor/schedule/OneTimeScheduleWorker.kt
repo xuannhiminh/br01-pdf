@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.schedule
+package free.pdf.documents.pdfreader.pdfviewer.editor.schedule
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -14,8 +14,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 import kotlin.random.Random
 
 class OneTimeScheduleWorker(

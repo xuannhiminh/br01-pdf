@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.create
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.create
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,8 +14,8 @@ import com.ezteam.baseproject.utils.TemporaryStorage
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetCreatePdfBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetCreatePdfBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob

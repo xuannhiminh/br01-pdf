@@ -1,11 +1,11 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.setting
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.setting
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.FeedbackSucessDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.FeedbackSucessDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
 
 class FeedBackSucessDialog : DialogFragment() {
     private var _binding: FeedbackSucessDialogBinding? = null

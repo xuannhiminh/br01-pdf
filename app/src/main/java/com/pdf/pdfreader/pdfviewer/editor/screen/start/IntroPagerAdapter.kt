@@ -1,10 +1,10 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.start
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.start
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemIntroPageBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemIntroPageBinding
 
 // Data class chứa dữ liệu cho từng trang
 data class IntroPage(

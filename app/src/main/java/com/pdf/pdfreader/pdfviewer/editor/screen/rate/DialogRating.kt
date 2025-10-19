@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.rate
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.rate
 
 import android.content.Context
 import android.os.Handler
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import com.daimajia.androidanimations.library.Techniques
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DialogRateAppBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DialogRateAppBinding
 import com.ezteam.baseproject.dialog.BaseDialog
 import com.ezteam.baseproject.dialog.BuilderDialog
 import com.ezteam.baseproject.listener.EzItemListener

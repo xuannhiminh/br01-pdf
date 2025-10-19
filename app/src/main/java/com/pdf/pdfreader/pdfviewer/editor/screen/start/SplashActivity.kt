@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.start
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.start
 
 
 import android.Manifest
@@ -33,18 +33,18 @@ import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
 import com.nlbn.ads.util.ConsentHelper
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivitySplashBinding
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationDecider
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
-import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
-import pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
-import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivitySplashBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationDecider
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import kotlinx.coroutines.Dispatchers
@@ -55,7 +55,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.android.ext.android.inject
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import kotlin.coroutines.resume
 
 @SuppressLint("CustomSplashScreen")

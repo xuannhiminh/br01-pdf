@@ -1,11 +1,11 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DialogAlertBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DialogAlertBinding
 import com.ezteam.baseproject.dialog.BaseDialog
 import com.ezteam.baseproject.dialog.BuilderDialog
 

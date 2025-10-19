@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.analytics.FirebaseAnalytics
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.SatisfactionDialogBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.search.FeedBackActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.setting.RateUsDialog
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.SatisfactionDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.search.FeedBackActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.setting.RateUsDialog
 
 class SatisfactionDialog : DialogFragment() {
     override fun getTheme(): Int {

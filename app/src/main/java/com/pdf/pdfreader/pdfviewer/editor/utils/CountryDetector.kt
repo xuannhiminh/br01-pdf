@@ -3,7 +3,7 @@ package com.pdf.pdfreader.pdfviewer.editor.utils
 import android.content.Context
 import android.telephony.TelephonyManager
 import android.util.Log
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*

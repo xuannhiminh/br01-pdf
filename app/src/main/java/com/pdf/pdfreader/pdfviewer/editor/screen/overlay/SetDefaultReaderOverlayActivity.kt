@@ -1,8 +1,8 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.overlay;
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.overlay;
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderUninstallInstructDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.DefaultReaderUninstallInstructDialogBinding
 
 class SetDefaultReaderOverlayActivity : AppCompatActivity() {
 

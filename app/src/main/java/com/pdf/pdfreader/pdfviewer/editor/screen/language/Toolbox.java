@@ -1,10 +1,10 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.language;
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.language;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
-import pdf.documents.pdfreader.pdfviewer.editor.R;
+import free.pdf.documents.pdfreader.pdfviewer.editor.R;
 
 import java.util.Locale;
 

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.common
+package free.pdf.documents.pdfreader.pdfviewer.editor.common
 
 enum class SortState(var value: Int) {
     NAME(1),

@@ -20,7 +20,7 @@ android {
 //    compileSdkVersion 33
     compileSdkVersion 35
     defaultConfig {
-        applicationId "pdf.documents.pdfreader.pdfviewer.editor"
+        applicationId "free.pdf.documents.pdfreader.pdfviewer.editor"
         minSdkVersion 28
         targetSdkVersion 35
         versionCode 103
@@ -85,7 +85,7 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
-    namespace 'pdf.documents.pdfreader.pdfviewer.editor'
+    namespace 'free.pdf.documents.pdfreader.pdfviewer.editor'
 
     // This disables creating test APKs
 //    testVariants.all { it.enabled = false }

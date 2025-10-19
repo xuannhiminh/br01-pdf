@@ -1,12 +1,12 @@
-package pdf.documents.pdfreader.pdfviewer.editor.model
+package free.pdf.documents.pdfreader.pdfviewer.editor.model
 
 import android.os.Build
 import androidx.annotation.Keep
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PreferencesUtils
-import pdf.documents.pdfreader.pdfviewer.editor.BuildConfig
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
+import free.pdf.documents.pdfreader.pdfviewer.editor.BuildConfig
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import java.util.Locale
 
 @Keep

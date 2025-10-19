@@ -1,7 +1,7 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.language;
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.language;
 
 
-import pdf.documents.pdfreader.pdfviewer.editor.R;
+import free.pdf.documents.pdfreader.pdfviewer.editor.R;
 
 public class Config {
     public static final ItemSelected[] itemsLanguage = {

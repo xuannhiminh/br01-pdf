@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile
 
 
 import android.animation.ValueAnimator
@@ -19,9 +19,9 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.nlbn.ads.callback.AdCallback
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityReloadingBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityReloadingBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay

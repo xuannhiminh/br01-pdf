@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.search
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.search
 
 import android.content.Intent
 import android.os.Build
@@ -13,15 +13,15 @@ import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PDFConstants.Companion.ADS_ITEM_INDEX
 import com.ezteam.baseproject.utils.SystemUtils
 import com.ezteam.baseproject.utils.TemporaryStorage
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
-import pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
-import pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityCheckFileBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.func.BottomSheetFileFunction
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityCheckFileBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.func.BottomSheetFileFunction
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback

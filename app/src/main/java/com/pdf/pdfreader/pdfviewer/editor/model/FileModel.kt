@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.model
+package free.pdf.documents.pdfreader.pdfviewer.editor.model
 
 import android.util.Log
 import androidx.annotation.Keep

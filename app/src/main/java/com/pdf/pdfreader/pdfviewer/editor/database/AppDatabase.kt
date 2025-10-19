@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.database
+package free.pdf.documents.pdfreader.pdfviewer.editor.database
 
 import android.content.Context
 import androidx.room.Database
@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 
 @Database(entities = [FileModel::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

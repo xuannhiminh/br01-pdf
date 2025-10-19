@@ -1,11 +1,11 @@
-package pdf.documents.pdfreader.pdfviewer.editor.adapter
+package free.pdf.documents.pdfreader.pdfviewer.editor.adapter
 
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import pdf.documents.pdfreader.pdfviewer.editor.common.LocaleManager
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguageBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.LanguageModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.LocaleManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguageBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.LanguageModel
 import com.ezteam.baseproject.adapter.BaseRecyclerAdapter
 
 class LanguageItemAdapter(

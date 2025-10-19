@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.dialog
+package free.pdf.documents.pdfreader.pdfviewer.editor.dialog
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -15,7 +15,7 @@ import android.widget.ImageView
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.GuideSpotlightBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.GuideSpotlightBinding
 
 class ReloadFileGuideDialog(
     context: Context,

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.search
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.search
 
 //import com.google.android.gms.ads.ez.EzAdControl
 import android.content.Intent
@@ -15,16 +15,16 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
-import pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
-import pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivitySearchFileBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.func.BottomSheetFileFunction
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivitySearchFileBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.func.BottomSheetFileFunction
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 import kotlinx.coroutines.launch
 import org.apache.commons.io.FilenameUtils
 import org.koin.android.ext.android.inject

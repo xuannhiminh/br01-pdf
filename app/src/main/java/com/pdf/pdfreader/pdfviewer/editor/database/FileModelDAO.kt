@@ -1,8 +1,8 @@
-package pdf.documents.pdfreader.pdfviewer.editor.database
+package free.pdf.documents.pdfreader.pdfviewer.editor.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 
 @Dao
 interface FileModelDAO {

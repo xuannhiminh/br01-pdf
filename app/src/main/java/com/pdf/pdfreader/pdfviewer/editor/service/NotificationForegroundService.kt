@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.service
+package free.pdf.documents.pdfreader.pdfviewer.editor.service
 
 import android.annotation.SuppressLint
 import android.app.ForegroundServiceStartNotAllowedException
@@ -24,15 +24,15 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.InstallStatus
-import pdf.documents.pdfreader.pdfviewer.editor.notification.FileObserverWrapper
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
-import pdf.documents.pdfreader.pdfviewer.editor.receiver.HomeButtonReceiver
-import pdf.documents.pdfreader.pdfviewer.editor.receiver.UnlockReceiver
-import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.FileObserverWrapper
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.receiver.HomeButtonReceiver
+import free.pdf.documents.pdfreader.pdfviewer.editor.receiver.UnlockReceiver
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_DESCRIPTION_FOREGROUND
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_ID_FOREGROUND
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_NAME_SERVICE
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_DESCRIPTION_FOREGROUND
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_ID_FOREGROUND
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.CHANNEL_NAME_SERVICE
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 
 class NotificationForegroundService: Service() {

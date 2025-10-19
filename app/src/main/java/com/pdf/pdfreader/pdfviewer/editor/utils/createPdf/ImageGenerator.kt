@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.utils.createPdf
+package free.pdf.documents.pdfreader.pdfviewer.editor.utils.createPdf
 
 import android.content.Context
 import android.graphics.Bitmap

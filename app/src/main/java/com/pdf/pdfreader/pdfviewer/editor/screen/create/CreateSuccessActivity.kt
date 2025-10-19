@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.create
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.create
 
 import android.content.Intent
 import android.net.Uri
@@ -9,11 +9,11 @@ import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityCreateSuccessBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityCreateSuccessBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
 import com.ezteam.baseproject.extensions.autoRotate
 import com.ezteam.baseproject.extensions.resizeBitmapByCanvas
 import com.ezteam.baseproject.utils.IAPUtils

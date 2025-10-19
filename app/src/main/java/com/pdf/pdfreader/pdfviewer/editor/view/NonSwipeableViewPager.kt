@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.view
+package free.pdf.documents.pdfreader.pdfviewer.editor.view
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.guide
+package free.pdf.documents.pdfreader.pdfviewer.editor.guide
 
 import android.content.Context
 import android.graphics.Canvas

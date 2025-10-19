@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.search
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.search
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,11 +17,11 @@ import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.ezteam.baseproject.utils.SystemUtils
 import com.google.firebase.firestore.FirebaseFirestore
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityFeedbackBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FeedbackData
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.setting.FeedBackSucessDialog
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityFeedbackBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FeedbackData
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.setting.FeedBackSucessDialog
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 
 class FeedBackActivity : PdfBaseActivity<ActivityFeedbackBinding>() {

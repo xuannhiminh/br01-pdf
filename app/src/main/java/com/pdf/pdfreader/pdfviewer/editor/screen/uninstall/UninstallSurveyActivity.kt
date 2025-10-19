@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.uninstall
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.uninstall
 
 //import com.google.android.gms.ads.ez.EzAdControl
 //import com.google.android.gms.ads.ez.listenner.ShowAdCallback
@@ -18,17 +18,17 @@ import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityUninstallReasonBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityUninstallReasonBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.TemporaryStorage
 import com.google.firebase.firestore.FirebaseFirestore
-import pdf.documents.pdfreader.pdfviewer.editor.model.FeedbackData
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FeedbackData
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 
 class UninstallSurveyActivity : PdfBaseActivity<ActivityUninstallReasonBinding>() {

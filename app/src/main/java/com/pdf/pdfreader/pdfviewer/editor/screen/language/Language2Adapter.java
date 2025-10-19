@@ -15,12 +15,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguage2Binding;
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguageChildBinding;
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguageGroupBinding;
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.BaseLanguageAdapter;
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.ItemSelected;
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.Toolbox;
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguage2Binding;
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguageChildBinding;
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ItemLanguageGroupBinding;
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.BaseLanguageAdapter;
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.ItemSelected;
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.Toolbox;
 
 public class Language2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         implements BaseLanguageAdapter {

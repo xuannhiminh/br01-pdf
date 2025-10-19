@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.main
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.main
 
 import android.Manifest
 import android.app.Application
@@ -16,13 +16,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import pdf.documents.pdfreader.pdfviewer.editor.common.LoadingState
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.common.SortState
-import pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepository
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
-import pdf.documents.pdfreader.pdfviewer.editor.utils.FileUtils
-import pdf.documents.pdfreader.pdfviewer.editor.utils.RenameStatus
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.LoadingState
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.SortState
+import free.pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepository
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.FileUtils
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.RenameStatus
 import com.ezteam.baseproject.EzListener
 import com.ezteam.baseproject.utils.DateUtils
 import com.ezteam.baseproject.utils.PathUtils
@@ -30,10 +30,10 @@ import com.ezteam.baseproject.utils.PreferencesUtils
 import com.ezteam.baseproject.utils.TemporaryStorage
 import com.ezteam.baseproject.utils.permisson.PermissionUtils
 import com.ezteam.baseproject.viewmodel.BaseViewModel
-import pdf.documents.pdfreader.pdfviewer.editor.common.BottomTab
-import pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.CurrentStatusAdsFiles
-import pdf.documents.pdfreader.pdfviewer.editor.utils.FileSaveManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.BottomTab
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FileTab
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.CurrentStatusAdsFiles
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.FileSaveManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

@@ -1,8 +1,8 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.base
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.base
 
 import android.net.Uri
 import com.google.android.gms.ads.nativead.NativeAd
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 
 interface IControl {
     fun shareFile(fileModel: FileModel)

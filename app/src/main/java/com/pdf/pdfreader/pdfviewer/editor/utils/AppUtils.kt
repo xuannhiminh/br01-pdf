@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.utils
+package free.pdf.documents.pdfreader.pdfviewer.editor.utils
 
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName

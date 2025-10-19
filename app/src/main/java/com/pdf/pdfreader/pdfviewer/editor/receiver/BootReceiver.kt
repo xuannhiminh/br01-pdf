@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.receiver
+package free.pdf.documents.pdfreader.pdfviewer.editor.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,8 +6,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.ezteam.baseproject.utils.PreferencesUtils
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
 
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

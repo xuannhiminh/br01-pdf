@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.iap
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -28,14 +28,14 @@ import com.nlbn.ads.callback.AdCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.PolicyActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.TermAndConditionsActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
-import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.PolicyActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.TermAndConditionsActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import setSelectedCard
 import java.util.Locale
 

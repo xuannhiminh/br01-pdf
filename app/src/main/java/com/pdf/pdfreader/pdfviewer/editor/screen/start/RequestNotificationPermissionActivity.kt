@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.start
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.start
 
 //import com.google.android.gms.ads.ez.EzAdControl
 //import com.google.android.gms.ads.ez.listenner.ShowAdCallback
@@ -23,13 +23,13 @@ import androidx.fragment.app.FragmentActivity
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.nlbn.ads.util.AppOpenManager
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityNotificationBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
-import pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.PresKey
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityNotificationBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
 import org.koin.android.ext.android.inject
 
 class RequestNotificationPermissionActivity : PdfBaseActivity<ActivityNotificationBinding>() {

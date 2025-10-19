@@ -7,8 +7,8 @@ import com.ezteam.baseproject.utils.IAPUtils
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pdf.documents.pdfreader.pdfviewer.editor.BuildConfig
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
+import free.pdf.documents.pdfreader.pdfviewer.editor.BuildConfig
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 
 import java.time.Instant
 import java.time.ZoneId

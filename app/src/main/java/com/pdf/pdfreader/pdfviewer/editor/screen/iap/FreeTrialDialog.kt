@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.iap
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -18,8 +18,8 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.FreeTrialDialogBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.FreeTrialDialogBinding
 
 class FreeTrialDialog : DialogFragment() {
     private var _binding: FreeTrialDialogBinding? = null

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.utils;
+package free.pdf.documents.pdfreader.pdfviewer.editor.utils;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel;
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel;
 import com.ezteam.baseproject.EzListener;
 import com.ezteam.baseproject.listener.EzItemListener;
 import com.ezteam.baseproject.utils.permisson.PermissionUtils;

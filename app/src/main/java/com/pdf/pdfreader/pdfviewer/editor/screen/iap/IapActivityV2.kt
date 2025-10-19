@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.iap
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap
 
 import android.content.Intent
 import android.os.Bundle
@@ -28,13 +28,13 @@ import com.nlbn.ads.callback.AdCallback
 import com.nlbn.ads.util.Admob
 import com.nlbn.ads.util.AppOpenManager
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapV3Binding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
-import pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapV3Binding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.RequestAllFilePermissionActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.utils.AppUtils
 import java.util.Locale
 
 

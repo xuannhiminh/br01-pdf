@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor
+package free.pdf.documents.pdfreader.pdfviewer.editor
 
 //import com.google.android.gms.ads.ez.EzApplication
 //import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
@@ -42,12 +42,12 @@ import kotlinx.coroutines.launch
 import office.file.ui.MyLibApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import pdf.documents.pdfreader.pdfviewer.editor.common.LocaleManager
-import pdf.documents.pdfreader.pdfviewer.editor.di.appModule
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
-import pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.LocaleManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.di.appModule
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 
 
 class PdfApplication: MyLibApplication(), DefaultLifecycleObserver {
@@ -149,11 +149,11 @@ class PdfApplication: MyLibApplication(), DefaultLifecycleObserver {
 
     private fun initLanguage() {
         if (TextUtils.isEmpty(PreferencesHelper.getString(PreferencesHelper.KEY_LANGUAGE))) {
-            pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.getInstance(this).prefLanguage =
-                pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.LANGUAGE_DEFAULT
+            free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.getInstance(this).prefLanguage =
+                free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.LANGUAGE_DEFAULT
             val currentLanguage = resources.configuration.locales.get(0).language
-            for (i in pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.lstCodeLanguage.indices) {
-                if (currentLanguage == pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.lstCodeLanguage[i]) {
+            for (i in free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.lstCodeLanguage.indices) {
+                if (currentLanguage == free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LocaleManager.lstCodeLanguage[i]) {
                     PreferencesHelper.putString(PreferencesHelper.KEY_LANGUAGE, currentLanguage)
                     delegate.setDefaultLanguage(this, resources.configuration.locales.get(0))
                     return

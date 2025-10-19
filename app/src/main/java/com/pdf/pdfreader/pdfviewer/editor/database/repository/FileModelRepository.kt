@@ -1,8 +1,8 @@
-package pdf.documents.pdfreader.pdfviewer.editor.database.repository
+package free.pdf.documents.pdfreader.pdfviewer.editor.database.repository
 
 import androidx.lifecycle.LiveData
-import pdf.documents.pdfreader.pdfviewer.editor.common.SortState
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.SortState
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 
 interface FileModelRepository {
     suspend fun insert(fileModel: FileModel)

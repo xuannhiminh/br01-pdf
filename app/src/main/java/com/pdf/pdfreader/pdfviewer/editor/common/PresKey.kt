@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.common
+package free.pdf.documents.pdfreader.pdfviewer.editor.common
 
 object PresKey {
     const val TIME_ENTER_APP = "time_enter_app"

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile
 
 //import com.google.android.gms.ads.ez.EzAdControl
 //import com.google.android.gms.ads.ez.listenner.ShowAdCallback
@@ -19,14 +19,14 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.nlbn.ads.callback.NativeCallback
 import com.nlbn.ads.util.Admob
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityReloadFileBinding
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.WIDGETS_NOTIFICATION_ID
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
-import pdf.documents.pdfreader.pdfviewer.editor.widgets.setClickAction
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityReloadFileBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager.Companion.WIDGETS_NOTIFICATION_ID
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.widgets.setClickAction
 import nl.dionsegijn.konfetti.core.Party
 import nl.dionsegijn.konfetti.core.Position
 import nl.dionsegijn.konfetti.xml.KonfettiView

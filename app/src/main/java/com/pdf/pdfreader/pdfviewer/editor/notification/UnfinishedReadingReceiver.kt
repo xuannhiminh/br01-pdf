@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.notification
+package free.pdf.documents.pdfreader.pdfviewer.editor.notification
 
 import android.content.BroadcastReceiver
 import android.content.Context

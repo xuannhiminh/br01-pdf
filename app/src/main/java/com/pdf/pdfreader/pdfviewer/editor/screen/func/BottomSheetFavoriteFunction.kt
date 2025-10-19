@@ -1,11 +1,11 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.func
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.func
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetFavoriteFuncBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.FunctionState
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.BottomSheetFavoriteFuncBinding
 import com.ezteam.baseproject.listener.EzItemListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

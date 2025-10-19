@@ -1,8 +1,8 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.base
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.base
 
 import android.net.Uri
 import androidx.viewbinding.ViewBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
 import com.ezteam.baseproject.fragment.BaseFragment
 
 abstract class PdfBaseFragment<B: ViewBinding> : BaseFragment<B>(), IControl {

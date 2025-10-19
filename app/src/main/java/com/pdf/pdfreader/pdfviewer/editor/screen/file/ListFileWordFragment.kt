@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.file
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.file
 
 import android.content.Intent
 import android.os.Handler
@@ -15,17 +15,17 @@ import androidx.lifecycle.lifecycleScope
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PDFConstants.Companion.ADS_ITEM_INDEX
 import com.google.android.gms.ads.nativead.NativeAd
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
-import pdf.documents.pdfreader.pdfviewer.editor.common.*
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.FragmentListFileBinding
-import pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.IAdsControl
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseFragment
-import pdf.documents.pdfreader.pdfviewer.editor.screen.func.BottomSheetFileFunction
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.adapter.FileItemAdapter
+import free.pdf.documents.pdfreader.pdfviewer.editor.common.*
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.FragmentListFileBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.model.FileModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.IAdsControl
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseFragment
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.func.BottomSheetFileFunction
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 //import com.google.android.gms.ads.ez.EzAdControl
 //import com.google.android.gms.ads.ez.listenner.NativeAdListener
 //import com.google.android.gms.ads.ez.listenner.ShowAdCallback

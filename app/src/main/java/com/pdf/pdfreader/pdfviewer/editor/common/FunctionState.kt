@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.common
+package free.pdf.documents.pdfreader.pdfviewer.editor.common
 
 enum class FunctionState {
     CONTINUOUS_PAGE, PAGE_BY_PAGE, NIGHT_MODE, GO_PAGE, FAVORITE, RENAME, PRINT, DELETE, BROWSE_FILE,

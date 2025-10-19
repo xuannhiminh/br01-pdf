@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.widgets
+package free.pdf.documents.pdfreader.pdfviewer.editor.widgets
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -8,9 +8,9 @@ import android.content.Intent
 import android.util.Log
 import android.widget.RemoteViews
 import com.ezteam.baseproject.utils.DateUtils
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepository
-import pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepository
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.start.SplashActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

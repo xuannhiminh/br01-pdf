@@ -1,12 +1,12 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen
 
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentActivity
-import pdf.documents.pdfreader.pdfviewer.editor.R
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityPolicyBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.R
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityPolicyBinding
 import com.ezteam.baseproject.activity.BaseActivity
 //import com.google.android.gms.ads.ez.EzAdControl
 import java.io.IOException

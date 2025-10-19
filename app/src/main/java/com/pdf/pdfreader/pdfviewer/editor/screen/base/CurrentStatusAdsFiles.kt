@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.base
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.base
 
 import com.google.android.gms.ads.nativead.NativeAd
 

@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.screen.iap
+package free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,10 @@ import androidx.fragment.app.FragmentActivity
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
 import com.ezteam.baseproject.utils.PreferencesUtils
 import com.ezteam.baseproject.utils.PresKey
-import pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapRegistrationSuccessfulBinding
-import pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.databinding.ActivityIapRegistrationSuccessfulBinding
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.base.PdfBaseActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.LanguageActivity
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainActivity
 
 
 class IapRegistrationSuccessfulActivity : PdfBaseActivity<ActivityIapRegistrationSuccessfulBinding>() {

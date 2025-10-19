@@ -1,9 +1,9 @@
-package pdf.documents.pdfreader.pdfviewer.editor.di
+package free.pdf.documents.pdfreader.pdfviewer.editor.di
 
-import pdf.documents.pdfreader.pdfviewer.editor.database.AppDatabase
-import pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepository
-import pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepositoryImpl
-import pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
+import free.pdf.documents.pdfreader.pdfviewer.editor.database.AppDatabase
+import free.pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepository
+import free.pdf.documents.pdfreader.pdfviewer.editor.database.repository.FileModelRepositoryImpl
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.main.MainViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

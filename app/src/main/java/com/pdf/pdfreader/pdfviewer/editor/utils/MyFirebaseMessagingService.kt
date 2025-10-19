@@ -1,4 +1,4 @@
-package pdf.documents.pdfreader.pdfviewer.editor.utils
+package free.pdf.documents.pdfreader.pdfviewer.editor.utils
 
 import android.content.Intent
 import android.util.Log
@@ -6,9 +6,9 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import pdf.documents.pdfreader.pdfviewer.editor.BuildConfig
-import pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
-import pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
+import free.pdf.documents.pdfreader.pdfviewer.editor.BuildConfig
+import free.pdf.documents.pdfreader.pdfviewer.editor.notification.NotificationManager
+import free.pdf.documents.pdfreader.pdfviewer.editor.service.NotificationForegroundService
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
