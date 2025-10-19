@@ -541,7 +541,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private fun navigateToNextScreen() {
 
-        if (FirebaseRemoteConfigUtil.getInstance().getTypeOfStartUp() == FirebaseRemoteConfigUtil.Companion.StartUpType.IAP_ADS_INTER_LANGUAGE.value) {
+        if (FirebaseRemoteConfigUtil.getInstance().getTypeOfStartUp() == FirebaseRemoteConfigUtil.Companion.StartUpType.ADS_OPEN_IAP_LANGUAGE.value) {
             if (!IAPUtils.isPremium() && BillingProcessor.isIabServiceAvailable(this)) {
                 intent.apply {
                     putExtra("${packageName}.isFromSplash", true)
