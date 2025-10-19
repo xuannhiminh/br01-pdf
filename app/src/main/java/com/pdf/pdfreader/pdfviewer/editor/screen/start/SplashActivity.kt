@@ -85,7 +85,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         // If you want to allow in some cases, put condition here
     }
 
-    private var typeOfStartup = 1;
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -370,7 +369,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun initData() {
-        typeOfStartup = FirebaseRemoteConfigUtil.getInstance().getTypeOfStartUp()
         // reset consent flag
         TemporaryStorage.isObtainConsent = false
         lifecycleScope.launch {
@@ -382,7 +380,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                  //   val loadInterAdDeferred   = async { loadInterstitialAd(ads_inter_id) }
                     val billingAndAdsDeferred = async {
                         initBillingAndAwait()
-                        when (typeOfStartup) {
+                        when (FirebaseRemoteConfigUtil.getInstance().getTypeOfStartUp()) {
                             FirebaseRemoteConfigUtil.Companion.StartUpType.ADS_OPEN_IAP_LANGUAGE.value -> {
                                 loadAppOpenAds()
                             }
@@ -407,7 +405,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                     Log.i("SplashActivity", "Splash flow completed in ${System.currentTimeMillis() - startTime} ms")
                     //showAdsInterstitial(interstitialAd)
-                    when (typeOfStartup) {
+                    when (FirebaseRemoteConfigUtil.getInstance().getTypeOfStartUp()) {
                         FirebaseRemoteConfigUtil.Companion.StartUpType.ADS_OPEN_IAP_LANGUAGE.value -> {
                             showAdsOpenAndPreLoadNativeAds()
                         }
@@ -543,7 +541,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private fun navigateToNextScreen() {
 
-        if (typeOfStartup == FirebaseRemoteConfigUtil.Companion.StartUpType.IAP_ADS_INTER_LANGUAGE.value) {
+        if (FirebaseRemoteConfigUtil.getInstance().getTypeOfStartUp() == FirebaseRemoteConfigUtil.Companion.StartUpType.IAP_ADS_INTER_LANGUAGE.value) {
             if (!IAPUtils.isPremium() && BillingProcessor.isIabServiceAvailable(this)) {
                 intent.apply {
                     putExtra("${packageName}.isFromSplash", true)
