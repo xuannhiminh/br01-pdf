@@ -196,35 +196,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/func_feature_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_setting_background"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="center_vertical">
-
-            <free.pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif"
-                android:textFontWeight="400"
-                app:fvTextColor="@color/text1"
-                app:fvTitle="@string/feature_request"
-                app:fvIcon="@drawable/icon_feature_request" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_setting_more"
-                android:clickable="false"
-                android:focusable="false"
-                android:duplicateParentState="true" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/func_browse_more_files"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -363,6 +334,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_setting_more"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/func_feature_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_setting_background"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center_vertical">
+
+            <free.pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textFontWeight="400"
+                app:fvTextColor="@color/text1"
+                app:fvTitle="@string/feature_request"
+                app:fvIcon="@drawable/icon_feature_request" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_setting_more"
+                android:clickable="false"
+                android:focusable="false"
+                android:duplicateParentState="true" />
         </LinearLayout>
 
         <LinearLayout
