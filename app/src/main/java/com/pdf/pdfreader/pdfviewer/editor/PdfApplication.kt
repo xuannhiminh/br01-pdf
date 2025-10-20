@@ -61,7 +61,7 @@ class PdfApplication: MyLibApplication(), DefaultLifecycleObserver {
         super<MyLibApplication>.onCreate()
         AppOpenManager.getInstance().disableAppResumeWithActivity(SplashActivity::class.java)
         AppOpenManager.getInstance().disableAppResumeWithActivity(IapActivity::class.java)
-        AppFlyer.getInstance().initAppFlyer(this, getString(R.string.app_flyer_id), true, false, true) // thay
+        //AppFlyer.getInstance().initAppFlyer(this, getString(R.string.app_flyer_id), true, false, true) // thay
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         PreferencesUtils.init(this)
         setupKoin()
