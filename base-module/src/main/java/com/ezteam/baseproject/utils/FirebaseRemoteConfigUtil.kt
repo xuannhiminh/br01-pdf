@@ -3,6 +3,7 @@ package com.ezteam.baseproject.utils
 import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import org.json.JSONObject
 
 class FirebaseRemoteConfigUtil private constructor() {
 
@@ -52,6 +53,29 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF = false
         private const val DEFAULT_IS_BIG_ADS = true
         private const val DEFAULT_NOTIFICATION_OUT_APP_INTERVAL_SECOND = 10
+        private const val DEFAULT_ADS_CONFIG = """
+        {
+            "open_splash": "ca-app-pub-3940256099942544/9257395921",
+            "native_language": "ca-app-pub-3940256099942544/2247696110",
+            "banner_navbar": "ca-app-pub-3940256099942544/9214589741",
+            "native_between_files_home": "ca-app-pub-3940256099942544/2247696110",
+            "inter_home": "ca-app-pub-3940256099942544/1033173712",
+            "native_filedetail": "ca-app-pub-3940256099942544/2247696110",
+            "inter_filedetail": "ca-app-pub-3940256099942544/1033173712",
+            "open_all": "ca-app-pub-3940256099942544/9257395921",
+            "native_between_files_selectfiles": "ca-app-pub-3940256099942544/2247696110",
+            "inter_createpdf": "ca-app-pub-3940256099942544/1033173712",
+            "native_bot_createpdf": "ca-app-pub-3940256099942544/2247696110",
+            "native_keep_user": "ca-app-pub-3940256099942544/2247696110",
+            "native_survey_user": "ca-app-pub-3940256099942544/2247696110",
+            "inter_reload_file": "ca-app-pub-3940256099942544/1033173712",
+            "native_reload_file_success": "ca-app-pub-3940256099942544/2247696110",
+            "inter_splash_uninstall": "ca-app-pub-3940256099942544/1033173712",
+            "inter_file_type": "ca-app-pub-3940256099942544/1033173712",
+            "native_exit_app": "ca-app-pub-3940256099942544/2247696110",
+            "native_bot_selectfiles": "ca-app-pub-3940256099942544/2247696110"
+        }
+        """
 
 
 
@@ -93,6 +117,7 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF = "allow_save_excel_to_pdf"
         private const val REMOTE_KEY_IS_BIG_ADS = "is_big_ads"
         private const val REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND = "notification_out_app_interval_second"
+        private const val REMOTE_KEY_ADS_CONFIG = "ads_config"
 
 
 
@@ -159,6 +184,7 @@ class FirebaseRemoteConfigUtil private constructor() {
                 REMOTE_KEY_SHOW_ADS_MAIN to DEFAULT_SHOW_ADS_MAIN,
                 REMOTE_KEY_IS_BIG_ADS to DEFAULT_IS_BIG_ADS,
                 REMOTE_KEY_ALLOW_SAVE_EXCEL_TO_PDF to DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF,
+                REMOTE_KEY_ADS_CONFIG to DEFAULT_ADS_CONFIG,
                 REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND to DEFAULT_NOTIFICATION_OUT_APP_INTERVAL_SECOND
 
             )
@@ -300,5 +326,14 @@ class FirebaseRemoteConfigUtil private constructor() {
     }
     fun getNotificationOutAppIntervalSecond(): Int {
         return firebaseRemoteConfig.getLong(REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND).toInt()
+    }
+    fun getAdsConfigJson(): JSONObject {
+        return try {
+            val jsonString = firebaseRemoteConfig.getString(REMOTE_KEY_ADS_CONFIG)
+            JSONObject(jsonString)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            JSONObject()
+        }
     }
 }
