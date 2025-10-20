@@ -124,6 +124,7 @@ import com.nlbn.ads.util.Helper
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import free.pdf.documents.pdfreader.pdfviewer.editor.dialog.ExitAppDialog
 import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
+import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.FeatureRequestActivity
 import free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.ReloadLoadingActivity
 
@@ -956,6 +957,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         if (IAPUtils.isPremium()) {
             IAPUtils.destroy()
         }
+        PreferencesHelper.putLong(PreferencesHelper.KEY_LAST_ENGAGE, System.currentTimeMillis())
     }
 
     override fun initData() {
@@ -1046,17 +1048,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         binding.toolbar.ivSearch.setOnClickListener {
             logEvent("main_search_press")
-            if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain()) {
-                if (isAllowShowAds()) {
-                    showAdsInterstitial(R.string.inter_home) {
-                        SearchFileActivity.start(this)
-                    }
-                } else {
-                    SearchFileActivity.start(this)
-                }
-            } else {
-                SearchFileActivity.start(this)
-            }
+            showAdsOr { SearchFileActivity.start(this) }
         }
 
         binding.toolbar.edtSearch.doOnTextChanged { text, _, _, _ ->
