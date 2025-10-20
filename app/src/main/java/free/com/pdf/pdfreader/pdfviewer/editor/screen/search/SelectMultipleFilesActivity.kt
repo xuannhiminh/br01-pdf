@@ -111,7 +111,7 @@ class SelectMultipleFilesActivity : PdfBaseActivity<ActivityCheckFileBinding>() 
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_bot_selectfiles),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_bot_selectfiles"),
                 callback
             )
         } else {
@@ -121,7 +121,7 @@ class SelectMultipleFilesActivity : PdfBaseActivity<ActivityCheckFileBinding>() 
     private fun loadNativeAdsMiddleFiles() {
         Admob.getInstance().loadNativeAd(
             applicationContext,
-            getString(R.string.native_between_files_selectfiles),
+            FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_between_files_selectfiles"),
             callback
         )
     }
@@ -170,7 +170,7 @@ class SelectMultipleFilesActivity : PdfBaseActivity<ActivityCheckFileBinding>() 
     }
     private fun showAdsOr(action: () -> Unit) {
         if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain()) {
-            showAdsInterstitial(R.string.inter_home) {
+            showAdsInterstitial(FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("inter_home")) {
                 action()
             }
         } else {

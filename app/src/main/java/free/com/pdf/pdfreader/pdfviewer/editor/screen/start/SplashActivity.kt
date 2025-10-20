@@ -266,7 +266,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                     AppOpenManager.getInstance().loadOpenAppAdSplash(
                         this@SplashActivity,
-                        getString(R.string.open_splash),
+                        FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("open_splash"),
                         100,
                         FirebaseRemoteConfigUtil.getInstance().getTimeoutLoadInterMillisecond(),
                         false,

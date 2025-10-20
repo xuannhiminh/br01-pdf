@@ -131,7 +131,7 @@ class PdfApplication: MyLibApplication(), DefaultLifecycleObserver {
     }
 
     override fun getResumeAdId(): String {
-        return getString(R.string.open_all)
+        return FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("open_all")
     }
 
 

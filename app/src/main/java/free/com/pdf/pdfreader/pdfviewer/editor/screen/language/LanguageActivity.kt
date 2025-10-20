@@ -337,7 +337,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_language),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_language"),
                 callback
             )
         }

@@ -33,7 +33,6 @@ import kotlin.coroutines.resume
 
 class ReloadLoadingActivity : BaseActivity<ActivityReloadingBinding>() {
     private val viewModel by inject<MainViewModel>()
-    private var adsId: String = ""
     companion object {
 
         const val TAG = "ReloadLoadingActivity"
@@ -51,9 +50,6 @@ class ReloadLoadingActivity : BaseActivity<ActivityReloadingBinding>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val adsJson = FirebaseRemoteConfigUtil.getInstance().getAdsConfigJson()
-        adsId = adsJson.optString("inter_reload_file", "")
-        Log.d(TAG, "Interstitial ID = $adsId")
         super.onCreate(savedInstanceState)
     }
 
@@ -121,7 +117,7 @@ class ReloadLoadingActivity : BaseActivity<ActivityReloadingBinding>() {
             val startTime = System.currentTimeMillis()
 
             val loadFileDeferred = async { migrateFileDataAndHandleIntentOpeningFile() }
-            val loadAdsDeferred = async { if(FirebaseRemoteConfigUtil.getInstance().isShowAdsReloadFileInter()) loadInterstitialAd(adsId) else null }
+            val loadAdsDeferred = async { if(FirebaseRemoteConfigUtil.getInstance().isShowAdsReloadFileInter()) loadInterstitialAd(FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("inter_reload_file")) else null }
             loadFileDeferred.await()
             val interAd = loadAdsDeferred.await()
 //            preloadLanguageNativeAd()

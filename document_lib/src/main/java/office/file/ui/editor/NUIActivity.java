@@ -15,6 +15,7 @@ import com.artifex.solib.ConfigOptions;
 import com.artifex.solib.k;
 import com.ezteam.baseproject.utils.IAPUtils;
 import com.ezteam.baseproject.utils.PreferencesUtils;
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil;
 import com.ezteam.baseproject.utils.PresKey;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
@@ -288,7 +289,7 @@ public class NUIActivity extends BaseActivity {
             // Load the native ad
             Admob.getInstance().loadNativeAd(
                     getApplicationContext(),
-                    getString(com.ezteam.baseproject.R.string.native_filedetail),
+                    FirebaseRemoteConfigUtil.Companion.getInstance().getAdsConfigValue("native_filedetail"),
                     callback
             );
         }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RemoteViews
 import androidx.fragment.app.FragmentActivity
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.SystemUtils
 import com.ezteam.baseproject.utils.TemporaryStorage
@@ -120,7 +121,7 @@ class ReloadFileSuccessActivity : PdfBaseActivity<ActivityReloadFileBinding>() {
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_reload_file_success),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_reload_file_success"),
                 callback
             )
         } else {
@@ -213,7 +214,7 @@ class ReloadFileSuccessActivity : PdfBaseActivity<ActivityReloadFileBinding>() {
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_reload_file_success),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_reload_file_success"),
                 callback
             )
         }

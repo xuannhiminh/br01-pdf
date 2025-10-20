@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil;
 import com.ezteam.baseproject.utils.IAPUtils;
 import com.ezteam.baseproject.utils.SystemUtils;
 import com.ezteam.ezpdflib.R;
@@ -104,7 +105,7 @@ public class ThumbnailActivity extends BasePdfViewerActivity {
 
             Admob.getInstance().loadNativeAd(
                     getApplicationContext(),
-                    getString(R.string.native_filedetail),
+                    FirebaseRemoteConfigUtil.Companion.getInstance().getAdsConfigValue("native_filedetail"),
                     callback
             );
         } else {

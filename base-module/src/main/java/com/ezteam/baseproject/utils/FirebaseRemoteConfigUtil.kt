@@ -53,7 +53,9 @@ class FirebaseRemoteConfigUtil private constructor() {
         private const val DEFAULT_ALLOW_SAVE_EXCEL_TO_PDF = false
         private const val DEFAULT_IS_BIG_ADS = true
         private const val DEFAULT_NOTIFICATION_OUT_APP_INTERVAL_SECOND = 10
-        private const val DEFAULT_ADS_CONFIG = """
+
+        private const val DEFAULT_ADS_CONFIG = "{}"
+        private const val DEFAULT_ADS_CONFIG1 = """
         {
             "open_splash": "ca-app-pub-3940256099942544/9257395921",
             "native_language": "ca-app-pub-3940256099942544/2247696110",
@@ -327,13 +329,13 @@ class FirebaseRemoteConfigUtil private constructor() {
     fun getNotificationOutAppIntervalSecond(): Int {
         return firebaseRemoteConfig.getLong(REMOTE_KEY_NOTIFICATION_OUT_APP_INTERVAL_SECOND).toInt()
     }
-    fun getAdsConfigJson(): JSONObject {
+    fun getAdsConfigValue(key: String): String {
         return try {
             val jsonString = firebaseRemoteConfig.getString(REMOTE_KEY_ADS_CONFIG)
-            JSONObject(jsonString)
+            val jsonObject = JSONObject(jsonString)
+            jsonObject.optString(key, "")
         } catch (e: Exception) {
-            e.printStackTrace()
-            JSONObject()
+            ""
         }
     }
 }

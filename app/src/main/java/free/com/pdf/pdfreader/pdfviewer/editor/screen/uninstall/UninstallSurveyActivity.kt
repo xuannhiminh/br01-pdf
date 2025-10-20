@@ -140,7 +140,7 @@ class UninstallSurveyActivity : PdfBaseActivity<ActivityUninstallReasonBinding>(
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_survey_user),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_survey_user"),
                 callback
             )
         } else {

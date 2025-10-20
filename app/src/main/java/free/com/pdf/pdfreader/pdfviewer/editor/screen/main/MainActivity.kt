@@ -279,7 +279,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
             val config = BannerPlugin.Config()
             config.defaultRefreshRateSec = 30
             config.defaultCBFetchIntervalSec = 30
-            config.defaultAdUnitId = getString(R.string.banner_navbar)
+            config.defaultAdUnitId = FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("banner_navbar")
             config.defaultBannerType = BannerPlugin.BannerType.Adaptive
             Admob.getInstance().loadBannerPlugin(
                 this,
@@ -313,7 +313,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_between_files_home),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_between_files_home"),
                 callback
             )
         } else {
@@ -1025,7 +1025,16 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
     }
     private fun showAdsOr(action: () -> Unit) {
         if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain() && isAllowShowAds()) {
-            showAdsInterstitial(R.string.inter_home) {
+            showAdsInterstitial(FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("inter_home")) {
+                action()
+            }
+        } else {
+            action()
+        }
+    }
+    private fun showAdsOrFileType(action: () -> Unit) {
+        if (FirebaseRemoteConfigUtil.getInstance().isShowAdsMain() && isAllowShowAds()) {
+            showAdsInterstitial(FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("inter_file_type")) {
                 action()
             }
         } else {
@@ -1140,7 +1149,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
                     else -> "main_file_tab_press"
                 }
                 logEvent(eventName)
-                showAdsOr {
+                showAdsOrFileType {
                     binding.viewPager.currentItem = index
                     handleUIBaseOnFileTab(textView)
                 }
@@ -1623,7 +1632,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         when (id) {
             R.id.navigation_home -> {
                 logEvent("main_home_bottom_tab_press")
-                showAdsOr {
+                showAdsOrFileType {
                     clearSearchField()
                     viewModel.updateBottomTab(BottomTab.HOME)
                     checkStoragePermissionToShowUI()
@@ -1650,7 +1659,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
             R.id.navigation_recent -> {
                 logEvent("main_recent_bottom_tab_press")
-                showAdsOr {
+                showAdsOrFileType {
                     clearSearchField()
                     viewModel.updateBottomTab(BottomTab.RECENT)
 
@@ -1668,7 +1677,7 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
             R.id.navigation_favorite -> {
                 logEvent("main_fav_bottom_tab_press")
-                showAdsOr {
+                showAdsOrFileType {
                     clearSearchField()
                     viewModel.updateBottomTab(BottomTab.FAVORITE)
 

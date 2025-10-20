@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -4737,7 +4738,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, OnTabCha
 
         Admob.getInstance().loadAndShowInter(
                 NUIDocView.this.activity(),
-                NUIDocView.this.activity().getString(R.string.inter_filedetail),
+                FirebaseRemoteConfigUtil.Companion.getInstance().getAdsConfigValue("inter_filedetail"),
                 100,
                 100,
                 interCallback

@@ -43,6 +43,7 @@ import com.ezstudio.pdftoolmodule.activity.ExtractActivity
 import com.ezstudio.pdftoolmodule.dialog.AddWatermarkDialog
 import com.ezteam.baseproject.extensions.uriToBitmap
 import com.ezteam.baseproject.photopicker.PickImageActivity
+import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 import com.ezteam.baseproject.utils.IAPUtils
 import com.ezteam.baseproject.utils.PresKey
 import com.ezteam.baseproject.utils.SystemUtils
@@ -222,7 +223,7 @@ open class PdfDetailActivity : BasePdfViewerActivity(), MyRecyclerView.TouchList
 
             Admob.getInstance().loadNativeAd(
                 applicationContext,
-                getString(R.string.native_filedetail),
+                FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("native_filedetail"),
                 callback
             )
         } else {
@@ -1601,7 +1602,7 @@ open class PdfDetailActivity : BasePdfViewerActivity(), MyRecyclerView.TouchList
         Admob.getInstance().setOpenActivityAfterShowInterAds(false)
         Admob.getInstance().loadAndShowInter(
             this,
-            getString(R.string.inter_filedetail),
+            FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("inter_filedetail"),
             100, 8000, interCallback
         )
     }
