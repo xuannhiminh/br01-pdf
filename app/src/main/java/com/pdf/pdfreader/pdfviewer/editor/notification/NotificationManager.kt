@@ -608,6 +608,10 @@ class NotificationManager(private val context: Context) {
             return
         }
 
+        if (IAPUtils.isPremium()) {
+            Log.d(TAG,"Notification out app not shown premium" )
+            return
+        }
         val openAppIntent = Intent(context, SplashActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("${context.packageName}.notificationID", CALL_USE_APP_NOTIFICATION_OUT_ID)
