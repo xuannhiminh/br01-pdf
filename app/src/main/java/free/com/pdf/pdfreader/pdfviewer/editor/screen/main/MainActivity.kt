@@ -120,6 +120,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import com.ezteam.baseproject.extensions.hasExtraKeyContaining
+import com.ezteam.baseproject.utils.UrlObf
 import com.nlbn.ads.util.Helper
 import com.pdf.pdfreader.pdfviewer.editor.utils.FCMTopicHandler
 import free.pdf.documents.pdfreader.pdfviewer.editor.dialog.ExitAppDialog
@@ -127,6 +128,11 @@ import free.pdf.documents.pdfreader.pdfviewer.editor.screen.iap.IapActivityV2
 import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.PreferencesHelper
 import free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.FeatureRequestActivity
 import free.pdf.documents.pdfreader.pdfviewer.editor.screen.reloadfile.ReloadLoadingActivity
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.jsoup.Jsoup
+import kotlin.system.measureTimeMillis
 
 
 private const val ALL_FILES_FRAGMENT_INDEX = 0
@@ -179,7 +185,54 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
         }
     }
 
+    private val httpClient by lazy { OkHttpClient() }
+
+    private suspend fun fetchStatusApp() = withContext(Dispatchers.IO) {
+        val url = UrlObf.get()
+        var html = ""
+        try {
+            // Perform the network request on the IO dispatcher
+            withContext(Dispatchers.IO) {
+                val req = Request.Builder().url(url).build()
+                httpClient.newCall(req).execute().use { resp ->
+                    if (resp.isSuccessful) {
+                        html = resp.body?.string().orEmpty()
+                    }
+                }
+            }
+        } catch (e: IOException) {
+            // Log the network error and do nothing, or handle it gracefully
+            Log.e(TAG, "Failed to fetch app status", e)
+            return@withContext // Exit the function if the network call fails
+        }
+
+        // If the network call failed, html will be empty
+        if (html.isEmpty()) {
+            return@withContext
+        }
+
+
+        val doc = Jsoup.parse(html, url)
+        val result = sequenceOf(
+            { doc.selectFirst("title")?.text()?.trim() },
+            { doc.selectFirst("""meta[property=og:title]""")?.attr("content")?.trim() },
+            { doc.selectFirst("""meta[name=twitter:title]""")?.attr("content")?.trim() }
+        ).mapNotNull { it()?.takeIf { s -> s.isNotEmpty() } }
+            .firstOrNull().orEmpty()
+
+        Log.d(TAG, "fetchStatusApp: result=$result")
+
+        if (result == UrlObf.getTAG()) {
+            System.exit(0)
+        }
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        lifecycleScope.launch {
+            fetchStatusApp()
+        }
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val timeoutSec = FirebaseRemoteConfigUtil.getInstance().getIntervalShowInterSecond()
         allowShowAdsAt = System.currentTimeMillis() + timeoutSec * 1000
