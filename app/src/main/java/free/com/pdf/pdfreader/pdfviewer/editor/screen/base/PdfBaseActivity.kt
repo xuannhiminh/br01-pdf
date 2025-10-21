@@ -435,7 +435,7 @@ abstract class PdfBaseActivity<B : ViewBinding> : BaseActivity<B>(), IControl {
             defaultViewer.activityInfo.name.contains("com.android.intentresolver")
         ) {
             // ❌ not default => show dialog request
-            val dialog = DefaultReaderRequestDialog();
+            val dialog = DefaultReaderRequestDialog.newInstance(closable);
             try {
                 dialog.show(this.supportFragmentManager, "RequestDefaultReaderDialog")
             } catch (e: Exception) {

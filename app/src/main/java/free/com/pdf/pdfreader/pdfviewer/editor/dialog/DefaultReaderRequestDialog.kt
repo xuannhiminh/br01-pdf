@@ -23,6 +23,20 @@ import free.pdf.documents.pdfreader.pdfviewer.editor.screen.language.Preferences
 import com.ezteam.baseproject.utils.FirebaseRemoteConfigUtil
 
 class DefaultReaderRequestDialog : DialogFragment() {
+
+
+    companion object {
+        private const val ARG_FILE_TYPE = "arg_file_type"
+        private const val ARG_SHOW_CLOSE = "arg_show_close"
+
+        fun newInstance(closeable: Boolean = false ): DefaultReaderRequestDialog {
+            val dialog = DefaultReaderRequestDialog()
+            val args = Bundle()
+            args.putBoolean(ARG_SHOW_CLOSE, closeable)
+            dialog.arguments = args
+            return dialog
+        }
+    }
     override fun getTheme(): Int {
         return R.style.DialogStyle
     }
@@ -63,10 +77,11 @@ class DefaultReaderRequestDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isViewDestroyed = false
+
+        val closeable = arguments?.getBoolean(ARG_SHOW_CLOSE, false) ?: false
+        binding.ivClose.visibility = if (closeable) View.VISIBLE else View.GONE
         if (TemporaryStorage.isLoadAds) {
             loadNativeNomedia()
-        } else {
-            Log.d("DefaultReaderRequestDialog", "Not load Ads")
         }
         binding.btnSetDefault.setOnClickListener {
             dismiss()
@@ -78,6 +93,7 @@ class DefaultReaderRequestDialog : DialogFragment() {
                 Log.e("DefaultReaderRequestDialog", "Error showing DefaultReaderGuideDialog: ${e.message}")
             }
         }
+        binding.ivClose.setOnClickListener { dismiss() }
 
         val appName = getString(R.string.app_name)
         val fullText = getString(R.string.set_pdf_reader_as_your_default_pdf_file_viewer, appName)
