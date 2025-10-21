@@ -104,7 +104,7 @@ object FCMTopicHandler {
             else -> "false"
         }
 
-        val topic = "${premium}_vn${!isNotVn}_v${version}_${engageBucket}_fo${engageFo}_db${BuildConfig.DEBUG}"
+        val topic = "${premium}_vn${!isNotVn}_v${version}_fo${engageFo}_db${BuildConfig.DEBUG}"
         Log.d(TAG, "generateTopic: $topic")
         return topic
     }
