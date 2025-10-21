@@ -23,8 +23,8 @@ android {
         applicationId "free.pdf.documents.pdfreader.pdfviewer.editor"
         minSdkVersion 28
         targetSdkVersion 35
-        versionCode 103
-        versionName "1.0.3"
+        versionCode 100
+        versionName "1.0.0"
 
         vectorDrawables.useSupportLibrary = true
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
