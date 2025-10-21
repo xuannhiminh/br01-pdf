@@ -94,8 +94,10 @@ class IapActivity : PdfBaseActivity<ActivityIapBinding>() {
         applyGradientToTitle()
 
         // Ẩn btnClose ban đầu
+        binding.btnClose.visibility = View.INVISIBLE
         binding.btnClose.alpha = 0f
         binding.btnClose.postDelayed({
+            binding.btnClose.visibility = View.VISIBLE
             binding.btnClose.animate().alpha(1f).setDuration(300).start()
         }, 3000)
 
