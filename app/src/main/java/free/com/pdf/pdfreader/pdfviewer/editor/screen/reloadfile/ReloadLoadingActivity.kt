@@ -56,7 +56,7 @@ class ReloadLoadingActivity : BaseActivity<ActivityReloadingBinding>() {
     override fun initView() {
         binding.animationView.playAnimation()
         binding.animationView.apply {
-            setAnimation(R.raw.loading_file)
+            setAnimation(R.raw.scanning)
             repeatCount = LottieDrawable.INFINITE
             speed = 2.0f
             playAnimation()
@@ -120,8 +120,14 @@ class ReloadLoadingActivity : BaseActivity<ActivityReloadingBinding>() {
             val loadAdsDeferred = async { if(FirebaseRemoteConfigUtil.getInstance().isShowAdsReloadFileInter()) loadInterstitialAd(FirebaseRemoteConfigUtil.getInstance().getAdsConfigValue("inter_reload_file")) else null }
             loadFileDeferred.await()
             val interAd = loadAdsDeferred.await()
-//            preloadLanguageNativeAd()
-            percentAnimator?.cancel()  // Immediately stops and ends animation
+
+            val elapsed = System.currentTimeMillis() - startTime
+            val minDuration = 3000L
+            if (elapsed < minDuration) {
+                delay(minDuration - elapsed)
+            }
+
+            percentAnimator?.cancel()
             percentAnimator = null
             binding.percentText.text = "100%"
             delay(200)
