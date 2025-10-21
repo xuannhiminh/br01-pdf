@@ -1052,7 +1052,11 @@ class MainActivity : PdfBaseActivity<ActivityMainBinding>() {
 
         binding.toolbar.ivIap.setOnClickListener {
             logEvent("main_iap_press")
-            IapActivityV2.start(this)
+            when (FirebaseRemoteConfigUtil.getInstance().getIapScreenType()) {
+                0 -> IapActivityV2.start(this)
+                1 -> IapActivity.start(this)
+                else -> IapActivityV2.start(this)
+            }
         }
 
         binding.toolbar.ivSearch.setOnClickListener {
