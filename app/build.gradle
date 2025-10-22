@@ -20,7 +20,7 @@ android {
 //    compileSdkVersion 33
     compileSdkVersion 35
     defaultConfig {
-        applicationId "free.pdf.documents.pdfreader.pdfviewer.editor"
+        applicationId "free.pdf.documents.pdfreader.pdfviewer.pdfeditor"
         minSdkVersion 28
         targetSdkVersion 35
         versionCode 100
