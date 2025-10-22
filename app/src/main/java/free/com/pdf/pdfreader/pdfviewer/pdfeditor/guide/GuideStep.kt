@@ -1,0 +1,9 @@
+package free.pdf.documents.pdfreader.pdfviewer.pdfeditor.dialog
+
+import android.view.View
+
+data class GuideStep(
+    val targetView: View,
+    val titleLines: List<String>,
+    val arrowOffsetY: Float = 0f
+)

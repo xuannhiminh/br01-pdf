@@ -85,7 +85,7 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
-    namespace 'free.pdf.documents.pdfreader.pdfviewer.editor'
+    namespace 'free.pdf.documents.pdfreader.pdfviewer.pdfeditor'
 
     // This disables creating test APKs
 //    testVariants.all { it.enabled = false }

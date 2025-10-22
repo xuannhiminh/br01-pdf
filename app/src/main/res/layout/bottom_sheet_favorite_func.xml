@@ -13,7 +13,7 @@
         android:paddingBottom="@dimen/_5sdp"
         android:orientation="vertical"
         android:layout_height="wrap_content">
-        <free.pdf.documents.pdfreader.pdfviewer.editor.view.ItemFunctionView
+        <free.pdf.documents.pdfreader.pdfviewer.pdfeditor.view.ItemFunctionView
             android:id="@+id/func_clear_favorite"
             android:layout_width="match_parent"
             app:fvIcon="@drawable/ic_clear_favorite"

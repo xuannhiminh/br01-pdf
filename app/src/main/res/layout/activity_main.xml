@@ -14,7 +14,7 @@
         android:id="@+id/main_layout"
         tools:context=".screen.main.MainActivity">
 
-    <free.pdf.documents.pdfreader.pdfviewer.editor.view.NonSwipeViewPager
+    <free.pdf.documents.pdfreader.pdfviewer.pdfeditor.view.NonSwipeViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"

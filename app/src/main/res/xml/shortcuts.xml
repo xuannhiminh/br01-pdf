@@ -7,7 +7,7 @@
         android:shortcutLongLabel="@string/uninstall">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="free.pdf.documents.pdfreader.pdfviewer.editor"
-            android:targetClass="free.pdf.documents.pdfreader.pdfviewer.editor.screen.uninstall.UninstallActivity" />
+            android:targetPackage="free.pdf.documents.pdfreader.pdfviewer.pdfeditor"
+            android:targetClass="free.pdf.documents.pdfreader.pdfviewer.pdfeditor.screen.uninstall.UninstallActivity" />
     </shortcut>
 </shortcuts>
