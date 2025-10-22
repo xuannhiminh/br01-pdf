@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "148945103371",
-    "project_id": "pdf-reader---funny",
-    "storage_bucket": "pdf-reader---funny.firebasestorage.app"
+    "project_number": "647550396523",
+    "project_id": "pdf-reader---rikatech",
+    "storage_bucket": "pdf-reader---rikatech.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:148945103371:android:4e384ffdfa015c07e8350e",
+        "mobilesdk_app_id": "1:647550396523:android:921c2eb0ee96c2bc03a92e",
         "android_client_info": {
           "package_name": "free.pdf.documents.pdfreader.pdfviewer.pdfeditor"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAzveBR2mLBvCYWHFieKa1E4_zEkdDutWA"
+          "current_key": "AIzaSyAut15liy738ZpL3gEoek2Q41mivHQO1aE"
         }
       ],
       "services": {
