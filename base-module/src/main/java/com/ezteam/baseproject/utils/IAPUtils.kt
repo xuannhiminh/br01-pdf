@@ -72,7 +72,7 @@ object IAPUtils {
     val KEY_PREMIUM = "release_premium_access"
     val KEY_PREMIUM_YEARLY_PLAN = "release-yearly-plan"
     val KEY_PREMIUM_MONTHLY_PLAN = "release-monthly-plan"
-    val KEY_PREMIUM_WEEKLY_PLAN = "release-weekly-plan-fixed"
+    val KEY_PREMIUM_WEEKLY_PLAN = "release-weekly-plan-fixed2"
 
     private var bp: BillingProcessor? = null
 
